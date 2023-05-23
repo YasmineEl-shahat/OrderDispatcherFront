@@ -2,8 +2,7 @@
 
 `git init`
 
-`git clone https://github.com/YasmineEl-shahat/Order Dispatching.git`
-
+`git clone https://github.com/YasmineEl-shahat/OrderDispatcherFront.git`
 for production mode use these commands:
 
 `npm run build`
