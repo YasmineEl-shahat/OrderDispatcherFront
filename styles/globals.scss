@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+@import "./abstracts/variables.scss";
+@import "./abstracts/mixins.scss";
+@import "./Layout/SideBar.scss";
+
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  //typography
+  font-size: $GlobalFont;
+
+  body {
+    font-family: "Poppins", sans-serif;
+
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient($darkBlue, transparent);
+      border-radius: 6px;
+    }
+
+    pre {
+      font-family: "Inter", sans-serif;
+      white-space: pre-wrap; /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+      white-space: -pre-wrap; /* Opera 4-6 */
+      white-space: -o-pre-wrap; /* Opera 7 */
+      word-wrap: break-word; /* Internet Explorer 5.5+ */
+    }
+
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      &:hover {
+        color: inherit;
+      }
+    }
+
+    .invisible {
+      display: none;
+    }
+    .mainContainer {
+      width: 82.39%;
+      margin: auto;
+      @include mQ(1300px) {
+        width: 88.39%;
+      }
+      @include mQ(992px) {
+        width: 90%;
+      }
+    }
+    ul {
+      list-style-type: none;
+    }
+
+    input,
+    select,
+    textarea,
+    button,
+    datalist {
+      border: none;
+      background: none;
+    }
+
+    input::-webkit-calendar-picker-indicator {
+      display: none !important;
+    }
+
+    button {
+      cursor: pointer;
+    }
+  }
+}

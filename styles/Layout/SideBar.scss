@@ -1,0 +1,12 @@
+@import "../abstracts/variables.scss";
+@import "../components/button.scss";
+
+body {
+  .navbar-expand-lg {
+    flex-wrap: wrap;
+  }
+
+  .navbar-brand {
+    cursor: pointer;
+  }
+}

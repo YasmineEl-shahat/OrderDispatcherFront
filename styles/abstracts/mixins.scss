@@ -1,0 +1,82 @@
+@import "./variables.scss";
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: $color;
+  }
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $color;
+  }
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: $color;
+  }
+}
+
+// media queries
+@mixin mQ($args...) {
+  @if length($args) == 1 {
+    @media screen and (max-width: nth($args, 1)) {
+      @content;
+    }
+  }
+  @if length($args) == 2 {
+    @media screen and (max-width: nth($args, 1)) and (min-width: nth($args, 2)) {
+      @content;
+    }
+  }
+}
+
+//grid W flex mixins
+
+@mixin grid($mgn, $width, $height) {
+  display: grid;
+  justify-content: space-between;
+  grid-gap: $mgn;
+  grid-template-columns: repeat(auto-fill, minmax($width, 1fr));
+  // unkown num of rows with minimum height of $height
+  grid-auto-rows: minmax($height, auto);
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexAround {
+  display: flex;
+  justify-content: space-around;
+}
+
+@mixin flexBet {
+  display: flex;
+  justify-content: space-between;
+}
+//  end grid W flex mixins
+
+// border and shadow for cards
+@mixin cardBorder {
+  border-radius: 0.7rem;
+  box-shadow: $shadowGlob;
+}
+
+//for centering an element
+@mixin Centering {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin centerX {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

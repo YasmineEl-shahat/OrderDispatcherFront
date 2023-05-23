@@ -1,0 +1,14 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+body {
+  .btn--global {
+    padding: 0.75rem 0;
+    color: white;
+  }
+
+  .btn--small {
+    width: 12rem;
+    font-size: 1.8rem;
+  }
+}
