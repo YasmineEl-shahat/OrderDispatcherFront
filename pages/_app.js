@@ -1,4 +1,5 @@
 import "../styles/globals.scss";
+import "../styles/arabicStyles.scss";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
