@@ -1,8 +1,10 @@
 {
   "en": {
-    "home": "Home page"
+    "home": "Home page",
+    "orders": "Orders"
   },
   "ar": {
-    "home": "الرئيسية"
+    "home": "الرئيسية",
+    "orders": "الطلبات"
   }
 }

@@ -1,12 +1,33 @@
 @import "../abstracts/variables.scss";
-@import "../components/button.scss";
+@import "../abstracts/mixins.scss";
 
-body {
-  .navbar-expand-lg {
-    flex-wrap: wrap;
-  }
+.sideBar {
+  position: fixed;
+  z-index: 99999;
+  width: 25rem;
+  top: 0;
+  height: 100vh;
+  text-align: center;
+  transition: 0.3s;
 
-  .navbar-brand {
+  box-shadow: 0px 3px 6px #00000029;
+
+  .categories {
+    box-shadow: 0px 1px 2px #0a0909f1;
+    padding: 0.5rem 0;
+    // background: $lightGray;
+
     cursor: pointer;
+    &:focus,
+    &:hover,
+    .catSelected {
+      // background: $SefbroGlobal;
+    }
   }
+}
+.invisible {
+  display: none;
+}
+.displayIcon {
+  cursor: pointer;
 }
