@@ -1,6 +1,6 @@
-import Layout from "../components/Layout";
-import Table from "../src/sharedui/Table";
-import { getAllOrders } from "./api/orders";
+import Layout from "../../components/Layout";
+import Table from "../../src/sharedui/Table";
+import { getAllOrders } from "../api/orders";
 import { useState, useEffect } from "react";
 
 const Orders = () => {

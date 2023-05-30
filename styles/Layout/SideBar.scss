@@ -3,7 +3,7 @@
 
 .sideBar {
   position: fixed;
-  z-index: 99999;
+  z-index: 10;
   width: 25rem;
   top: 0;
   height: 100vh;
@@ -12,7 +12,7 @@
 
   box-shadow: 0px 3px 6px #00000029;
 
-  .categories {
+  .sideItem {
     box-shadow: 0px 1px 2px #0a0909f1;
     padding: 0.5rem 0;
     // background: $lightGray;

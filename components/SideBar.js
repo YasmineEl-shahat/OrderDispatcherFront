@@ -5,7 +5,7 @@ const SideBar = () => {
     <aside className="sideBar">
       <div id="catSide">
         <Link href="/" passHref>
-          <div className="categories">Dasboard</div>
+          <div className="sideItem">Dasboard</div>
         </Link>
       </div>
     </aside>
