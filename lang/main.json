@@ -1,10 +1,30 @@
 {
   "en": {
+    "order-dispatcher": "Order Dispatcher",
     "home": "Home page",
-    "orders": "Orders"
+    "orders": "Orders",
+    "dashboard": "dashboard",
+    "users": "users",
+    "roles": "roles & permissions",
+    "on-hand-stock": "on hand stock",
+    "warehouses": "warehouses",
+    "drivers": "drivers",
+    "customers": "customers",
+    "locations": "locations",
+    "reports": "reports"
   },
   "ar": {
+    "order-dispatcher": "مرسل الطلب",
     "home": "الرئيسية",
-    "orders": "الطلبات"
+    "orders": "الطلبات",
+    "dashboard": "لوحة التحكم",
+    "users": "المستخدمون",
+    "roles": "الأدوار والأذونات",
+    "on-hand-stock": "في المخزون",
+    "warehouses": "المستودعات",
+    "drivers": "السائقون",
+    "customers": "العملاء",
+    "locations": "المواقع",
+    "reports": "التقارير"
   }
 }

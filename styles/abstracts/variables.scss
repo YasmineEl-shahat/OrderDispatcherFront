@@ -1,23 +1,22 @@
 // colors
 $primary: #927af4ff;
-$primaryGray: #dee1e6ff;
-$LightGray: #e9e9e9;
-
+$primaryGray: #565d6dff;
+$primaryBlack: #171a1fff;
 // Typography Start
 // Font sizes
 $GlobalFont: 62.5%;
-$HeadFont: 4rem;
-$MediumFont: 3rem;
-$smallFont: 2rem;
+$HeadFont: 1.8rem;
+$MediumFont: 1.4rem;
+$smallFont: 1.2rem;
 
 // Line Heights
-$HeadLineSpacing: 5rem;
-$MediumLineSpacing: 3.5rem;
-$InfoLineSpacing: 3rem;
+$HeadLineSpacing: 2.8rem;
+$MediumLineSpacing: 2.2rem;
+$smallLineSpacing: 1.5rem;
 
 //Typography End
 
 //shadow
-$globalShadow: 2px 3px 12px $LightGray;
+$globalShadow: 0px 0px 1.5px $primaryGray;
 
 $globalRadius: 22.5px;

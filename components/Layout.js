@@ -14,12 +14,12 @@ const Layout = ({ title, children }) => {
       <Head>
         <title>
           {title
-            ? `${t(title)}  | ${t("Order Dispatcher")}`
-            : t("Order Dispatcher")}
+            ? `${t(title)}  | ${t("order-dispatcher")}`
+            : t("order-dispatcher")}
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <SideBar />
+      <SideBar translate={t} />
       {children}
     </div>
   );

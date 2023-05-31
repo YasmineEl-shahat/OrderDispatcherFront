@@ -8,17 +8,35 @@
   top: 0;
   height: 100vh;
   transition: 0.3s;
-  box-shadow: 0px 0px 1.5px $primaryGray, 0px 0px 2px $primaryGray;
+  box-shadow: $globalShadow;
   text-transform: capitalize;
+  color: $primaryGray;
+  padding: 2rem 1rem;
+  .sideBar-title {
+    display: flex;
+    h1 {
+      font-size: $HeadFont;
+      line-height: $HeadLineSpacing;
+      color: $primaryBlack;
+      font-weight: bold;
+      margin-left: 1rem;
+    }
+  }
   .sideBar-menu {
+    font-size: $MediumFont;
+    line-height: $MediumLineSpacing;
+    margin-top: 2rem;
     .sideItem {
       cursor: pointer;
-      &:hover {
-        color: #927af4ff;
+      padding: 1rem 0px;
+      i {
+        margin-right: 1rem;
       }
     }
+    .sideItem:hover,
     .selected {
-      color: #927af4ff;
+      color: $primary;
+      font-weight: bold;
     }
     padding: 0.5rem 0;
   }
