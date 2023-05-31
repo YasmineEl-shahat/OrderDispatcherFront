@@ -17,7 +17,11 @@ const Orders = () => {
 
   const columnNames = ["id", "name"];
 
-  return <Table columnNames={columnNames} tableContent={orders} />;
+  return (
+    <main className="mainContainer">
+      <Table columnNames={columnNames} tableContent={orders} />
+    </main>
+  );
 };
 Orders.getLayout = function getLayout(page) {
   return <Layout title="Order">{page}</Layout>;

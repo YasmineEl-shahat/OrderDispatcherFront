@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
 @import "./abstracts/variables.scss";
 @import "./abstracts/mixins.scss";
 @import "./Layout/SideBar.scss";
@@ -16,7 +16,7 @@ html {
   font-size: $GlobalFont;
 
   body {
-    font-family: "Poppins", sans-serif;
+    font-family: "Mulish", sans-serif;
 
     overflow-x: hidden;
 
@@ -25,7 +25,7 @@ html {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: linear-gradient($darkBlue, transparent);
+      background: linear-gradient($primary, transparent);
       border-radius: 6px;
     }
 
@@ -51,8 +51,9 @@ html {
       display: none;
     }
     .mainContainer {
-      width: 82.39%;
-      margin: auto;
+      margin-left: 25rem;
+      padding: 5rem;
+
       @include mQ(1300px) {
         width: 88.39%;
       }
