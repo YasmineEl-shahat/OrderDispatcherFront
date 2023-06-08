@@ -2,7 +2,8 @@
 @import "./abstracts/variables.scss";
 @import "./abstracts/mixins.scss";
 @import "./Layout/SideBar.scss";
-
+@import "./Layout/Navbar.scss";
+@import "./components/Spinner.scss";
 * {
   box-sizing: border-box;
   text-decoration: none;
@@ -51,18 +52,17 @@ html {
       display: none;
     }
     .mainContainer {
-      margin-left: 25rem;
+      margin-left: 25.1rem;
       padding: 5rem;
 
-      @include mQ(1300px) {
-        width: 88.39%;
-      }
-      @include mQ(992px) {
-        width: 90%;
+      @include mQ(500px) {
+        padding: 2rem;
       }
     }
     ul {
       list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 0;
     }
 
     input,

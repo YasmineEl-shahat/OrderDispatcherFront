@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import SideBar from "./SideBar";
 import { useTranslation } from "../util/useTranslation";
+import Navbar from "./Navbar";
 
 const Layout = ({ title, children }) => {
   const router = useRouter();
@@ -19,7 +20,9 @@ const Layout = ({ title, children }) => {
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar locale={locale} translate={t} />
       <SideBar translate={t} />
+
       {children}
     </div>
   );

@@ -1,25 +1,41 @@
 import Layout from "../../components/Layout";
+import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { getAllOrders } from "../api/orders";
 import { useState, useEffect } from "react";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // const receivedOrders = getAllOrders();
     // setOrders(receivedOrders);
-    setOrders([
-      { id: 1, name: "dddd" },
-      { id: 2, name: "dddd" },
-    ]);
+
+    setTimeout(() => {
+      setOrders([
+        { id: 1, name: "dddd" },
+        { id: 2, name: "dddd" },
+      ]);
+      setLoading(false);
+    }, 3000);
   }, []);
 
   const columnNames = ["id", "name"];
 
   return (
-    <main className="mainContainer">
-      <Table columnNames={columnNames} tableContent={orders} />
+    <main
+      className={
+        loading
+          ? `mainContainer d-flex justify-content-center align-items-center`
+          : `mainContainer`
+      }
+    >
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Table columnNames={columnNames} tableContent={orders} />
+      )}
     </main>
   );
 };

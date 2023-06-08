@@ -6,12 +6,12 @@
     "dashboard": "dashboard",
     "users": "users",
     "roles": "roles & permissions",
-    "on-hand-stock": "on hand stock",
-    "warehouses": "warehouses",
     "drivers": "drivers",
     "customers": "customers",
     "locations": "locations",
-    "reports": "reports"
+    "reports": "reports",
+    "english": "English",
+    "arabic": "Arabic"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -20,11 +20,11 @@
     "dashboard": "لوحة التحكم",
     "users": "المستخدمون",
     "roles": "الأدوار والأذونات",
-    "on-hand-stock": "في المخزون",
-    "warehouses": "المستودعات",
     "drivers": "السائقون",
     "customers": "العملاء",
     "locations": "المواقع",
-    "reports": "التقارير"
+    "reports": "التقارير",
+    "english": "الإنجليزية",
+    "arabic": "العربية"
   }
 }

@@ -1,0 +1,117 @@
+@import "./abstracts/variables.scss";
+@import "./abstracts/mixins.scss";
+
+.navbar {
+  span,
+  li {
+    text-transform: capitalize;
+  }
+  span {
+    vertical-align: middle;
+  }
+
+  .dropLang {
+    padding: 0.5rem;
+    min-width: 9.9rem;
+  }
+  .dropdown-menu,
+  .dropLang {
+    cursor: pointer;
+  }
+  .dropdown {
+    .dropdown-menu,
+    .dropLang {
+      border: 1px solid #9095a1ff;
+      border-radius: 6px;
+    }
+  }
+  .dropdown-menu {
+    --bs-dropdown-min-width: 9.9rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0;
+
+    li {
+      font-size: $MediumFont;
+    }
+  }
+  h6 {
+    display: inline-block;
+    font-size: $MediumFont;
+    font-weight: 400;
+    margin: 0 0.5rem;
+  }
+  .notifications {
+    font-size: $HeadFont;
+    cursor: pointer;
+  }
+  .notificationDropdown {
+    min-width: 10vw;
+    min-height: 10vh;
+  }
+  .dropdown-menu.show {
+    top: 3rem;
+  }
+  margin-left: 25.1rem;
+  box-shadow: $globalShadow;
+  padding: 1rem 2rem !important;
+
+  .photo {
+    vertical-align: middle;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 3;
+  }
+  .photo.active {
+    border: 1.5px solid $primary;
+  }
+  .menu {
+    z-index: 2;
+    background-color: #fff;
+    overflow: hidden;
+    max-height: 0rem;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 0.2rem;
+    position: absolute;
+    right: 4.5rem;
+    top: 4.5rem;
+    img {
+      border-radius: 50%;
+      margin: 0.5rem;
+    }
+    img + h5 {
+      display: inline-block;
+    }
+
+    ul {
+      color: $primary;
+      li {
+        &:first-of-type,
+        &:last-of-type {
+          border-top: 1px solid rgba(0, 0, 0, 0.05);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        cursor: pointer;
+        text-align: start;
+        padding: 0.8rem 8rem 0.8rem 0.8rem;
+        &:hover {
+          background: #e3e3e3;
+        }
+        i {
+          margin-right: 0.2rem;
+          color: $primary;
+          font-size: $smallFont;
+        }
+      }
+    }
+  }
+  .menu.active {
+    max-height: 20rem;
+    opacity: 1;
+    overflow-y: auto;
+  }
+  .displayIcon {
+    font-size: $HeadFont;
+    cursor: pointer;
+  }
+}

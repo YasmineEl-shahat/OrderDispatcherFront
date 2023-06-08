@@ -1,11 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const SideBar = ({ translate }) => {
-  const [activeLink, setActiveLink] = useState("/");
+  const router = useRouter();
+  const [activeLink, setActiveLink] = useState(router.pathname);
+
+  useEffect(() => {
+    let navbar = document.querySelector(".navbar");
+    let main = document.querySelector(".mainContainer");
+
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    if (mediaQuery.matches) {
+      document.getElementById("sideBar").classList.add("invisible");
+      navbar.style.marginRight = "0rem";
+      main.style.marginRight = "0rem";
+      navbar.style.marginLeft = "0rem";
+      main.style.marginLeft = "0rem";
+    }
+  }, []);
+
   return (
-    <aside className="sideBar">
+    <aside className="sideBar" id="sideBar">
       <div className="sideBar-title">
         <Image src={"/assets/logo.png"} width={48} height={45} alt="logo" />
         <h1>{translate("order-dispatcher")}</h1>
@@ -49,27 +66,7 @@ const SideBar = ({ translate }) => {
             {translate("orders")}
           </div>
         </Link>
-        <Link href="/on-hand-stock" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink === "/on-hand-stock" ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/on-hand-stock")}
-          >
-            <i className="fa-solid fa-truck"></i> {translate("on-hand-stock")}
-          </div>
-        </Link>
-        <Link href="/warehouses" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink === "/warehouses" ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/warehouses")}
-          >
-            <i className="fa-solid fa-warehouse"></i>
-            {translate("warehouses")}
-          </div>
-        </Link>
+
         <Link href="/drivers" passHref>
           <div
             className={`sideItem  ${
