@@ -4,6 +4,8 @@
 @import "./Layout/SideBar.scss";
 @import "./Layout/Navbar.scss";
 @import "./components/Spinner.scss";
+@import "../src/sharedui/table.css";
+@import "../pages/login/login.scss";
 * {
   box-sizing: border-box;
   text-decoration: none;

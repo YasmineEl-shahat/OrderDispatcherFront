@@ -22,7 +22,6 @@ const Layout = ({ title, children }) => {
       </Head>
       <Navbar locale={locale} translate={t} />
       <SideBar translate={t} />
-
       {children}
     </div>
   );

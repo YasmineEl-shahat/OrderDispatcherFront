@@ -11,7 +11,10 @@
     "locations": "locations",
     "reports": "reports",
     "english": "English",
-    "arabic": "Arabic"
+    "arabic": "Arabic",
+    "login": "Login",
+    "signin": "sign in",
+    "forget": "Forgot your password?"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -25,6 +28,9 @@
     "locations": "المواقع",
     "reports": "التقارير",
     "english": "الإنجليزية",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "login": "تسجيل الدخول",
+    "signin": "تسجيل الدخول",
+    "forget": "نسيت كلمة السر؟"
   }
 }
