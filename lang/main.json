@@ -14,7 +14,9 @@
     "arabic": "Arabic",
     "login": "Login",
     "signin": "sign in",
-    "forget": "Forgot your password?"
+    "forget": "Forgot your password?",
+    "code": "Enter your Email to recieve the code",
+    "submit": "submit"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -31,6 +33,8 @@
     "arabic": "العربية",
     "login": "تسجيل الدخول",
     "signin": "تسجيل الدخول",
-    "forget": "نسيت كلمة السر؟"
+    "forget": "نسيت كلمة السر؟",
+    "code": "أدخل بريدك الإلكتروني لتلقي الرمز",
+    "submit": "إرسال"
   }
 }
