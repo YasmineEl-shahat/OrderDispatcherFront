@@ -4,7 +4,7 @@ const ISSERVER = typeof window === "undefined";
 let savedToken;
 
 if (!ISSERVER) {
-  savedToken = localStorage.getItem("token");
+  savedToken = cookieCutter.get("auth");
 }
 
 const token = `Bearer ` + savedToken;
