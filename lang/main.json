@@ -16,7 +16,9 @@
     "signin": "sign in",
     "forget": "Forgot your password?",
     "code": "Enter your Email to recieve the code",
-    "submit": "submit"
+    "submit": "submit",
+    "reset": "reset password",
+    "data": "enter your data"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -35,6 +37,8 @@
     "signin": "تسجيل الدخول",
     "forget": "نسيت كلمة السر؟",
     "code": "أدخل بريدك الإلكتروني لتلقي الرمز",
-    "submit": "إرسال"
+    "submit": "إرسال",
+    "reset": "إعادة تعيين كلمة السر",
+    "data": "أدخل بياناتك"
   }
 }
