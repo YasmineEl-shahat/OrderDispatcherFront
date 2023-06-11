@@ -89,8 +89,8 @@ export const AuthProvider = ({ children }) => {
     else {
       err[e.target.name] = "";
       newData[e.target.name] = e.target.value;
-      setBackError("");
     }
+    setBackError("");
     setErrors(err);
     setData(newData);
   };
@@ -110,17 +110,19 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     if (validate()) {
       setSubmitting(true);
-      let response = userLogin(JSON.stringify(data));
 
-      console.log("fdd", response.status);
-      //   if (response.ok) {
-      //     const res = await response.json();
-      //     setBackError("");
-      //     const { token } = res;
-      //     setAuth(token);
-      //     setUser(jwt_decode(token));
-      //     cookieCutter.set("auth", token);
-      // if (user.role === "Seeker") {
+      userLogin(JSON.stringify(data))
+        .then((res) => {
+          const token = res.data.token;
+          cookieCutter.set("auth", token);
+          setUser(jwt_decode(token));
+          setBackError("");
+          router.replace("/");
+        })
+        .catch((error) => {
+          setBackError(error.response.data.message);
+        });
+
       //   const resDes = await fetch(
       //     baseUrl + "seeker/details/view/" + user.id
       //   );
@@ -142,21 +144,6 @@ export const AuthProvider = ({ children }) => {
       //   }
       //   router.replace("/");
       // }
-      //   }
-      //   if (response.status === 500) {
-      //     // So, a server-side validation error occurred.
-      //     // Server side validation returns a string error message, so parse as text instead of json.
-      //     const error = response.text();
-      //     setBackError("server-side validation error occurred.");
-      //     throw new Error(error);
-      //   }
-      //   if (response.status === 400) {
-      //     //invalid user
-      //     const error = response.statusText;
-      //     setBackError("!Invalid user");
-
-      //     throw new Error(error);
-      //   }
 
       setSubmitting(false);
     }

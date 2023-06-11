@@ -1,14 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
-
 import { toggleElement } from "../functions/toggleElement";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
+import AuthContext from "../context/AuthContext";
 
 const Navbar = ({ locale, translate }) => {
-  //   const { logoutUser, name, image } = useContext(AuthContext);
-  const name = "";
-  const image = "";
+  const { logoutUser, name, image } = useContext(AuthContext);
+
   const router = useRouter();
 
   const toggleSideBar = () => {
@@ -133,8 +130,7 @@ const Navbar = ({ locale, translate }) => {
               />
               <h5>{name ? name : "Name"}</h5>
 
-              {/* <li onClick={() => logoutUser()}> */}
-              <li>
+              <li onClick={() => logoutUser()}>
                 <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 Log Out
               </li>
