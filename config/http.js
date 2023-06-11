@@ -8,15 +8,30 @@ if (!ISSERVER) {
 }
 
 const token = `Bearer ` + savedToken;
-export let http = axios.create({
+export let httpJson = axios.create({
   headers: {
     "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
   },
 });
 
-export let authorizedHttp = axios.create({
+export let httpForm = axios.create({
   headers: {
     "Access-Control-Allow-Origin": "*",
+    "Content-Type": "multipart/form-data",
+  },
+});
+export let authorizedHttpJson = axios.create({
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+    Authorization: token,
+  },
+});
+export let authorizedHttpForm = axios.create({
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "multipart/form-data",
     Authorization: token,
   },
 });

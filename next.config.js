@@ -22,7 +22,7 @@ module.exports = {
       config.plugins = [
         ...config.plugins,
         new webpack.DefinePlugin({
-          "process.env.API_URL": JSON.stringify("http://localhost:8000/"),
+          "process.env.API_URL": JSON.stringify("http://localhost:8080"),
         }),
       ];
     }

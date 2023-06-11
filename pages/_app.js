@@ -4,6 +4,7 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { useEffect } from "react";
+import { AuthProvider } from "../context/AuthContext";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -12,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout || ((page) => page);
 
-  return getLayout(<Component {...pageProps} />);
+  return <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>;
 }
 
 export default MyApp;

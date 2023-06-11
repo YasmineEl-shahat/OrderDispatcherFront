@@ -18,7 +18,8 @@
     "code": "Enter your Email to recieve the code",
     "submit": "submit",
     "reset": "reset password",
-    "data": "enter your data"
+    "data": "enter your data",
+    "submitting": "submitting..."
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -39,6 +40,7 @@
     "code": "أدخل بريدك الإلكتروني لتلقي الرمز",
     "submit": "إرسال",
     "reset": "إعادة تعيين كلمة السر",
-    "data": "أدخل بياناتك"
+    "data": "أدخل بياناتك",
+    "submitting": "...إرسال"
   }
 }

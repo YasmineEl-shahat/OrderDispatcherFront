@@ -1,6 +1,6 @@
 import { api_url } from "../../config/config";
-import { authorizedHttp } from "../../config/http";
+import { authorizedHttpJson } from "../../config/http";
 
 export async function getAllOrders() {
-  return await authorizedHttp.get(`${api_url}/orders`);
+  return await authorizedHttpJson.get(`${api_url}/orders`);
 }

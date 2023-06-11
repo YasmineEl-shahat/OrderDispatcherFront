@@ -1,8 +1,13 @@
 import Head from "next/head";
 import { useTranslation } from "../../util/useTranslation";
 import Image from "next/image";
+import AuthContext from "../../context/AuthContext";
+import { useContext } from "react";
+import Link from "next/link";
 const Login = () => {
   const { t } = useTranslation();
+  const { login, backError, errors, onChangeHandler, submitting } =
+    useContext(AuthContext);
   return (
     <>
       <Head>
@@ -19,12 +24,33 @@ const Login = () => {
 
         <div className="container" id="container">
           <div className="form-container sign-in-container">
-            <form action="#">
+            <form onSubmit={(e) => login(e)}>
               <h1>{t("signin")}</h1>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-              <a href="#">{t("forget")}</a>
-              <button>{t("signin")}</button>
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={(e) => onChangeHandler(e)}
+              />
+              <span className="invalid">
+                {errors.email ? errors.email : ""}
+              </span>
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={(e) => onChangeHandler(e)}
+              />
+              <span className="invalid">
+                {errors.password ? errors.password : ""}
+              </span>
+              <span className="invalid">{backError}</span>
+              <Link href="/forget-password" passHref>
+                {t("forget")}
+              </Link>
+              <button type="submit">
+                {submitting ? t("submitting") : t("signin")}
+              </button>
             </form>
           </div>
           <div className="overlay-container">

@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
 import translate from "../lang/main";
-import { http, authorizedHttp } from "../config/http";
+import {
+  httpJson,
+  authorizedHttpJson,
+  httpForm,
+  authorizedHttpForm,
+} from "../config/http";
 const ISSERVER = typeof window === "undefined";
 let lang;
 
@@ -15,8 +20,10 @@ export const useTranslation = () => {
     ? nextRouter.locale
     : lang;
 
-  http.defaults.headers["lang"] = locale;
-  authorizedHttp.defaults.headers["lang"] = locale;
+  httpJson.defaults.headers["lang"] = locale;
+  httpForm.defaults.headers["lang"] = locale;
+  authorizedHttpJson.defaults.headers["lang"] = locale;
+  authorizedHttpForm.defaults.headers["lang"] = locale;
 
   return {
     t: (text) => {
