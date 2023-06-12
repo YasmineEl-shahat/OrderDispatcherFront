@@ -4,6 +4,10 @@ import Table from "../../src/sharedui/Table";
 import { getAllOrders } from "../api/orders";
 import { useState, useEffect } from "react";
 
+// Where to Call the orders endpoint
+// HACK -> In useEffect
+// ===============
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
