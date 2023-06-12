@@ -6,9 +6,7 @@ const Table = ({ columnNames, tableContent, handleDelete }) => {
           <div className="table-title">
             <div className="row">
               <div className="col-sm-8">
-                <h2>
-                  <b>Details</b>
-                </h2>
+                <h2>Filters</h2>
               </div>
               <div className="col-sm-4">
                 <div className="search-box">
@@ -45,7 +43,7 @@ const Table = ({ columnNames, tableContent, handleDelete }) => {
               </div>
             </div>
           </div>
-          <table className="table table-striped table-hover table-bordered">
+          <table className="table table-bordered">
             <thead>
               <tr>
                 {columnNames.map((column, index) => (
@@ -53,6 +51,7 @@ const Table = ({ columnNames, tableContent, handleDelete }) => {
                     {column}
                   </th>
                 ))}
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -62,7 +61,13 @@ const Table = ({ columnNames, tableContent, handleDelete }) => {
                   <tr key={item.id}>
                     {keys.map((key) => {
                       const value = item[key];
-                      return <td key={key}>{value}</td>;
+                      return (
+                        <td key={key}>
+                          {typeof value === "object" && value !== null
+                            ? JSON.stringify(value)
+                            : value}
+                        </td>
+                      );
                     })}
                     <td>
                       <a
@@ -97,33 +102,6 @@ const Table = ({ columnNames, tableContent, handleDelete }) => {
               })}
             </tbody>
           </table>
-          <div className="clearfix">
-            <div className="hint-text">
-              Showing <b>1</b> out of <b>1</b> entries
-            </div>
-            <ul className="pagination">
-              <li className="page-item disabled">
-                <a href="#">
-                  <i className="fa fa-angle-double-left"></i>
-                </a>
-              </li>
-              <li className="page-item active">
-                <a href="#" className="page-link">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a href="#" className="page-link">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a href="#" className="page-link">
-                  3
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>

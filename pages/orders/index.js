@@ -6,22 +6,22 @@ import { useState, useEffect } from "react";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [columnNames, setColumnNames] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // const receivedOrders = getAllOrders();
-    // setOrders(receivedOrders);
-
     setTimeout(() => {
-      setOrders([
-        { id: 1, name: "dddd" },
-        { id: 2, name: "dddd" },
-      ]);
+      getAllOrders()
+        .then((res) => {
+          setOrders(res.data.data);
+          setColumnNames(Object.keys(res.data.data[0]));
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+        });
       setLoading(false);
     }, 3000);
   }, []);
-
-  const columnNames = ["id", "name"];
 
   return (
     <main

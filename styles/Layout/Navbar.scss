@@ -2,6 +2,7 @@
 @import "./abstracts/mixins.scss";
 
 .navbar {
+  background-color: #fff;
   span,
   li {
     text-transform: capitalize;
