@@ -19,7 +19,8 @@
     "submit": "submit",
     "reset": "reset password",
     "data": "enter your data",
-    "submitting": "submitting..."
+    "submitting": "submitting...",
+    "governate": "governates"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -41,6 +42,7 @@
     "submit": "إرسال",
     "reset": "إعادة تعيين كلمة السر",
     "data": "أدخل بياناتك",
-    "submitting": "...إرسال"
+    "submitting": "...إرسال",
+    "governate": "محافظات"
   }
 }

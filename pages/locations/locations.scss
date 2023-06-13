@@ -1,0 +1,21 @@
+@import "../../styles/abstracts/variables.scss";
+@import "../../styles/abstracts/mixins.scss";
+.tabWrapper {
+  background: $primary;
+  font-size: $MediumFont;
+  text-transform: capitalize;
+  color: white;
+  @include flexBet;
+  border-radius: 5px;
+  padding: 5px;
+  span {
+    text-align: center;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  span.active {
+    color: $primary;
+    background: white;
+  }
+}
