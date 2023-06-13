@@ -20,7 +20,9 @@
     "reset": "reset password",
     "data": "enter your data",
     "submitting": "submitting...",
-    "governate": "governates"
+    "governate": "governates",
+    "cities": "cities",
+    "areas": "areas"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -43,6 +45,8 @@
     "reset": "إعادة تعيين كلمة السر",
     "data": "أدخل بياناتك",
     "submitting": "...إرسال",
-    "governate": "محافظات"
+    "governate": "محافظات",
+    "cities": "مدن",
+    "areas": "مناطق"
   }
 }

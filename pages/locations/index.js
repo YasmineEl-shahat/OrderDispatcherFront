@@ -57,7 +57,7 @@ const Locations = () => {
                 className={`col-4 ${index === activeIndex ? "active" : ""}`}
                 key={data}
               >
-                {data}
+                {t(data)}
               </span>
             ))}
           </section>
