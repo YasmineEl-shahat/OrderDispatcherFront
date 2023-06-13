@@ -4,47 +4,41 @@ import Table from "../../src/sharedui/Table";
 import { getAllOrders } from "../api/orders";
 import { useState, useEffect } from "react";
 
-// Where to Call the orders endpoint
-// HACK -> In useEffect
-// ===============
-
 const Orders = () => {
-  const [orders, setOrders] = useState([]);
-  const [columnNames, setColumnNames] = useState([]);
-  const [loading, setLoading] = useState(true);
+	const [orders, setOrders] = useState([]);
+	const [columnNames, setColumnNames] = useState([]);
+	const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      getAllOrders()
-        .then((res) => {
-          setOrders(res.data.data);
-          setColumnNames(Object.keys(res.data.data[0]));
-        })
-        .catch((error) => {
-          console.log(error.response.data.message);
-        });
-      setLoading(false);
-    }, 1000);
-  }, []);
+	useEffect(() => {
+		getAllOrders()
+			.then((res) => {
+				setOrders(res.data.data);
+				setColumnNames(Object.keys(res.data.data[0]));
+			})
+			.catch((error) => {
+				console.log(error.response.data.message);
+			});
+		setLoading(false);
+	}, []);
 
-  return (
-    <main
-      className={
-        loading
-          ? `mainContainer d-flex justify-content-center align-items-center`
-          : `mainContainer`
-      }
-    >
-      {loading ? (
-        <Spinner />
-      ) : (
-        <Table columnNames={columnNames} tableContent={orders} />
-      )}
-    </main>
-  );
+	return (
+		<main
+			className={
+				loading
+					? `mainContainer d-flex justify-content-center align-items-center`
+					: `mainContainer`
+			}
+		>
+			{loading ? (
+				<Spinner />
+			) : (
+				<Table columnNames={columnNames} tableContent={orders} />
+			)}
+		</main>
+	);
 };
 Orders.getLayout = function getLayout(page) {
-  return <Layout title="Order">{page}</Layout>;
+	return <Layout title="Order">{page}</Layout>;
 };
 
 export default Orders;
