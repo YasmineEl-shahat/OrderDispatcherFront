@@ -24,7 +24,7 @@ const Orders = () => {
           console.log(error.response.data.message);
         });
       setLoading(false);
-    }, 3000);
+    }, 1000);
   }, []);
 
   return (
