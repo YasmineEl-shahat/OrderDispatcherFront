@@ -12,11 +12,11 @@ const Drivers = () => {
 	useEffect(() => {
 		getAllDrivers()
 			.then((res) => {
-				setDrivers(res.data.data);
+				setDrivers(res.data);
 				setColumnNames(Object.keys(res.data.data[0]));
 			})
 			.catch((error) => {
-				console.log(error.response.data.message);
+				console.log(error.response);
 			});
 		setLoading(false);
 	}, []);
