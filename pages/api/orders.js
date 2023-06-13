@@ -1,7 +1,10 @@
 import { api_url } from "../../config/config";
 import { authorizedHttpJson } from "../../config/http";
 
-export async function getAllOrders() {
-  // Call axios Get >> return data 
-  return await authorizedHttpJson.get(`${api_url}/orders`);
+export async function getAllOrders(orderNum) {
+  // Call axios Get >> return data
+
+  return await authorizedHttpJson.get(
+    api_url + "/orders" + (orderNum ?? "?orderNum=" + orderNum)
+  );
 }

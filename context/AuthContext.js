@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import cookieCutter from "cookie-cutter";
 import { useRouter } from "next/router";
-import { userLogin } from "../pages/api/auth";
+import { userLogin, isValidToken } from "../pages/api/auth";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -51,35 +51,31 @@ export const AuthProvider = ({ children }) => {
 
   //handle Expired tokens
   const checkToken = async () => {
-    let response = await fetch(baseUrl + "jwtValidate", {
+    let response = await fetch(baseUrl + "/validToken", {
       headers: {
-        Authorization: "Bearer" + " " + auth,
+        Authorization: auth,
       },
     });
-    if (response.status === 200) {
-      let { tokenObject } = await response.json();
-      setAuth(tokenObject);
-      setUser(jwt_decode(tokenObject));
-      if (typeof window !== "undefined") {
-        // cookieCutter.set("auth", "", { expires: new Date(0) });
-        cookieCutter.set("auth", tokenObject);
-      }
-    } else {
+
+    if (response.status !== 200) {
       logoutUser();
     }
   };
 
-  //renew token on every reload
-  //   useEffect(() => {
-  //     const path = ["/login", "/forget-password", "/reset-password"];
-  //     if (!path.includes(router.asPath) && auth) checkToken();
-  //     else if (!path.includes(router.asPath) && router.asPath !== "/login")
-  //       router.replace("/login");
-  //     let hour = 1000 * 60 * 60;
-  //     let interval = setInterval(function () {
-  //       if (!path.includes(router.asPath) && auth) checkToken();
-  //     }, hour);
-  //   }, [auth]);
+  useEffect(() => {
+    const path = ["/login", "/forget-password", "/reset-password"];
+    if (!path.includes(router.asPath) && auth) checkToken();
+    else if (!path.includes(router.asPath) && router.asPath !== "/login")
+      router.replace("/login");
+    else if (path.includes(router.asPath) && auth && checkToken())
+      router.replace("/");
+
+    let hour = 3000 * 60 * 60;
+
+    let interval = setInterval(function () {
+      if (!path.includes(router.asPath) && auth) checkToken();
+    }, hour);
+  }, [auth]);
 
   const onChangeHandler = (e) => {
     let err = { ...errors };
