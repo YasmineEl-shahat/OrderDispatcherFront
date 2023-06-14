@@ -1,9 +1,39 @@
 import Head from "next/head";
-import { useTranslation } from "../../util/useTranslation";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
+import { useContext } from "react";
+import { useTranslation } from "../../util/useTranslation";
+import AuthContext from "../../context/AuthContext";
+import { forgetPassword } from "../api/auth";
 
 const Forget = () => {
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const {
+    data,
+    backError,
+    errors,
+    onChangeHandler,
+    submitting,
+    setSubmitting,
+    setBackError,
+  } = useContext(AuthContext);
+
+  const submit = (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    forgetPassword(JSON.stringify(data))
+      .then((res) => {
+        setSubmitting(false);
+        router.replace("/reset-password");
+      })
+      .catch((error) => {
+        setBackError(error.response.data.message);
+        setSubmitting(false);
+      });
+  };
   return (
     <>
       <Head>
@@ -19,10 +49,18 @@ const Forget = () => {
         </figure>
         <div className="container" id="container">
           <div className="form-container sign-in-container">
-            <form action="#">
+            <form onSubmit={(e) => submit(e)}>
               <h1>{t("code")}</h1>
-              <input type="email" placeholder="Email" />
-              <button>{t("submit")}</button>
+              <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                onChange={(e) => onChangeHandler(e)}
+              />
+              <span className="invalid">
+                {backError ? backError : errors.email ? errors.email : ""}
+              </span>
+              <button> {submitting ? t("submitting") : t("submit")}</button>
             </form>
           </div>
           <div className="overlay-container">

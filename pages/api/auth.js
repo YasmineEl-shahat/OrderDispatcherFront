@@ -8,3 +8,7 @@ export async function userLogin(data) {
 export async function forgetPassword(data) {
   return await httpJson.post(`${api_url}/forgetpassword`, data);
 }
+
+export async function resetPassword(data) {
+  return await httpJson.patch(`${api_url}/resetpassword`, data);
+}

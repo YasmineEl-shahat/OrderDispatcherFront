@@ -75,6 +75,11 @@ export const AuthProvider = ({ children }) => {
     let interval = setInterval(function () {
       if (!path.includes(router.asPath) && auth) checkToken();
     }, hour);
+
+    return () => {
+      clearInterval(interval);
+    };
+    //eslint-disable-next-line
   }, [auth]);
 
   const onChangeHandler = (e) => {
@@ -153,9 +158,12 @@ export const AuthProvider = ({ children }) => {
     auth,
     user,
     name,
+    image,
+    data,
     setName,
     setImage,
-    image,
+    setBackError,
+    setSubmitting,
     logoutUser,
     onChangeHandler,
   };

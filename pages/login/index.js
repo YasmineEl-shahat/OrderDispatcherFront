@@ -1,9 +1,10 @@
 import Head from "next/head";
-import { useTranslation } from "../../util/useTranslation";
-import Image from "next/image";
-import AuthContext from "../../context/AuthContext";
-import { useContext } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useContext } from "react";
+import { useTranslation } from "../../util/useTranslation";
+import AuthContext from "../../context/AuthContext";
+
 const Login = () => {
   const { t } = useTranslation();
   const { login, backError, errors, onChangeHandler, submitting } =
