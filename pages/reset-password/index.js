@@ -30,6 +30,7 @@ const ResetPassword = () => {
       .then((res) => {
         setSubmitting(false);
         router.replace("/login");
+        setBackError("");
       })
       .catch((error) => {
         setBackError(error.response.data.message);

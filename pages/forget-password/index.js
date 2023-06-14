@@ -28,6 +28,7 @@ const Forget = () => {
       .then((res) => {
         setSubmitting(false);
         router.replace("/reset-password");
+        setBackError("");
       })
       .catch((error) => {
         setBackError(error.response.data.message);
