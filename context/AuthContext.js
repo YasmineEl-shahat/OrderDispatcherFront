@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import cookieCutter from "cookie-cutter";
 import { useRouter } from "next/router";
-import { userLogin, isValidToken } from "../pages/api/auth";
+import { userLogin } from "../pages/api/auth";
 
 const AuthContext = createContext();
 export default AuthContext;
