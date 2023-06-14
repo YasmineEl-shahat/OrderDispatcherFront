@@ -1,10 +1,10 @@
 import { api_url } from "../../config/config";
 import { authorizedHttpJson } from "../../config/http";
 
-export async function getAllOrders(orderNum = 6) {
+export async function getAllOrders(orderNum = 6, searchKey = "") {
   // Call axios Get >> return data
-  console.log(orderNum);
+  console.log(searchKey);
   authorizedHttpJson.defaults.headers["orderNum"] = orderNum;
-  console.log(authorizedHttpJson.defaults.headers);
+  authorizedHttpJson.defaults.headers["searchKey"] = searchKey;
   return await authorizedHttpJson.get(api_url + "/orders");
 }

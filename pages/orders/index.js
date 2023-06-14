@@ -8,20 +8,39 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [orderNum, setOrderNum] = useState(6);
+  const [orderNum, setOrderNum] = useState(7);
+  const [searchKey, setSearchKey] = useState("");
 
   useEffect(() => {
-    getAllOrders(orderNum)
+    getAllOrders(orderNum, searchKey)
       .then((res) => {
-        setOrders(res.data.data);
-        setColumnNames(Object.keys(res.data.data[0]));
+        let ordersArray = [];
+        res.data.data.forEach((order) => {
+          ordersArray.push({
+            "Order Code": order._id,
+            "Customer Name": order.CustomerName,
+            Governate: order.Address.Governate,
+            City: order.Address.City,
+            Status: order.Status,
+            "Payment Method": order.PaymentMethod,
+          });
+        });
+        setOrders(ordersArray);
+        setColumnNames([
+          "Order Code",
+          "Customer Name",
+          "Governate",
+          "City",
+          "Status",
+          "Payment Method",
+        ]);
       })
       .catch((error) => {
         console.log(error.response.data.message);
       });
 
     setLoading(false);
-  }, [orderNum]);
+  }, [orderNum, searchKey]);
 
   return (
     <main
@@ -34,7 +53,12 @@ const Orders = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <Table columnNames={columnNames} tableContent={orders} />
+        <Table
+          columnNames={columnNames}
+          tableContent={orders}
+          searchKey={searchKey}
+          setSearchKey={setSearchKey}
+        />
       )}
     </main>
   );

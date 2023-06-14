@@ -1,7 +1,10 @@
 const Table = ({
   columnNames,
   tableContent,
+  searchKey,
+  setSearchKey,
   handleDelete,
+  handleEdit,
   filter1,
   filter1_list,
   setFilter1,
@@ -20,16 +23,20 @@ const Table = ({
             <div className="col-sm-8">
               <h2>Filters</h2>
             </div>
-            <div className="col-sm-4">
-              {/* <div className="search-box">
+            {searchKey !== undefined && (
+              <div className="col-sm-4">
+                <div className="search-box">
                   <i className="material-icons">&#xE8B6;</i>
                   <input
                     type="text"
                     className="form-control"
                     placeholder="Search&hellip;"
+                    onChange={(e) => setSearchKey(e.target.value)}
+                    value={searchKey}
                   />
-                </div> */}
-            </div>
+                </div>
+              </div>
+            )}
           </div>
           <br />
           <div className="row">
@@ -154,14 +161,17 @@ const Table = ({
                     >
                       <i className="material-icons">&#xE417;</i>
                     </a>
-                    <a
-                      href="#"
-                      className="edit"
-                      title="Edit"
-                      data-toggle="tooltip"
-                    >
-                      <i className="material-icons">&#xE254;</i>
-                    </a>
+                    {handleEdit && (
+                      <a
+                        href="#"
+                        className="edit"
+                        title="Edit"
+                        data-toggle="tooltip"
+                      >
+                        <i className="material-icons">&#xE254;</i>
+                      </a>
+                    )}
+
                     {handleDelete && (
                       <button
                         className="delete"
