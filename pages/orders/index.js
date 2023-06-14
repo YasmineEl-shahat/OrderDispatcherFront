@@ -8,10 +8,10 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [orderNum, setOrderNum] = useState(2);
+  const [orderNum, setOrderNum] = useState(6);
 
   useEffect(() => {
-    getAllOrders()
+    getAllOrders(orderNum)
       .then((res) => {
         setOrders(res.data.data);
         setColumnNames(Object.keys(res.data.data[0]));
