@@ -37,14 +37,14 @@
 }
 .search-box input {
   height: 34px;
-  border-radius: 20px;
+  border: 1px solid #9095a1ff;
+  border-radius: 6px;
+}
+.filter .search-box input {
   padding-left: 35px;
-  border-color: #ddd;
   box-shadow: none;
 }
-.search-box input:focus {
-  border-color: #3fbae4;
-}
+
 .search-box i {
   color: #a0a5b1;
   position: absolute;

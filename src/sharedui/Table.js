@@ -8,12 +8,15 @@ const Table = ({
   filter1,
   filter1_list,
   setFilter1,
+  filter1_placeholder,
   filter2,
   filter2_list,
   setFilter2,
+  filter2_placeholder,
   filter3,
   filter3_list,
   setFilter3,
+  filter3_placeholder,
   num,
   setNum,
   total,
@@ -31,7 +34,7 @@ const Table = ({
               <input
                 type="number"
                 value={num}
-                min={0}
+                min={1}
                 onChange={(e) => setNum(e.target.value)}
                 max={total}
               />
@@ -54,26 +57,20 @@ const Table = ({
           <br />
           <div className="row">
             <div className="col-sm-4">
-              {/* <div className="search-box">
-                  <i className="material-icons">&#xE8B6;</i>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Filter One&hellip;"
-                  />
-                </div> */}
               {filter1_list && (
                 <>
-                  <input
-                    list="filter1"
-                    placeholder="Select&hellip;"
-                    className="txt"
-                    value={filter1}
-                    onChange={(e) => setFilter1(e.target.value)}
-                  />
+                  <div className="search-box">
+                    <input
+                      list="filter1"
+                      placeholder={`${filter1_placeholder}...`}
+                      className="form-select"
+                      value={filter1}
+                      onChange={(e) => setFilter1(e.target.value)}
+                    />
+                  </div>
                   <datalist id="filter1">
                     {filter1_list.map((filter1, index) => (
-                      <option value={filter1} key={index}>
+                      <option value={filter1} key={"filter1" + index}>
                         {filter1}
                       </option>
                     ))}
@@ -82,26 +79,20 @@ const Table = ({
               )}
             </div>
             <div className="col-sm-4">
-              {/* <div className="search-box">
-                  <i className="material-icons">&#xE8B6;</i>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Filter Two &hellip;"
-                  />
-                </div> */}
               {filter2_list && (
                 <>
-                  <input
-                    list="filter2"
-                    placeholder="Select&hellip;"
-                    className="txt"
-                    value={filter2}
-                    onChange={(e) => setFilter2(e.target.value)}
-                  />
+                  <div className="search-box">
+                    <input
+                      list="filter2"
+                      placeholder={`${filter2_placeholder}...`}
+                      className="form-select"
+                      value={filter2}
+                      onChange={(e) => setFilter2(e.target.value)}
+                    />
+                  </div>
                   <datalist id="filter2">
                     {filter2_list.map((filter2, index) => (
-                      <option value={filter2} key={index}>
+                      <option value={filter2} key={"filter2" + index}>
                         {filter2}
                       </option>
                     ))}
@@ -110,26 +101,18 @@ const Table = ({
               )}
             </div>
             <div className="col-sm-4">
-              {/* <div className="search-box">
-                  <i className="material-icons">&#xE8B6;</i>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Filter One&hellip;"
-                  />
-                </div> */}
               {filter3_list && (
                 <>
                   <input
                     list="filter3"
-                    placeholder="Select&hellip;"
-                    className="txt"
+                    placeholder={`${filter3_placeholder}...`}
+                    className="form-select"
                     value={filter3}
                     onChange={(e) => setFilter3(e.target.value)}
                   />
                   <datalist id="filter3">
                     {filter3_list.map((filter3, index) => (
-                      <option value={filter3} key={index}>
+                      <option value={filter3} key={"filter3" + index}>
                         {filter3}
                       </option>
                     ))}
@@ -143,7 +126,7 @@ const Table = ({
           <thead>
             <tr>
               {columnNames.map((column, index) => (
-                <th key={index} scope="col">
+                <th key={"column" + index} scope="col">
                   {column}
                 </th>
               ))}
@@ -158,7 +141,7 @@ const Table = ({
                   {keys.map((key) => {
                     const value = item[key];
                     return (
-                      <td key={key}>
+                      <td key={`${item.id} ${key}`}>
                         {typeof value === "object" && value !== null
                           ? JSON.stringify(value)
                           : value}

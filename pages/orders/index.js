@@ -1,8 +1,10 @@
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
-import { getAllOrders } from "../api/orders";
+import { assignOrder, getAllOrders } from "../api/orders";
 import { useState, useEffect } from "react";
+import { generalSocket } from "../api/io";
+import { getAllCities, getAllGovernates } from "../api/locations";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -11,12 +13,16 @@ const Orders = () => {
   const [orderNum, setOrderNum] = useState(7);
   const [searchKey, setSearchKey] = useState("");
   const [totalOrders, setTotalOrders] = useState(0);
+  const [governates, setGovernates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [statuses, setStatuses] = useState([]);
 
-  useEffect(() => {
+  const getData = () => {
     getAllOrders(orderNum, searchKey)
       .then((res) => {
         let ordersArray = [];
         setTotalOrders(res.data.totalOrders);
+        if (orderNum > res.data.totalOrders) setOrderNum(res.data.totalOrders);
         res.data.data.forEach((order) => {
           ordersArray.push({
             "Order Code": order._id,
@@ -24,6 +30,7 @@ const Orders = () => {
             Governate: order.Address.Governate,
             City: order.Address.City,
             Status: order.Status,
+            "Total Price": order.TotalPrice + "$",
             "Payment Method": order.PaymentMethod,
           });
         });
@@ -34,16 +41,53 @@ const Orders = () => {
           "Governate",
           "City",
           "Status",
+          "Total Price",
           "Payment Method",
         ]);
-        setLoading(false);
+
+        getAllGovernates()
+          .then((res) => {
+            setGovernates(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+          });
+        getAllCities()
+          .then((res) => {
+            setCities(res.data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+          });
       })
       .catch((error) => {
         console.log(error.response.data.message);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line
   }, [orderNum, searchKey]);
 
+  useEffect(() => {
+    generalSocket.on("newOrder", async (orderData) => {
+      try {
+        // Send a request to orderController.saveOrder()
+        saveOrder(orderData);
+
+        // Send a request to orderController.getall()
+        getData();
+
+        assignOrder(orderData._id);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
   return (
     <main
       className={
@@ -61,6 +105,10 @@ const Orders = () => {
           searchKey={searchKey}
           num={orderNum}
           total={totalOrders}
+          filter1_list={governates}
+          filter2_list={cities}
+          filter1_placeholder="Governate"
+          filter2_placeholder="City"
           setSearchKey={setSearchKey}
           setNum={setOrderNum}
         />
