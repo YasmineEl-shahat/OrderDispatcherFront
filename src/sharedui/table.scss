@@ -4,6 +4,20 @@
   min-width: 1000px;
   background: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  .filter {
+    align-items: center;
+  }
+  label {
+    font-size: $MediumFont;
+    margin-right: 1rem;
+  }
+  input[type="number"] {
+    border: 1px solid #9095a1ff;
+    width: 40px;
+    border-radius: 6px;
+    padding: 2px;
+    text-align: center;
+  }
 }
 .table-responsive {
   overflow-x: hidden !important;
@@ -44,6 +58,7 @@ table.table tr td {
   padding: 2rem;
   text-align: center;
 }
+
 .table thead {
   background-color: rgba(128, 128, 128, 0.11);
 }

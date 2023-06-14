@@ -10,11 +10,13 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [orderNum, setOrderNum] = useState(7);
   const [searchKey, setSearchKey] = useState("");
+  const [totalOrders, setTotalOrders] = useState(0);
 
   useEffect(() => {
     getAllOrders(orderNum, searchKey)
       .then((res) => {
         let ordersArray = [];
+        setTotalOrders(res.data.totalOrders);
         res.data.data.forEach((order) => {
           ordersArray.push({
             "Order Code": order._id,
@@ -34,12 +36,12 @@ const Orders = () => {
           "Status",
           "Payment Method",
         ]);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error.response.data.message);
+        setLoading(false);
       });
-
-    setLoading(false);
   }, [orderNum, searchKey]);
 
   return (
@@ -57,7 +59,10 @@ const Orders = () => {
           columnNames={columnNames}
           tableContent={orders}
           searchKey={searchKey}
+          num={orderNum}
+          total={totalOrders}
           setSearchKey={setSearchKey}
+          setNum={setOrderNum}
         />
       )}
     </main>

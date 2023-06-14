@@ -14,14 +14,27 @@ const Table = ({
   filter3,
   filter3_list,
   setFilter3,
+  num,
+  setNum,
+  total,
 }) => {
   return (
     <div className="table-responsive">
       <div className="table-wrapper">
         <div className="table-title">
-          <div className="row">
-            <div className="col-sm-8">
+          <div className="row filter">
+            <div className="col-sm-4">
               <h2>Filters</h2>
+            </div>
+            <div className="col-sm-4">
+              <label> numbers of rows</label>
+              <input
+                type="number"
+                value={num}
+                min={0}
+                onChange={(e) => setNum(e.target.value)}
+                max={total}
+              />
             </div>
             {searchKey !== undefined && (
               <div className="col-sm-4">
