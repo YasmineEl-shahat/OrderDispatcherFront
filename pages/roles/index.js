@@ -9,47 +9,65 @@ const Roles = () => {
   const [Roles, setRoles] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
   const [totalRoles, setTotalRoles] = useState(0);
-  const [userNum, setUserNum] = useState(7);
-  const [searchKey, setSearchKey] = useState("");
+  const [roleNum, setRoleNum] = useState(7);
+
+  // handler
+
+  const getPermissionList = (permissions) => {
+    console.log(permissions);
+    const ul = document.createElement("ul");
+
+    for (const key in permissions) {
+      const innerValues = Object.values(permissions[key]);
+      if (innerValues.includes(true)) {
+        const li = document.createElement("li");
+        li.textContent = `${key}: `;
+        const innerUl = document.createElement("ul");
+
+        for (const innerKey in permissions[key]) {
+          if (permissions[key][innerKey] === true) {
+            const innerLi = document.createElement("li");
+            innerLi.textContent = innerKey;
+            innerUl.appendChild(innerLi);
+          }
+        }
+
+        li.appendChild(innerUl);
+        ul.appendChild(li);
+      }
+    }
+
+    return (
+      <ul
+        className="permissionsWrapper"
+        dangerouslySetInnerHTML={{ __html: ul.innerHTML }}
+      />
+    );
+  };
 
   useEffect(() => {
-    getAllRoles(userNum, searchKey)
+    getAllRoles(roleNum)
       .then((res) => {
         let RolesArray = [];
-        if (userNum > res.data.count) setUserNum(res.data.count);
-        res.data.data.forEach((user) => {
+        if (roleNum > res.data.rolesCount) setRoleNum(res.data.rolesCount);
+        res.data.roles.forEach((role) => {
+          console.log(role.permissions);
           RolesArray.push({
-            id: user._id,
-            name: user.firstName + " " + user.lastName,
-            email: user.email,
-            "phone number": user.phoneNumber,
-            active: user.active ? (
-              <i className="fa-solid fa-check" style={{ color: "green" }}></i>
-            ) : (
-              <i className="fa-solid fa-x" style={{ color: "red" }}></i>
-            ),
-            role: user.roleName,
+            id: role._id,
+            name: role.name,
+            permissions: getPermissionList(role.permissions),
           });
         });
-        setTotalRoles(res.data.count);
-        setColumnNames([
-          "Id",
-          "Name",
-          "Email",
-          "Phone Number",
-          "Active",
-          "Role",
-        ]);
+        setTotalRoles(res.data.rolesCount);
+        setColumnNames(["Id", "Name", "Permissions"]);
         setRoles(RolesArray);
         setLoading(false);
       })
       .catch((error) => {
-        // console.log(error.response.data.message);
         console.log(error);
-
         setLoading(false);
       });
-  }, [userNum, searchKey]);
+  }, [roleNum]);
 
   return (
     <main
@@ -66,10 +84,8 @@ const Roles = () => {
           columnNames={columnNames}
           tableContent={Roles}
           total={totalRoles}
-          num={userNum}
-          searchKey={searchKey}
-          setSearchKey={setSearchKey}
-          setNum={setUserNum}
+          num={roleNum}
+          setNum={setRoleNum}
         />
       )}
     </main>

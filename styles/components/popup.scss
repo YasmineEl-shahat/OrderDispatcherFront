@@ -1,0 +1,40 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.pop {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 7;
+  padding: 2.5rem 5rem;
+  background-color: $WhiteGlobal;
+  text-align: center;
+  color: $VDarkGray;
+  font-size: $SHeadFont;
+  font-weight: 600;
+  border-radius: 1.5rem;
+
+  @include mQ(900px) {
+    width: 70%;
+  }
+  @include mQ(720px) {
+    width: 90%;
+    font-size: $InfoFont;
+  }
+  @include mQ(415px) {
+    padding: 2.5rem 1rem;
+  }
+}
+
+.popOverlay {
+  background: rgba(6, 5, 5, 0.388);
+  z-index: 5;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+.popOverlay {
+  position: fixed;
+  height: 100%;
+}
