@@ -103,13 +103,15 @@ const Table = ({
             <div className="col-sm-4">
               {filter3_list && (
                 <>
-                  <input
-                    list="filter3"
-                    placeholder={`${filter3_placeholder}...`}
-                    className="form-select"
-                    value={filter3}
-                    onChange={(e) => setFilter3(e.target.value)}
-                  />
+                  <div className="search-box">
+                    <input
+                      list="filter3"
+                      placeholder={`${filter3_placeholder}...`}
+                      className="form-select"
+                      value={filter3}
+                      onChange={(e) => setFilter3(e.target.value)}
+                    />
+                  </div>
                   <datalist id="filter3">
                     {filter3_list.map((filter3, index) => (
                       <option value={filter3} key={"filter3" + index}>

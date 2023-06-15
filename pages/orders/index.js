@@ -1,24 +1,27 @@
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
-import { assignOrder, getAllOrders } from "../api/orders";
+import { assignOrder, getAllOrders, getAllStatuses } from "../api/orders";
 import { useState, useEffect } from "react";
 import { generalSocket } from "../api/io";
 import { getAllCities, getAllGovernates } from "../api/locations";
 
 const Orders = () => {
+  const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [orderNum, setOrderNum] = useState(7);
-  const [searchKey, setSearchKey] = useState("");
-  const [totalOrders, setTotalOrders] = useState(0);
   const [governates, setGovernates] = useState([]);
   const [cities, setCities] = useState([]);
   const [statuses, setStatuses] = useState([]);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [orderNum, setOrderNum] = useState(7);
+  const [searchKey, setSearchKey] = useState("");
+  const [governate, setGovernate] = useState("");
+  const [city, setCity] = useState("");
+  const [status, setStatus] = useState("");
 
   const getData = () => {
-    getAllOrders(orderNum, searchKey)
+    getAllOrders(orderNum, searchKey, governate, city, status)
       .then((res) => {
         let ordersArray = [];
         setTotalOrders(res.data.totalOrders);
@@ -55,6 +58,13 @@ const Orders = () => {
         getAllCities()
           .then((res) => {
             setCities(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response.data.message);
+          });
+        getAllStatuses()
+          .then((res) => {
+            setStatuses(res.data);
             setLoading(false);
           })
           .catch((error) => {
@@ -70,7 +80,7 @@ const Orders = () => {
   useEffect(() => {
     getData();
     // eslint-disable-next-line
-  }, [orderNum, searchKey]);
+  }, [orderNum, searchKey, governate, city, status]);
 
   useEffect(() => {
     generalSocket.on("newOrder", async (orderData) => {
@@ -107,8 +117,16 @@ const Orders = () => {
           total={totalOrders}
           filter1_list={governates}
           filter2_list={cities}
+          filter3_list={statuses}
           filter1_placeholder="Governate"
           filter2_placeholder="City"
+          filter3_placeholder="Status"
+          filter1={governate}
+          filter2={city}
+          filter3={status}
+          setFilter1={setGovernate}
+          setFilter2={setCity}
+          setFilter3={setStatus}
           setSearchKey={setSearchKey}
           setNum={setOrderNum}
         />
