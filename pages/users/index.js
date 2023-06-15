@@ -1,6 +1,7 @@
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
+import { getAllRoles } from "../api/roles";
 import { getAllUsers } from "../api/users";
 import { useState, useEffect } from "react";
 
@@ -11,9 +12,17 @@ const Users = () => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [userNum, setUserNum] = useState(7);
   const [searchKey, setSearchKey] = useState("");
+  const [roles, setRoles] = useState([]);
+  const [role, setRole] = useState("");
+  const [roleNum, setRoleNum] = useState(2);
+  const [active, setActive] = useState(true);
+
+  function handleSetActive(e) {
+    setActive(e.target.value === "active");
+  }
 
   useEffect(() => {
-    getAllUsers(userNum, searchKey)
+    getAllUsers(userNum, searchKey, role, active)
       .then((res) => {
         let usersArray = [];
         if (userNum > res.data.count) setUserNum(res.data.count);
@@ -41,15 +50,30 @@ const Users = () => {
           "Role",
         ]);
         setUsers(usersArray);
-        setLoading(false);
+
+        getAllRoles(roleNum)
+          .then((res) => {
+            let RolesArray = [];
+            if (roleNum !== res.data.rolesCount)
+              setRoleNum(res.data.rolesCount);
+            res.data.roles.forEach((role) => {
+              RolesArray.push(role.name);
+            });
+
+            setRoles(RolesArray);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
       })
       .catch((error) => {
-        // console.log(error.response.data.message);
         console.log(error);
 
         setLoading(false);
       });
-  }, [userNum, searchKey]);
+  }, [userNum, searchKey, role, active, roleNum]);
 
   return (
     <main
@@ -62,15 +86,45 @@ const Users = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <Table
-          columnNames={columnNames}
-          tableContent={users}
-          total={totalUsers}
-          num={userNum}
-          searchKey={searchKey}
-          setSearchKey={setSearchKey}
-          setNum={setUserNum}
-        />
+        <>
+          <div className="radio-buttons">
+            {" "}
+            <label>
+              <input
+                type="radio"
+                name="active"
+                value="active"
+                checked={active}
+                onChange={handleSetActive}
+              />
+              active
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="active"
+                value="inactive"
+                checked={!active}
+                onChange={handleSetActive}
+              />
+              inactive
+            </label>
+          </div>
+
+          <Table
+            columnNames={columnNames}
+            tableContent={users}
+            total={totalUsers}
+            num={userNum}
+            searchKey={searchKey}
+            setSearchKey={setSearchKey}
+            setNum={setUserNum}
+            filter1_list={roles}
+            filter1={role}
+            setFilter1={setRole}
+            filter1_placeholder={"Role"}
+          />
+        </>
       )}
     </main>
   );

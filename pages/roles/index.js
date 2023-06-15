@@ -12,9 +12,7 @@ const Roles = () => {
   const [roleNum, setRoleNum] = useState(7);
 
   // handler
-
   const getPermissionList = (permissions) => {
-    console.log(permissions);
     const ul = document.createElement("ul");
 
     for (const key in permissions) {
@@ -51,7 +49,6 @@ const Roles = () => {
         let RolesArray = [];
         if (roleNum > res.data.rolesCount) setRoleNum(res.data.rolesCount);
         res.data.roles.forEach((role) => {
-          console.log(role.permissions);
           RolesArray.push({
             id: role._id,
             name: role.name,
