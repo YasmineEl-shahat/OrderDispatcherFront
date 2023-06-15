@@ -142,13 +142,7 @@ const Table = ({
                 <tr key={item.id}>
                   {keys.map((key) => {
                     const value = item[key];
-                    return (
-                      <td key={`${item.id} ${key}`}>
-                        {typeof value === "object" && value !== null
-                          ? JSON.stringify(value)
-                          : value}
-                      </td>
-                    );
+                    return <td key={`${item.id} ${key}`}>{value}</td>;
                   })}
                   <td>
                     <a

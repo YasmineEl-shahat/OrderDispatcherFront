@@ -53,14 +53,14 @@ const Orders = () => {
             setGovernates(res.data);
           })
           .catch((error) => {
-            console.log(error.response.data.message);
+            console.log(error);
           });
         getAllCities()
           .then((res) => {
             setCities(res.data);
           })
           .catch((error) => {
-            console.log(error.response.data.message);
+            console.log(error);
           });
         getAllStatuses()
           .then((res) => {
@@ -68,11 +68,11 @@ const Orders = () => {
             setLoading(false);
           })
           .catch((error) => {
-            console.log(error.response.data.message);
+            console.log(error);
           });
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        console.log(error);
         setLoading(false);
       });
   };

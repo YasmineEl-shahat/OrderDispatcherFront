@@ -1,24 +1,24 @@
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
-import { getAllUsers } from "../api/users";
+import { getAllRoles } from "../api/roles";
 import { useState, useEffect } from "react";
 
-const Users = () => {
+const Roles = () => {
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState([]);
+  const [Roles, setRoles] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
-  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalRoles, setTotalRoles] = useState(0);
   const [userNum, setUserNum] = useState(7);
   const [searchKey, setSearchKey] = useState("");
 
   useEffect(() => {
-    getAllUsers(userNum, searchKey)
+    getAllRoles(userNum, searchKey)
       .then((res) => {
-        let usersArray = [];
+        let RolesArray = [];
         if (userNum > res.data.count) setUserNum(res.data.count);
         res.data.data.forEach((user) => {
-          usersArray.push({
+          RolesArray.push({
             id: user._id,
             name: user.firstName + " " + user.lastName,
             email: user.email,
@@ -31,7 +31,7 @@ const Users = () => {
             role: user.roleName,
           });
         });
-        setTotalUsers(res.data.count);
+        setTotalRoles(res.data.count);
         setColumnNames([
           "Id",
           "Name",
@@ -40,7 +40,7 @@ const Users = () => {
           "Active",
           "Role",
         ]);
-        setUsers(usersArray);
+        setRoles(RolesArray);
         setLoading(false);
       })
       .catch((error) => {
@@ -64,8 +64,8 @@ const Users = () => {
       ) : (
         <Table
           columnNames={columnNames}
-          tableContent={users}
-          total={totalUsers}
+          tableContent={Roles}
+          total={totalRoles}
           num={userNum}
           searchKey={searchKey}
           setSearchKey={setSearchKey}
@@ -75,8 +75,8 @@ const Users = () => {
     </main>
   );
 };
-Users.getLayout = function getLayout(page) {
-  return <Layout title="Users">{page}</Layout>;
+Roles.getLayout = function getLayout(page) {
+  return <Layout title="Roles">{page}</Layout>;
 };
 
-export default Users;
+export default Roles;
