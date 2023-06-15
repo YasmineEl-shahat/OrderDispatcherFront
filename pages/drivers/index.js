@@ -12,8 +12,20 @@ const Drivers = () => {
   useEffect(() => {
     getAllDrivers()
       .then((res) => {
-        setDrivers(res.data);
-        setColumnNames(Object.keys(res.data[0]));
+        let driversArray = [];
+        res.data.forEach((driver) => {
+          driversArray.push({
+            id: driver._id,
+            name: driver.driverName,
+            status: driver.status,
+            availability: driver.availability,
+            email: driver.email,
+            "phone number": driver.phoneNumber,
+            "no. of orders": driver.orderCount,
+          });
+        });
+        setDrivers(driversArray);
+        setColumnNames(Object.keys(driversArray[0]));
       })
       .catch((error) => {
         console.log(error.response);

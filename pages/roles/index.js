@@ -46,18 +46,18 @@ const Roles = () => {
   useEffect(() => {
     getAllRoles(roleNum)
       .then((res) => {
-        let RolesArray = [];
+        let rolesArray = [];
         if (roleNum > res.data.rolesCount) setRoleNum(res.data.rolesCount);
         res.data.roles.forEach((role) => {
-          RolesArray.push({
+          rolesArray.push({
             id: role._id,
             name: role.name,
             permissions: getPermissionList(role.permissions),
           });
         });
         setTotalRoles(res.data.rolesCount);
-        setColumnNames(["Id", "Name", "Permissions"]);
-        setRoles(RolesArray);
+        setColumnNames(Object.keys(rolesArray[0]));
+        setRoles(rolesArray);
         setLoading(false);
       })
       .catch((error) => {

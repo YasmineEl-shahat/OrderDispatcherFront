@@ -38,16 +38,8 @@ const Orders = () => {
           });
         });
         setOrders(ordersArray);
-        setColumnNames([
-          "Order Code",
-          "Customer Name",
-          "Governate",
-          "City",
-          "Status",
-          "Total Price",
-          "Payment Method",
-        ]);
 
+        setColumnNames(Object.keys(ordersArray[0]));
         getAllGovernates()
           .then((res) => {
             setGovernates(res.data);

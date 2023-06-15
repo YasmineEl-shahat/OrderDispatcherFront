@@ -15,7 +15,7 @@ const Users = () => {
   const [roles, setRoles] = useState([]);
   const [role, setRole] = useState("");
   const [roleNum, setRoleNum] = useState(2);
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState();
 
   function handleSetActive(e) {
     setActive(e.target.value === "active");
@@ -41,14 +41,8 @@ const Users = () => {
           });
         });
         setTotalUsers(res.data.count);
-        setColumnNames([
-          "Id",
-          "Name",
-          "Email",
-          "Phone Number",
-          "Active",
-          "Role",
-        ]);
+
+        setColumnNames(Object.keys(usersArray[0]));
         setUsers(usersArray);
 
         getAllRoles(roleNum)
@@ -88,13 +82,11 @@ const Users = () => {
       ) : (
         <>
           <div className="radio-buttons">
-            {" "}
             <label>
               <input
                 type="radio"
                 name="active"
                 value="active"
-                checked={active}
                 onChange={handleSetActive}
               />
               active
@@ -104,7 +96,6 @@ const Users = () => {
                 type="radio"
                 name="active"
                 value="inactive"
-                checked={!active}
                 onChange={handleSetActive}
               />
               inactive

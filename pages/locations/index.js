@@ -13,6 +13,8 @@ const Locations = () => {
   const [locations, setLocations] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [shownNumber, setShownNumber] = useState(7);
+  const [searchKey, setSearchKey] = useState("");
 
   const { t } = useTranslation();
 
@@ -23,7 +25,7 @@ const Locations = () => {
   };
 
   useEffect(() => {
-    getAllLocations(location)
+    getAllLocations(location, shownNumber, searchKey)
       .then((res) => {
         let arrayOfLocations = [];
         res.data.forEach((l) => {
@@ -33,10 +35,10 @@ const Locations = () => {
         setLocations(arrayOfLocations);
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        console.log(error);
       });
     setLoading(false);
-  }, [location]);
+  }, [location, shownNumber, searchKey]);
 
   return (
     <main
@@ -50,7 +52,7 @@ const Locations = () => {
         <Spinner />
       ) : (
         <>
-          <section className="tabWrapper row">
+          <section className="tabWrapper">
             {tabData.map((data, index) => (
               <span
                 onClick={() => handleTabClick(data, index)}
@@ -62,7 +64,14 @@ const Locations = () => {
             ))}
           </section>
 
-          <Table columnNames={columnNames} tableContent={locations} />
+          <Table
+            columnNames={columnNames}
+            tableContent={locations}
+            num={shownNumber}
+            searchKey={searchKey}
+            setSearchKey={setSearchKey}
+            setNum={setShownNumber}
+          />
         </>
       )}
     </main>
