@@ -119,7 +119,7 @@ const Users = () => {
                 inactive
               </label>
             </div>
-            <Link href="/users?operation=add" passHref>
+            <Link href="/users/add" passHref>
               <button className="btn--global ">Add New User</button>
             </Link>
           </article>

@@ -32,12 +32,9 @@ const Locations = () => {
     getAllLocations(location, shownNumber, searchKey)
       .then((res) => {
         setTotalLocations(res.data.totalCount);
-        let arrayOfLocations = [];
-        res.data.location.forEach((l) => {
-          arrayOfLocations.push({ name: l });
-        });
-        setColumnNames(["Name"]);
-        setLocations(arrayOfLocations);
+
+        setColumnNames(Object.keys(res.data.location[0]));
+        setLocations(res.data.location);
       })
       .catch((error) => {
         console.log(error);
