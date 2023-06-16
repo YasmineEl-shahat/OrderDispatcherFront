@@ -59,7 +59,7 @@ const Navbar = ({ locale, translate }) => {
   return (
     <nav className="navbar navbar-expand-lg sticky-top d-flex align-items-center justify-content-between">
       <article className="title">
-        {translate(router.pathname.substring(1))}
+        {translate(router.asPath.substring(1))}
       </article>
       <article className="d-flex align-items-center flex-row-reverse">
         <div className="main d-flex align-items-center flex-row gap-3">

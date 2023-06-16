@@ -1,10 +1,13 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 const Table = ({
   columnNames,
   tableContent,
   searchKey,
   setSearchKey,
   handleDelete,
-  handleEdit,
+  canEdit,
   filter1,
   filter1_list,
   setFilter1,
@@ -21,6 +24,8 @@ const Table = ({
   setNum,
   total,
 }) => {
+  const router = useRouter();
+
   return (
     <div className="table-responsive">
       <div className="table-wrapper">
@@ -145,23 +150,33 @@ const Table = ({
                     return <td key={`${item.id} ${key}`}>{value}</td>;
                   })}
                   <td>
-                    <a
-                      href="#"
-                      className="view"
-                      title="View"
-                      data-toggle="tooltip"
+                    <Link
+                      href={router.pathname + "/" + item.id + "?operation=view"}
+                      passHref
                     >
-                      <i className="material-icons">&#xE417;</i>
-                    </a>
-                    {handleEdit && (
-                      <a
-                        href="#"
-                        className="edit"
-                        title="Edit"
+                      <button
+                        className="view"
+                        title="View"
                         data-toggle="tooltip"
                       >
-                        <i className="material-icons">&#xE254;</i>
-                      </a>
+                        <i className="material-icons">&#xE417;</i>
+                      </button>
+                    </Link>
+                    {canEdit && (
+                      <Link
+                        href={
+                          router.pathname + "/" + item.id + "?operation=edit"
+                        }
+                        passHref
+                      >
+                        <button
+                          className="edit"
+                          title="Edit"
+                          data-toggle="tooltip"
+                        >
+                          <i className="material-icons">&#xE254;</i>
+                        </button>
+                      </Link>
                     )}
 
                     {handleDelete && (
@@ -171,7 +186,7 @@ const Table = ({
                         data-toggle="tooltip"
                         onClick={() => handleDelete(item.id)}
                       >
-                        <i className="material-icons">&#xE872;</i>
+                        <i className="material-icons ">&#xE872;</i>
                       </button>
                     )}
                   </td>

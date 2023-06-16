@@ -84,18 +84,18 @@ table.table th i {
 table.table td:last-child {
   width: 130px;
 }
-table.table td a {
+table.table td button {
   color: #a0a5b1;
   display: inline-block;
   margin: 0 5px;
 }
-table.table td a.view {
+table.table td button.view {
   color: #03a9f4;
 }
-table.table td a.edit {
+table.table td button.edit {
   color: #ffc107;
 }
-table.table td a.delete {
+table.table td button.delete {
   color: #e34724;
 }
 table.table td i {

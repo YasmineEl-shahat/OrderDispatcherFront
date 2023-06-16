@@ -4,6 +4,7 @@ import Table from "../../src/sharedui/Table";
 import { getAllLocations } from "../api/locations";
 import { useState, useEffect } from "react";
 import { useTranslation } from "../../util/useTranslation";
+import Link from "next/link";
 
 const Locations = () => {
   const tabData = ["governates", "cities", "areas"];
@@ -24,6 +25,8 @@ const Locations = () => {
     setLocation(data);
     setActiveIndex(index);
   };
+
+  const handleDelete = () => {};
 
   useEffect(() => {
     getAllLocations(location, shownNumber, searchKey)
@@ -54,6 +57,12 @@ const Locations = () => {
         <Spinner />
       ) : (
         <>
+          <article className="addWrapper">
+            <div></div>
+            <Link href="/locations?operation=add" passHref>
+              <button className="btn--global ">Add New Location</button>
+            </Link>
+          </article>
           <section className="tabWrapper">
             {tabData.map((data, index) => (
               <span
@@ -74,6 +83,8 @@ const Locations = () => {
             setSearchKey={setSearchKey}
             setNum={setShownNumber}
             total={totalLocations}
+            canEdit={true}
+            handleDelete={handleDelete}
           />
         </>
       )}

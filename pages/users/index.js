@@ -18,9 +18,12 @@ const Users = () => {
   const [roleNum, setRoleNum] = useState(2);
   const [active, setActive] = useState(null);
 
-  function handleSetActive(e) {
+  // handlers
+  const handleSetActive = (e) => {
     setActive(e.target.value === "active");
-  }
+  };
+
+  const handleDelete = () => {};
 
   useEffect(() => {
     getAllUsers(userNum, searchKey, role, active)
@@ -37,7 +40,7 @@ const Users = () => {
             active: user.active ? (
               <i className="fa-solid fa-check" style={{ color: "green" }}></i>
             ) : (
-              <i className="fa-solid fa-x" style={{ color: "red" }}></i>
+              <i className="fa-solid fa-x" style={{ color: "#e34724" }}></i>
             ),
             role: user.roleName,
           });
@@ -132,6 +135,8 @@ const Users = () => {
             filter1={role}
             setFilter1={setRole}
             filter1_placeholder={"Role"}
+            canEdit={true}
+            handleDelete={handleDelete}
           />
         </>
       )}

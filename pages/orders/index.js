@@ -28,7 +28,7 @@ const Orders = () => {
         if (orderNum > res.data.totalOrders) setOrderNum(res.data.totalOrders);
         res.data.data.forEach((order) => {
           ordersArray.push({
-            "Order Code": order._id,
+            id: order._id,
             "Customer Name": order.CustomerName,
             Governate: order.Address.Governate,
             City: order.Address.City,

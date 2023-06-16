@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
@@ -8,6 +9,10 @@ const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // handlers
+
+  const handleDelete = () => {};
 
   useEffect(() => {
     getAllDrivers()
@@ -44,7 +49,20 @@ const Drivers = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <Table columnNames={columnNames} tableContent={drivers} />
+        <>
+          <article className="addWrapper">
+            <div></div>
+            <Link href="/drivers?operation=add" passHref>
+              <button className="btn--global ">Add New Driver</button>
+            </Link>
+          </article>
+          <Table
+            columnNames={columnNames}
+            tableContent={drivers}
+            canEdit={true}
+            handleDelete={handleDelete}
+          />
+        </>
       )}
     </main>
   );

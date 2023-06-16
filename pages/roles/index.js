@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
@@ -77,13 +78,22 @@ const Roles = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <Table
-          columnNames={columnNames}
-          tableContent={Roles}
-          total={totalRoles}
-          num={roleNum}
-          setNum={setRoleNum}
-        />
+        <>
+          <article className="addWrapper">
+            <div></div>
+            <Link href="/roles?operation=add" passHref>
+              <button className="btn--global ">Add New Role</button>
+            </Link>
+          </article>
+          <Table
+            columnNames={columnNames}
+            tableContent={Roles}
+            total={totalRoles}
+            num={roleNum}
+            setNum={setRoleNum}
+            canEdit={true}
+          />
+        </>
       )}
     </main>
   );
