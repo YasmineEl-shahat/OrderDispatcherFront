@@ -4,6 +4,7 @@
 @import "./Layout/SideBar.scss";
 @import "./Layout/Navbar.scss";
 @import "./components/Spinner.scss";
+@import "./components/button.scss";
 @import "../src/sharedui/table.scss";
 @import "../pages/login/login.scss";
 @import "../pages/locations/locations.scss";
@@ -87,6 +88,12 @@ html {
 
     button {
       cursor: pointer;
+    }
+    .addWrapper {
+      @include flexBet;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: $smallFont;
     }
   }
 }

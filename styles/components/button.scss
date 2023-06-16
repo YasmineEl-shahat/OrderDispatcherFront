@@ -3,8 +3,11 @@
 
 body {
   .btn--global {
-    padding: 0.75rem 0;
+    padding: 1rem 2rem;
+    height: fit-content;
     color: white;
+    background-color: $primary;
+    border-radius: 3px;
   }
 
   .btn--small {

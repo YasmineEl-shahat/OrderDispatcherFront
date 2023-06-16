@@ -48,7 +48,9 @@ const Customers = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <Table columnNames={columnNames} tableContent={customers} />
+        <>
+          <Table columnNames={columnNames} tableContent={customers} />
+        </>
       )}
     </main>
   );

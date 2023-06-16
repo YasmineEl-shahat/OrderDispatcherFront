@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
@@ -15,7 +16,7 @@ const Users = () => {
   const [roles, setRoles] = useState([]);
   const [role, setRole] = useState("");
   const [roleNum, setRoleNum] = useState(2);
-  const [active, setActive] = useState();
+  const [active, setActive] = useState(null);
 
   function handleSetActive(e) {
     setActive(e.target.value === "active");
@@ -24,6 +25,7 @@ const Users = () => {
   useEffect(() => {
     getAllUsers(userNum, searchKey, role, active)
       .then((res) => {
+        setLoading(true);
         let usersArray = [];
         if (userNum > res.data.count) setUserNum(res.data.count);
         res.data.data.forEach((user) => {
@@ -81,27 +83,43 @@ const Users = () => {
         <Spinner />
       ) : (
         <>
-          <div className="radio-buttons">
-            <label>
-              <input
-                type="radio"
-                name="active"
-                value="active"
-                onChange={handleSetActive}
-              />
-              active
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="active"
-                value="inactive"
-                onChange={handleSetActive}
-              />
-              inactive
-            </label>
-          </div>
-
+          <article className="addWrapper">
+            <div className="radio-buttons">
+              <label>
+                <input
+                  type="radio"
+                  name="active"
+                  value="all"
+                  checked={active === null}
+                  onChange={() => setActive(null)}
+                />
+                All
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="active"
+                  value="active"
+                  checked={active}
+                  onChange={handleSetActive}
+                />
+                active
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="active"
+                  value="inactive"
+                  checked={active === false}
+                  onChange={handleSetActive}
+                />
+                inactive
+              </label>
+            </div>
+            <Link href="/users?operation=add" passHref>
+              <button className="btn--global ">Add New User</button>
+            </Link>
+          </article>
           <Table
             columnNames={columnNames}
             tableContent={users}

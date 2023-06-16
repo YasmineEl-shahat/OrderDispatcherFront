@@ -27,6 +27,7 @@ const Locations = () => {
   useEffect(() => {
     getAllLocations(location, shownNumber, searchKey)
       .then((res) => {
+        console.log(res);
         let arrayOfLocations = [];
         res.data.forEach((l) => {
           arrayOfLocations.push({ name: l });
