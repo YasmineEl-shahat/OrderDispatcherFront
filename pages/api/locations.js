@@ -2,7 +2,7 @@ import { api_url } from "../../config/config";
 import { authorizedHttpJson } from "../../config/http";
 
 export async function getAllLocations(
-  location = "governate",
+  location = "governates",
   shownNumber = 6,
   searchKey = ""
 ) {
@@ -12,7 +12,7 @@ export async function getAllLocations(
 }
 
 export async function getAllGovernates() {
-  return await authorizedHttpJson.get(`${api_url}/locations/governate`);
+  return await authorizedHttpJson.get(`${api_url}/locations/governates`);
 }
 
 export async function getAllCities() {

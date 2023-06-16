@@ -42,14 +42,14 @@ const Orders = () => {
         setColumnNames(Object.keys(ordersArray[0]));
         getAllGovernates()
           .then((res) => {
-            setGovernates(res.data);
+            setGovernates(res.data.location);
           })
           .catch((error) => {
             console.log(error);
           });
         getAllCities()
           .then((res) => {
-            setCities(res.data);
+            setCities(res.data.location);
           })
           .catch((error) => {
             console.log(error);

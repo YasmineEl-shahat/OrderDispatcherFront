@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "../../util/useTranslation";
 
 const Locations = () => {
-  const tabData = ["governate", "cities", "areas"];
+  const tabData = ["governates", "cities", "areas"];
 
   const [location, setLocation] = useState(tabData[0]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -14,6 +14,7 @@ const Locations = () => {
   const [columnNames, setColumnNames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [shownNumber, setShownNumber] = useState(7);
+  const [totalLocations, setTotalLocations] = useState(0);
   const [searchKey, setSearchKey] = useState("");
 
   const { t } = useTranslation();
@@ -27,9 +28,9 @@ const Locations = () => {
   useEffect(() => {
     getAllLocations(location, shownNumber, searchKey)
       .then((res) => {
-        console.log(res);
+        setTotalLocations(res.data.totalCount);
         let arrayOfLocations = [];
-        res.data.forEach((l) => {
+        res.data.location.forEach((l) => {
           arrayOfLocations.push({ name: l });
         });
         setColumnNames(["Name"]);
@@ -72,6 +73,7 @@ const Locations = () => {
             searchKey={searchKey}
             setSearchKey={setSearchKey}
             setNum={setShownNumber}
+            total={totalLocations}
           />
         </>
       )}
