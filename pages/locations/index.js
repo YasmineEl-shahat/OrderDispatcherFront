@@ -32,7 +32,6 @@ const Locations = () => {
     getAllLocations(location, shownNumber, searchKey)
       .then((res) => {
         setTotalLocations(res.data.totalCount);
-
         setColumnNames(Object.keys(res.data.location[0]));
         setLocations(res.data.location);
       })

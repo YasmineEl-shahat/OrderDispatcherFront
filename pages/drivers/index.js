@@ -9,16 +9,19 @@ const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [driverNum, setDriverNum] = useState(7);
+  const [totalDrivers, setTotalDrivers] = useState(0);
+  const [searchKey, setSearchKey] = useState("");
 
   // handlers
-
   const handleDelete = () => {};
 
   useEffect(() => {
-    getAllDrivers()
+    getAllDrivers(driverNum, searchKey)
       .then((res) => {
         let driversArray = [];
-        res.data.forEach((driver) => {
+        setTotalDrivers(res.data.totalCount);
+        res.data.data.forEach((driver) => {
           driversArray.push({
             id: driver._id,
             name: driver.driverName,
@@ -36,7 +39,7 @@ const Drivers = () => {
         console.log(error.response);
       });
     setLoading(false);
-  }, []);
+  }, [driverNum, searchKey]);
 
   return (
     <main
@@ -61,6 +64,11 @@ const Drivers = () => {
             tableContent={drivers}
             canEdit={true}
             handleDelete={handleDelete}
+            num={driverNum}
+            setNum={setDriverNum}
+            searchKey={searchKey}
+            setSearchKey={setSearchKey}
+            total={totalDrivers}
           />
         </>
       )}
