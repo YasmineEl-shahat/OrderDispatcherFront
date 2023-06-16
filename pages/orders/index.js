@@ -42,14 +42,22 @@ const Orders = () => {
         setColumnNames(Object.keys(ordersArray[0]));
         getAllGovernates()
           .then((res) => {
-            setGovernates(res.data.location);
+            let locations = [];
+            res.data.location.forEach((loc) => {
+              locations.push(loc.name);
+            });
+            setGovernates(locations);
           })
           .catch((error) => {
             console.log(error);
           });
         getAllCities()
           .then((res) => {
-            setCities(res.data.location);
+            let locations = [];
+            res.data.location.forEach((loc) => {
+              locations.push(loc.name);
+            });
+            setCities(locations);
           })
           .catch((error) => {
             console.log(error);

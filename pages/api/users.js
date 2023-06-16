@@ -13,3 +13,7 @@ export async function getAllUsers(
   authorizedHttpJson.defaults.headers["active"] = active;
   return await authorizedHttpJson.get(`${api_url}/users`);
 }
+
+export async function addUser(data) {
+  return await authorizedHttpJson.post(`${api_url}/users`, data);
+}

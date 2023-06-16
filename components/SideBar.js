@@ -40,7 +40,9 @@ const SideBar = ({ translate }) => {
         </Link>
         <Link href="/users" passHref>
           <div
-            className={`sideItem  ${activeLink === "/users" ? "selected" : ""}`}
+            className={`sideItem  ${
+              activeLink.includes("/users") ? "selected" : ""
+            }`}
             onClick={() => setActiveLink("/users")}
           >
             <i className="fa-solid fa-user-group"></i>
@@ -49,7 +51,9 @@ const SideBar = ({ translate }) => {
         </Link>
         <Link href="/roles" passHref>
           <div
-            className={`sideItem  ${activeLink === "/roles" ? "selected" : ""}`}
+            className={`sideItem  ${
+              activeLink.includes("/roles") ? "selected" : ""
+            }`}
             onClick={() => setActiveLink("/roles")}
           >
             <i className="fa-solid fa-lock"></i> {translate("roles")}
@@ -58,7 +62,7 @@ const SideBar = ({ translate }) => {
         <Link href="/orders" passHref>
           <div
             className={`sideItem  ${
-              activeLink === "/orders" ? "selected" : ""
+              activeLink.includes("/orders") ? "selected" : ""
             }`}
             onClick={() => setActiveLink("/orders")}
           >
@@ -70,7 +74,7 @@ const SideBar = ({ translate }) => {
         <Link href="/drivers" passHref>
           <div
             className={`sideItem  ${
-              activeLink === "/drivers" ? "selected" : ""
+              activeLink.includes("/drivers") ? "selected" : ""
             }`}
             onClick={() => setActiveLink("/drivers")}
           >
@@ -81,7 +85,7 @@ const SideBar = ({ translate }) => {
         <Link href="/customers" passHref>
           <div
             className={`sideItem  ${
-              activeLink === "/customers" ? "selected" : ""
+              activeLink.includes("/customers") ? "selected" : ""
             }`}
             onClick={() => setActiveLink("/customers")}
           >
@@ -92,7 +96,7 @@ const SideBar = ({ translate }) => {
         <Link href="/locations" passHref>
           <div
             className={`sideItem  ${
-              activeLink === "/locations" ? "selected" : ""
+              activeLink.includes("/locations") ? "selected" : ""
             }`}
             onClick={() => setActiveLink("/locations")}
           >
@@ -103,7 +107,7 @@ const SideBar = ({ translate }) => {
         <Link href="/reports" passHref>
           <div
             className={`sideItem  ${
-              activeLink === "/reports" ? "selected" : ""
+              activeLink.includes("/reports") ? "selected" : ""
             }`}
             onClick={() => setActiveLink("/reports")}
           >
