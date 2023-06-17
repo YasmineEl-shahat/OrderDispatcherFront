@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Layout from "../../../components/Layout";
 import AuthContext from "../../../context/AuthContext";
 import { useTranslation } from "../../../util/useTranslation";
@@ -6,7 +7,6 @@ import { addUser } from "../../api/users";
 import { getAllRoles } from "../../api/roles";
 import Spinner from "../../../components/Spinner";
 import UserForm from "../../../src/sharedui/forms/userForm";
-import { useRouter } from "next/router";
 
 const AddUser = () => {
   const router = useRouter();

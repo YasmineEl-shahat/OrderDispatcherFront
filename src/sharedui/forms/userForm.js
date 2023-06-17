@@ -103,7 +103,7 @@ const UserForm = ({
             name="role_id"
             type="text"
             placeholder="Role..."
-            value={data.role}
+            value={data.role_id}
             onChange={(e) => onChangeHandler(e)}
             list="roles"
           />

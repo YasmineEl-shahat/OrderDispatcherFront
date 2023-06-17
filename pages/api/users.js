@@ -17,3 +17,11 @@ export async function getAllUsers(
 export async function addUser(data) {
   return await authorizedHttpJson.post(`${api_url}/users`, data);
 }
+
+export async function viewUser(id) {
+  return await authorizedHttpJson.get(`${api_url}/users/${id}`);
+}
+
+export async function updateUser(id, data) {
+  return await authorizedHttpJson.put(`${api_url}/users/${id}`, data);
+}
