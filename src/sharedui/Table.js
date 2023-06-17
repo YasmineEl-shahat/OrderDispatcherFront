@@ -23,6 +23,7 @@ const Table = ({
   num,
   setNum,
   total,
+  setSelectedUser,
 }) => {
   const router = useRouter();
 
@@ -184,7 +185,10 @@ const Table = ({
                         className="delete"
                         title="Delete"
                         data-toggle="tooltip"
-                        onClick={() => handleDelete(item.id)}
+                        onClick={() => {
+                          setSelectedUser(item);
+                          handleDelete();
+                        }}
                       >
                         <i className="material-icons ">&#xE872;</i>
                       </button>

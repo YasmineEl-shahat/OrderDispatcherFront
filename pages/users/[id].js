@@ -94,6 +94,7 @@ const UpdateUser = () => {
           onChangeHandler={onChangeHandler}
           submit={operation === "edit" ? submit : false}
           viewOnly={operation === "view"}
+          emailView={true}
           roles={roles}
           submitting={submitting}
           t={t}

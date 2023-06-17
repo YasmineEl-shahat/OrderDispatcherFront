@@ -25,3 +25,7 @@ export async function viewUser(id) {
 export async function updateUser(id, data) {
   return await authorizedHttpJson.put(`${api_url}/users/${id}`, data);
 }
+
+export async function deleteUser(id) {
+  return await authorizedHttpJson.delete(`${api_url}/users/${id}`);
+}

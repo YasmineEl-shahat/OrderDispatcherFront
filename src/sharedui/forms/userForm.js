@@ -8,6 +8,7 @@ const UserForm = ({
   submitting,
   t,
   viewOnly,
+  emailView,
 }) => {
   return (
     <form onSubmit={(e) => submit(e)}>
@@ -58,7 +59,7 @@ const UserForm = ({
             type="email"
             placeholder="Email"
             value={data.email}
-            disabled={viewOnly}
+            disabled={emailView}
             onChange={(e) => onChangeHandler(e)}
           />
           <span className="invalid">{errors.email ? errors.email : ""}</span>

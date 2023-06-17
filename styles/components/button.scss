@@ -15,4 +15,24 @@ body {
     text-transform: capitalize;
     padding: 1rem 4rem;
   }
+
+  .modal-btns {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    button {
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 1rem;
+    }
+  }
+  .btn--cancel {
+    background-color: $secondary;
+  }
+  .btn--confirm {
+    background-color: $primary;
+  }
 }

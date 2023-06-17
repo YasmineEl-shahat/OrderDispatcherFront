@@ -3,8 +3,9 @@ import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { getAllRoles } from "../api/roles";
-import { getAllUsers } from "../api/users";
+import { deleteUser, getAllUsers } from "../api/users";
 import { useState, useEffect } from "react";
+import CustomModal from "../../src/sharedui/modal";
 
 const Users = () => {
   const [loading, setLoading] = useState(true);
@@ -17,14 +18,26 @@ const Users = () => {
   const [role, setRole] = useState("");
   const [roleNum, setRoleNum] = useState(2);
   const [active, setActive] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({});
 
   // handlers
   const handleSetActive = (e) => {
     setActive(e.target.value === "active");
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    setIsModalOpen(true);
+  };
 
+  const handleConfirmDelete = () => {
+    deleteUser(selectedUser.id);
+    setIsModalOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsModalOpen(false);
+  };
   useEffect(() => {
     getAllUsers(userNum, searchKey, role, active)
       .then((res) => {
@@ -75,72 +88,81 @@ const Users = () => {
   }, [userNum, searchKey, role, active, roleNum]);
 
   return (
-    <main
-      className={
-        loading
-          ? `mainContainer d-flex justify-content-center align-items-center`
-          : `mainContainer`
-      }
-    >
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <article className="addWrapper">
-            <div className="radio-buttons">
-              <label>
-                <input
-                  type="radio"
-                  name="active"
-                  value="all"
-                  checked={active === null}
-                  onChange={() => setActive(null)}
-                />
-                All
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="active"
-                  value="active"
-                  checked={active}
-                  onChange={handleSetActive}
-                />
-                active
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="active"
-                  value="inactive"
-                  checked={active === false}
-                  onChange={handleSetActive}
-                />
-                inactive
-              </label>
-            </div>
-            <Link href="/users/add" passHref>
-              <button className="btn--global ">Add New User</button>
-            </Link>
-          </article>
-          <Table
-            columnNames={columnNames}
-            tableContent={users}
-            total={totalUsers}
-            num={userNum}
-            searchKey={searchKey}
-            setSearchKey={setSearchKey}
-            setNum={setUserNum}
-            filter1_list={roles}
-            filter1={role}
-            setFilter1={setRole}
-            filter1_placeholder={"Role"}
-            canEdit={true}
-            handleDelete={handleDelete}
-          />
-        </>
-      )}
-    </main>
+    <>
+      <main
+        className={
+          loading
+            ? `mainContainer d-flex justify-content-center align-items-center`
+            : `mainContainer`
+        }
+      >
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <article className="addWrapper">
+              <div className="radio-buttons">
+                <label>
+                  <input
+                    type="radio"
+                    name="active"
+                    value="all"
+                    checked={active === null}
+                    onChange={() => setActive(null)}
+                  />
+                  All
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="active"
+                    value="active"
+                    checked={active}
+                    onChange={handleSetActive}
+                  />
+                  active
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="active"
+                    value="inactive"
+                    checked={active === false}
+                    onChange={handleSetActive}
+                  />
+                  inactive
+                </label>
+              </div>
+              <Link href="/users/add" passHref>
+                <button className="btn--global ">Add New User</button>
+              </Link>
+            </article>
+            <Table
+              columnNames={columnNames}
+              tableContent={users}
+              total={totalUsers}
+              num={userNum}
+              searchKey={searchKey}
+              setSearchKey={setSearchKey}
+              setNum={setUserNum}
+              filter1_list={roles}
+              filter1={role}
+              setFilter1={setRole}
+              filter1_placeholder={"Role"}
+              canEdit={true}
+              handleDelete={handleDelete}
+              setSelectedUser={setSelectedUser}
+            />
+          </>
+        )}
+      </main>
+      <CustomModal
+        isModalOpen={isModalOpen}
+        handleCancelDelete={handleCancelDelete}
+        handleConfirmDelete={handleConfirmDelete}
+        name={selectedUser.name}
+      />
+    </>
   );
 };
 Users.getLayout = function getLayout(page) {
