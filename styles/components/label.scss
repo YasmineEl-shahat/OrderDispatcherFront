@@ -1,2 +1,10 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
+
+.label--global {
+  font-size: $smallFont;
+  color: $primaryGray;
+  line-height: $MediumLineSpacing;
+  display: block;
+  font-weight: 600;
+}

@@ -1,0 +1,43 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.radio-buttons {
+  label {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    font-size: $smallFont;
+  }
+
+  input[type="radio"] {
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    position: relative;
+
+    &:before {
+      content: "";
+      display: block;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ccc;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    &:checked {
+      &:before {
+        opacity: 1;
+        background-color: $secondary;
+      }
+    }
+  }
+}

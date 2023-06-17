@@ -87,10 +87,8 @@ export const AuthProvider = ({ children }) => {
     let newData = { ...data };
     if (e.target.value == "")
       err[e.target.name] = e.target.name + " is required!";
-    else {
-      err[e.target.name] = "";
-      newData[e.target.name] = e.target.value;
-    }
+    else err[e.target.name] = "";
+    newData[e.target.name] = e.target.value;
     setBackError("");
     setErrors(err);
     setData(newData);

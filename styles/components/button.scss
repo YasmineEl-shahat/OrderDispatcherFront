@@ -10,8 +10,9 @@ body {
     border-radius: 3px;
   }
 
-  .btn--small {
-    width: 12rem;
-    font-size: 1.8rem;
+  .btn--forms {
+    float: right;
+    text-transform: capitalize;
+    padding: 1rem 4rem;
   }
 }
