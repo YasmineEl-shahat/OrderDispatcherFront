@@ -38,6 +38,7 @@ const Users = () => {
   const handleCancelDelete = () => {
     setIsModalOpen(false);
   };
+
   useEffect(() => {
     getAllUsers(userNum, searchKey, role, active)
       .then((res) => {

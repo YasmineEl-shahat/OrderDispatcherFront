@@ -2,8 +2,9 @@ import Link from "next/link";
 import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
-import { getAllDrivers } from "../api/drivers";
+import { deleteDriver, getAllDrivers } from "../api/drivers";
 import { useState, useEffect } from "react";
+import CustomModal from "../../src/sharedui/modal";
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
@@ -12,9 +13,25 @@ const Drivers = () => {
   const [driverNum, setDriverNum] = useState(7);
   const [totalDrivers, setTotalDrivers] = useState(0);
   const [searchKey, setSearchKey] = useState("");
+  const [selectedDriver, setSelectedDriver] = useState({});
 
   // handlers
-  const handleDelete = () => {};
+  const handleSetActive = (e) => {
+    setActive(e.target.value === "active");
+  };
+
+  const handleDelete = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteDriver(selectedDriver.id);
+    setIsModalOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     getAllDrivers(driverNum, searchKey)
@@ -42,37 +59,45 @@ const Drivers = () => {
   }, [driverNum, searchKey]);
 
   return (
-    <main
-      className={
-        loading
-          ? `mainContainer d-flex justify-content-center align-items-center`
-          : `mainContainer`
-      }
-    >
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <article className="addWrapper">
-            <div></div>
-            <Link href="/drivers?operation=add" passHref>
-              <button className="btn--global ">Add New Driver</button>
-            </Link>
-          </article>
-          <Table
-            columnNames={columnNames}
-            tableContent={drivers}
-            canEdit={true}
-            handleDelete={handleDelete}
-            num={driverNum}
-            setNum={setDriverNum}
-            searchKey={searchKey}
-            setSearchKey={setSearchKey}
-            total={totalDrivers}
-          />
-        </>
-      )}
-    </main>
+    <>
+      <main
+        className={
+          loading
+            ? `mainContainer d-flex justify-content-center align-items-center`
+            : `mainContainer`
+        }
+      >
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <article className="addWrapper">
+              <div></div>
+              <Link href="/drivers?operation=add" passHref>
+                <button className="btn--global ">Add New Driver</button>
+              </Link>
+            </article>
+            <Table
+              columnNames={columnNames}
+              tableContent={drivers}
+              canEdit={true}
+              handleDelete={handleDelete}
+              num={driverNum}
+              setNum={setDriverNum}
+              searchKey={searchKey}
+              setSearchKey={setSearchKey}
+              total={totalDrivers}
+            />
+          </>
+        )}
+      </main>
+      <CustomModal
+        isModalOpen={isModalOpen}
+        handleCancelDelete={handleCancelDelete}
+        handleConfirmDelete={handleConfirmDelete}
+        name={selectedDriver.name}
+      />
+    </>
   );
 };
 Drivers.getLayout = function getLayout(page) {
