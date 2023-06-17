@@ -19,7 +19,7 @@ export async function getAllCities() {
   return await authorizedHttpJson.get(`${api_url}/locations/cities`);
 }
 
-export async function deleteLocation(location = "governate", id) {
+export async function deleteLocation(location = "governates", id) {
   return await authorizedHttpJson.delete(
     `${api_url}/locations/${location}/${id}`
   );

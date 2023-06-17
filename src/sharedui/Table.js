@@ -23,7 +23,7 @@ const Table = ({
   num,
   setNum,
   total,
-  setSelectedUser,
+  setSelectedItem,
 }) => {
   const router = useRouter();
 
@@ -186,7 +186,7 @@ const Table = ({
                         title="Delete"
                         data-toggle="tooltip"
                         onClick={() => {
-                          setSelectedUser(item);
+                          setSelectedItem(item);
                           handleDelete();
                         }}
                       >

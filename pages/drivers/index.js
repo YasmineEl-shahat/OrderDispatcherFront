@@ -14,12 +14,10 @@ const Drivers = () => {
   const [totalDrivers, setTotalDrivers] = useState(0);
   const [searchKey, setSearchKey] = useState("");
   const [selectedDriver, setSelectedDriver] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [changeHappened, setChangeHappened] = useState(false);
 
   // handlers
-  const handleSetActive = (e) => {
-    setActive(e.target.value === "active");
-  };
-
   const handleDelete = () => {
     setIsModalOpen(true);
   };
@@ -27,6 +25,7 @@ const Drivers = () => {
   const handleConfirmDelete = () => {
     deleteDriver(selectedDriver.id);
     setIsModalOpen(false);
+    setChangeHappened(true);
   };
 
   const handleCancelDelete = () => {
@@ -51,12 +50,13 @@ const Drivers = () => {
         });
         setDrivers(driversArray);
         setColumnNames(Object.keys(driversArray[0]));
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error.response);
+        setLoading(false);
       });
-    setLoading(false);
-  }, [driverNum, searchKey]);
+  }, [driverNum, searchKey, changeHappened]);
 
   return (
     <>
@@ -87,6 +87,7 @@ const Drivers = () => {
               searchKey={searchKey}
               setSearchKey={setSearchKey}
               total={totalDrivers}
+              setSelectedItem={setSelectedDriver}
             />
           </>
         )}

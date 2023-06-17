@@ -20,6 +20,7 @@ const Users = () => {
   const [active, setActive] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
+  const [changeHappened, setChangeHappened] = useState(false);
 
   // handlers
   const handleSetActive = (e) => {
@@ -33,6 +34,7 @@ const Users = () => {
   const handleConfirmDelete = () => {
     deleteUser(selectedUser.id);
     setIsModalOpen(false);
+    setChangeHappened(true);
   };
 
   const handleCancelDelete = () => {
@@ -86,7 +88,7 @@ const Users = () => {
 
         setLoading(false);
       });
-  }, [userNum, searchKey, role, active, roleNum]);
+  }, [userNum, searchKey, role, active, roleNum, changeHappened]);
 
   return (
     <>
@@ -152,7 +154,7 @@ const Users = () => {
               filter1_placeholder={"Role"}
               canEdit={true}
               handleDelete={handleDelete}
-              setSelectedUser={setSelectedUser}
+              setSelectedItem={setSelectedUser}
             />
           </>
         )}
