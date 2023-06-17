@@ -22,14 +22,3 @@
     width: 90vw !important;
   }
 }
-
-.form--section {
-  @include flexBet;
-  flex-wrap: wrap;
-}
-.field--wrapper {
-  margin-bottom: 2rem;
-  span {
-    display: block;
-  }
-}

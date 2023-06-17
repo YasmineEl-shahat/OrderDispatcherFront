@@ -1,0 +1,17 @@
+@import "../abstracts/mixins.scss";
+
+.formContainer {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+.form--section {
+  @include flexBet;
+  flex-wrap: wrap;
+}
+.field--wrapper {
+  margin-bottom: 2rem;
+  span {
+    display: block;
+  }
+}

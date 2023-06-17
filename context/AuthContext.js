@@ -158,6 +158,7 @@ export const AuthProvider = ({ children }) => {
     name,
     image,
     data,
+    setData,
     setName,
     setImage,
     setBackError,
