@@ -11,7 +11,7 @@ import UserForm from "../../src/sharedui/forms/userForm";
 
 const UpdateUser = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, operation } = router.query;
   const {
     data,
     backError,
@@ -92,7 +92,8 @@ const UpdateUser = () => {
           errors={errors}
           backError={backError}
           onChangeHandler={onChangeHandler}
-          submit={submit}
+          submit={operation === "edit" ? submit : false}
+          viewOnly={operation === "view"}
           roles={roles}
           submitting={submitting}
           t={t}

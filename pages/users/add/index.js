@@ -28,6 +28,7 @@ const AddUser = () => {
   const [roles, setRoles] = useState([]);
 
   useEffect(() => {
+    setData({});
     getAllRoles(roleNum)
       .then((res) => {
         setLoading(true);

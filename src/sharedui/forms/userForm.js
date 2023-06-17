@@ -7,6 +7,7 @@ const UserForm = ({
   roles,
   submitting,
   t,
+  viewOnly,
 }) => {
   return (
     <form onSubmit={(e) => submit(e)}>
@@ -21,6 +22,7 @@ const UserForm = ({
             type="text"
             placeholder="First Name"
             value={data.firstName}
+            disabled={viewOnly}
             onChange={(e) => onChangeHandler(e)}
           />
           <span className="invalid">
@@ -38,6 +40,7 @@ const UserForm = ({
             type="text"
             placeholder="Last Name"
             value={data.lastName}
+            disabled={viewOnly}
             onChange={(e) => onChangeHandler(e)}
           />
           <span className="invalid">
@@ -55,27 +58,31 @@ const UserForm = ({
             type="email"
             placeholder="Email"
             value={data.email}
+            disabled={viewOnly}
             onChange={(e) => onChangeHandler(e)}
           />
           <span className="invalid">{errors.email ? errors.email : ""}</span>
         </div>
-
-        <div className="field--wrapper">
-          <label className="label--global" htmlFor="password">
-            Password
-          </label>
-          <input
-            className="text--global"
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={data.password}
-            onChange={(e) => onChangeHandler(e)}
-          />
-          <span className="invalid">
-            {errors.password ? errors.password : ""}
-          </span>
-        </div>
+        {viewOnly ? (
+          <></>
+        ) : (
+          <div className="field--wrapper">
+            <label className="label--global" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="text--global"
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={data.password}
+              onChange={(e) => onChangeHandler(e)}
+            />
+            <span className="invalid">
+              {errors.password ? errors.password : ""}
+            </span>
+          </div>
+        )}
 
         <div className="field--wrapper">
           <label className="label--global" htmlFor="phoneNumber">
@@ -88,6 +95,7 @@ const UserForm = ({
             placeholder="Phone Number"
             value={data.phoneNumber}
             onChange={(e) => onChangeHandler(e)}
+            disabled={viewOnly}
           />
           <span className="invalid">
             {errors.phoneNumber ? errors.phoneNumber : ""}
@@ -104,6 +112,7 @@ const UserForm = ({
             type="text"
             placeholder="Role..."
             value={data.role_id}
+            disabled={viewOnly}
             onChange={(e) => onChangeHandler(e)}
             list="roles"
           />
@@ -128,6 +137,7 @@ const UserForm = ({
                 type="radio"
                 name="active"
                 value={1}
+                disabled={viewOnly}
                 checked={data.active == 1 || data.active === true}
                 onChange={(e) => onChangeHandler(e)}
               />
@@ -138,6 +148,7 @@ const UserForm = ({
                 type="radio"
                 name="active"
                 value={0}
+                disabled={viewOnly}
                 checked={data.active == 0 || data.active === false}
                 onChange={(e) => onChangeHandler(e)}
               />
@@ -149,9 +160,11 @@ const UserForm = ({
       </section>
 
       <span className="invalid">{backError}</span>
-      <button className="btn--global btn--forms">
-        {submitting ? t("submitting") : t("submit")}
-      </button>
+      {submit && (
+        <button className="btn--global btn--forms">
+          {submitting ? t("submitting") : t("submit")}
+        </button>
+      )}
     </form>
   );
 };
