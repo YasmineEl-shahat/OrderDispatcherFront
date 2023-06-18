@@ -42,12 +42,12 @@ const Governate = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    updateGovernate(JSON.stringify({ name: data.governate }))
+    updateGovernate(id, JSON.stringify({ name: data.governate }))
       .then((res) => {
         setSubmitting(false);
         setData({});
-        router.replace("/locations");
         setBackError("");
+        router.replace("/locations");
       })
       .catch((error) => {
         setBackError(error.response.data.message);
@@ -99,20 +99,22 @@ const Governate = () => {
           )}
           <article>
             <span className="label--global title">City: </span>
-            <span className="description permissionsWrapper">
+            <span className="description">
               <ul>
-                {data.cities.map((city) => (
-                  <li key={city}>{city}</li>
-                ))}
-              </ul>
-            </span>
-          </article>
-          <article>
-            <span className="label--global title">Areas: </span>
-            <span className="description permissionsWrapper">
-              <ul>
-                {data.areas.map((area) => (
-                  <li key={area}>{area}</li>
+                {data?.cities?.map((city) => (
+                  <>
+                    <li key={city.city}>{city.city}</li>
+                    <article>
+                      <span className="label--global title">Areas: </span>
+                      <span className="description permissionsWrapper">
+                        <ul>
+                          {city.areas?.map((area) => (
+                            <li key={area}>{area}</li>
+                          ))}
+                        </ul>
+                      </span>
+                    </article>
+                  </>
                 ))}
               </ul>
             </span>

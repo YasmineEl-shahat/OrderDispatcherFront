@@ -42,12 +42,12 @@ const Area = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    updateArea(JSON.stringify({ name: data.area }))
+    updateArea(id, JSON.stringify({ name: data.area }))
       .then((res) => {
         setSubmitting(false);
         setData({});
-        router.replace("/locations");
         setBackError("");
+        router.replace("/locations");
       })
       .catch((error) => {
         setBackError(error.response.data.message);

@@ -42,12 +42,12 @@ const City = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    updateCity(JSON.stringify({ name: data.city }))
+    updateCity(id, JSON.stringify({ name: data.city }))
       .then((res) => {
         setSubmitting(false);
+        setBackError("");
         setData({});
         router.replace("/locations");
-        setBackError("");
       })
       .catch((error) => {
         setBackError(error.response.data.message);
@@ -105,7 +105,7 @@ const City = () => {
             <span className="label--global title">Areas: </span>
             <span className="description permissionsWrapper">
               <ul>
-                {data.areas.map((area) => (
+                {data?.areas?.map((area) => (
                   <li key={area}>{area}</li>
                 ))}
               </ul>
