@@ -30,5 +30,16 @@ export async function deleteLocation(location = "governates", id) {
 }
 
 export async function addLocation(data) {
-  return await authorizedHttpJson.post(`${api_url}/Locations`, data);
+  return await authorizedHttpJson.post(`${api_url}/locations`, data);
+}
+
+export async function viewArea(id) {
+  return await authorizedHttpJson.get(`${api_url}/locations/areas/${id}`);
+}
+
+export async function updateArea(id, data) {
+  return await authorizedHttpJson.patch(
+    `${api_url}/locations/areas/${id}`,
+    data
+  );
 }

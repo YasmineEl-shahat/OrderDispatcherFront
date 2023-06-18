@@ -24,6 +24,7 @@ const Table = ({
   setNum,
   total,
   setSelectedItem,
+  location,
 }) => {
   const router = useRouter();
 
@@ -152,7 +153,16 @@ const Table = ({
                   })}
                   <td>
                     <Link
-                      href={router.pathname + "/" + item.id + "?operation=view"}
+                      href={
+                        location
+                          ? router.pathname +
+                            "/" +
+                            location +
+                            "/" +
+                            item.id +
+                            "?operation=view"
+                          : router.pathname + "/" + item.id + "?operation=view"
+                      }
                       passHref
                     >
                       <button
@@ -166,7 +176,17 @@ const Table = ({
                     {canEdit && (
                       <Link
                         href={
-                          router.pathname + "/" + item.id + "?operation=edit"
+                          location
+                            ? router.pathname +
+                              "/" +
+                              location +
+                              "/" +
+                              item.id +
+                              "?operation=edit"
+                            : router.pathname +
+                              "/" +
+                              item.id +
+                              "?operation=edit"
                         }
                         passHref
                       >

@@ -57,6 +57,6 @@ const AddLocation = () => {
   );
 };
 AddLocation.getLayout = function getLayout(page) {
-  return <Layout title="Add User">{page}</Layout>;
+  return <Layout title="Add Location">{page}</Layout>;
 };
 export default AddLocation;

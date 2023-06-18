@@ -100,6 +100,7 @@ const Locations = () => {
               canEdit={true}
               handleDelete={handleDelete}
               setSelectedItem={setSelectedLocation}
+              location={location}
             />
           </>
         )}
