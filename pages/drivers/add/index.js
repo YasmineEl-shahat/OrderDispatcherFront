@@ -29,6 +29,7 @@ const AddDriver = () => {
 
   useEffect(() => {
     setData({});
+    setSelectedAreas([]);
     getAllAreas()
       .then((res) => {
         let areasArray = res.data.location.map((area) => ({
@@ -42,16 +43,16 @@ const AddDriver = () => {
         console.log(error);
         setLoading(false);
       });
+    // eslint-disable-next-line
   }, []);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     let newData = { ...data };
     newData["areas"] = selectedAreas.map((area) => area.value);
-    setData(newData);
 
-    addDriver(JSON.stringify(data))
+    addDriver(JSON.stringify(newData))
       .then((res) => {
         setSubmitting(false);
         setData({});

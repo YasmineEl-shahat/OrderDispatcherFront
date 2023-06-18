@@ -82,6 +82,7 @@ const DriverForm = ({
             value={data.orderCount}
             onChange={(e) => onChangeHandler(e)}
             disabled={viewOnly}
+            min={1}
           />
           <span className="invalid">
             {errors.orderCount ? errors.orderCount : ""}
@@ -163,6 +164,7 @@ const DriverForm = ({
             isMulti
             onChange={setSelectedAreas}
             closeMenuOnSelect={false}
+            isDisabled={viewOnly}
           />
         </div>
       </section>

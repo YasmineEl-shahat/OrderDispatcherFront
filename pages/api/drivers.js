@@ -14,3 +14,11 @@ export async function deleteDriver(id) {
 export async function addDriver(data) {
   return await authorizedHttpJson.post(`${api_url}/drivers`, data);
 }
+
+export async function viewDriver(id) {
+  return await authorizedHttpJson.get(`${api_url}/drivers/${id}`);
+}
+
+export async function updateDriver(id, data) {
+  return await authorizedHttpJson.put(`${api_url}/drivers/${id}`, data);
+}
