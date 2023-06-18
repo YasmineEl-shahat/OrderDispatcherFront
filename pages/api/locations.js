@@ -19,6 +19,10 @@ export async function getAllCities() {
   return await authorizedHttpJson.get(`${api_url}/locations/cities`);
 }
 
+export async function getAllAreas() {
+  return await authorizedHttpJson.get(`${api_url}/locations/areas`);
+}
+
 export async function deleteLocation(location = "governates", id) {
   return await authorizedHttpJson.delete(
     `${api_url}/locations/${location}/${id}`

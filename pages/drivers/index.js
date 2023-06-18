@@ -73,7 +73,7 @@ const Drivers = () => {
           <>
             <article className="addWrapper">
               <div></div>
-              <Link href="/drivers?operation=add" passHref>
+              <Link href="/drivers/add" passHref>
                 <button className="btn--global ">Add New Driver</button>
               </Link>
             </article>

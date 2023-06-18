@@ -10,3 +10,7 @@ export async function getAllDrivers(driverNum = 6, searchKey = "") {
 export async function deleteDriver(id) {
   return await authorizedHttpJson.delete(`${api_url}/drivers/${id}`);
 }
+
+export async function addDriver(data) {
+  return await authorizedHttpJson.post(`${api_url}/drivers`, data);
+}

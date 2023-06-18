@@ -1,17 +1,16 @@
 @import "../abstracts/variables.scss";
 @import "../abstracts/mixins.scss";
 
-.text--global {
+.text--global,
+.css-13cymwt-control,
+.css-qbdosj-Input {
   width: 35vw !important;
-  height: 3.5rem;
-  padding: 0rem 1.2rem;
   font-size: $MediumFont;
-  background-color: #f3f4f6ff !important;
+
   @include placeholder-color(#bdc1caff);
   color: $primaryGray;
   border-radius: 6px;
-  outline: none;
-  border: none !important;
+
   &:focus {
     border: 1px solid $primaryGray;
   }
@@ -21,4 +20,12 @@
   @include mQ(500px) {
     width: 90vw !important;
   }
+}
+
+.text--global {
+  height: 3.5rem;
+  background-color: #f3f4f6ff !important;
+  outline: none;
+  border: none !important;
+  padding: 0rem 1.2rem;
 }

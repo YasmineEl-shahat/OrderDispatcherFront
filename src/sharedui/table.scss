@@ -142,7 +142,7 @@ table.table td i {
 .table td .permissionsWrapper {
   text-align: left;
   font-weight: 600;
-  @include grid(8px, 200px, 10px);
+  @include grid(8px, 210px, 10px);
   ul {
     display: flex;
     margin-left: 1rem;
