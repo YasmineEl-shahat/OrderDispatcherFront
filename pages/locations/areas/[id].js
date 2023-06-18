@@ -4,7 +4,6 @@ import Layout from "../../../components/Layout";
 import AuthContext from "../../../context/AuthContext";
 import { useTranslation } from "../../../util/useTranslation";
 import { updateArea, viewArea } from "../../api/locations";
-import LocaitonForm from "../../../src/sharedui/forms/locaitonForm";
 import Spinner from "../../../components/Spinner";
 
 const Area = () => {
@@ -26,11 +25,9 @@ const Area = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log(id);
     viewArea(id)
       .then((res) => {
         setData(res.data);
-
         setLoading(false);
       })
       .catch((error) => {
@@ -45,7 +42,7 @@ const Area = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    updateArea(JSON.stringify(data))
+    updateArea(JSON.stringify({ name: data.area }))
       .then((res) => {
         setSubmitting(false);
         setData({});
@@ -62,22 +59,53 @@ const Area = () => {
       className={
         loading
           ? `mainContainer d-flex justify-content-center align-items-center`
-          : `mainContainer formContainer`
+          : `mainContainer `
       }
     >
       {loading ? (
         <Spinner />
       ) : (
-        <LocaitonForm
-          data={data}
-          errors={errors}
-          backError={backError}
-          onChangeHandler={onChangeHandler}
-          submit={operation === "edit" ? submit : false}
-          viewOnly={operation === "view"}
-          submitting={submitting}
-          t={t}
-        />
+        <>
+          {operation === "edit" && (
+            <form onSubmit={(e) => submit(e)}>
+              <div className="field--wrapper">
+                <label className="label--global" htmlFor="area">
+                  Area
+                </label>
+                <input
+                  className="text--global"
+                  name="area"
+                  type="text"
+                  placeholder="Area"
+                  value={data.area}
+                  onChange={(e) => onChangeHandler(e)}
+                />
+                <span className="invalid">
+                  {errors.area ? errors.area : ""}
+                </span>
+                <span className="invalid">{backError}</span>
+                <br />
+                <button className="btn--global btn--forms">
+                  {submitting ? t("submitting") : t("submit")}
+                </button>
+              </div>
+            </form>
+          )}
+          {operation === "view" && (
+            <article>
+              <span className="label--global title">Area: </span>
+              <span className="description">{data.area}</span>
+            </article>
+          )}
+          <article>
+            <span className="label--global title">Governate: </span>
+            <span className="description">{data.governate}</span>
+          </article>
+          <article>
+            <span className="label--global title">City: </span>
+            <span className="description">{data.city}</span>
+          </article>
+        </>
       )}
     </main>
   );

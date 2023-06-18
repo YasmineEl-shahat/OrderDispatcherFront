@@ -139,7 +139,7 @@ table.table td i {
   font-size: 95%;
 }
 
-.table td .permissionsWrapper {
+.permissionsWrapper {
   text-align: left;
   font-weight: 600;
   @include grid(8px, 210px, 10px);
