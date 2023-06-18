@@ -43,3 +43,25 @@ export async function updateArea(id, data) {
     data
   );
 }
+
+export async function viewCity(id) {
+  return await authorizedHttpJson.get(`${api_url}/locations/cities/${id}`);
+}
+
+export async function updateCity(id, data) {
+  return await authorizedHttpJson.patch(
+    `${api_url}/locations/cities/${id}`,
+    data
+  );
+}
+
+export async function viewGovernate(id) {
+  return await authorizedHttpJson.get(`${api_url}/locations/governates/${id}`);
+}
+
+export async function updateGovernate(id, data) {
+  return await authorizedHttpJson.patch(
+    `${api_url}/locations/governates/${id}`,
+    data
+  );
+}
