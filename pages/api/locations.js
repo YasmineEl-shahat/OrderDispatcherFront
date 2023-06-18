@@ -28,3 +28,7 @@ export async function deleteLocation(location = "governates", id) {
     `${api_url}/locations/${location}/${id}`
   );
 }
+
+export async function addLocation(data) {
+  return await authorizedHttpJson.post(`${api_url}/Locations`, data);
+}

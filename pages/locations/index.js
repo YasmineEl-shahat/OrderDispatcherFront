@@ -73,7 +73,7 @@ const Locations = () => {
           <>
             <article className="addWrapper">
               <div></div>
-              <Link href="/locations?operation=add" passHref>
+              <Link href="/locations/add" passHref>
                 <button className="btn--global ">Add New Location</button>
               </Link>
             </article>

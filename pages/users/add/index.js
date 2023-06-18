@@ -40,6 +40,7 @@ const AddUser = () => {
         console.log(error);
         setLoading(false);
       });
+    // eslint-disable-next-line
   }, [roleNum]);
 
   const submit = (e) => {
