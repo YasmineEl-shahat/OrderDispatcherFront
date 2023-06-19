@@ -7,6 +7,7 @@ import Spinner from "../../components/Spinner";
 const Order = () => {
   const [loading, setLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState(null);
+  const [statusColor, setStatusColor] = useState(null);
 
   const router = useRouter();
   const { id } = router.query;
@@ -15,6 +16,29 @@ const Order = () => {
     viewOrder(id)
       .then((res) => {
         setOrderDetails(res.data);
+        console.log(res.data.Status);
+        switch (res.data.Status) {
+          case "assign":
+            setStatusColor("#ebe234");
+            break;
+          case "reassigned":
+            setStatusColor("#ebe234");
+            break;
+          case "confirm":
+            setStatusColor("#34eb34");
+            break;
+          case "picked":
+            setStatusColor("#eb8334");
+            break;
+          case "delivered":
+            setStatusColor("#34eb34");
+            break;
+          case "cancelled":
+            setStatusColor("#eb4034");
+            break;
+          default:
+            setStatusColor("#ebe234");
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -50,7 +74,11 @@ const Order = () => {
         <Spinner />
       ) : (
         <div className="order">
-          <h1>Order Details</h1>
+          <h1>Order Details: #{id}</h1>
+          <h2>
+            Status :{" "}
+            <span style={{ color: statusColor }}>{orderDetails.Status}</span>
+          </h2>
           <table>
             <tbody>
               <tr>
@@ -77,10 +105,7 @@ const Order = () => {
                 <td>Address:</td>
                 <td>{`${orderDetails.Address.Governate}, ${orderDetails.Address.City}, ${orderDetails.Address.Area}`}</td>
               </tr>
-              <tr>
-                <td>Status:</td>
-                <td>{orderDetails.Status}</td>
-              </tr>
+
               <tr>
                 <td>Total Price:</td>
                 <td>{orderDetails.TotalPrice}</td>
