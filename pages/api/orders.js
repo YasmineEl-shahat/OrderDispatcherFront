@@ -27,3 +27,7 @@ export async function assignOrder(order_id) {
 export async function getAllStatuses() {
   return await httpJson.get(api_url + "/orders/status");
 }
+
+export async function viewOrder(id) {
+  return await authorizedHttpJson.get(`${api_url}/orders/${id}`);
+}
