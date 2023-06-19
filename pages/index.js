@@ -1,12 +1,101 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Spinner from "../components/Spinner";
 import { useTranslation } from "../util/useTranslation";
+import {
+  getAssignOrders,
+  getCancelledOrders,
+  getDeliveredOrders,
+  getNewOrders,
+  getPickedOrders,
+  getReassignOrders,
+  getTotalOrders,
+} from "./api/statistics";
 
 const Home = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [totalOrders, setTotalOrders] = useState();
+  const [newOrders, setNewOrders] = useState();
+  const [deliveredOrders, setDeliveredOrders] = useState();
+  const [canceledOrders, setCanceledOrders] = useState();
+  const [pickedOrders, setPickedOrders] = useState();
+  const [assignOrders, setAssignOrders] = useState();
+  const [reassignOrders, setReassignOrders] = useState();
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    getTotalOrders()
+      .then((res) => {
+        setLoading(true);
+        setTotalOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getNewOrders()
+      .then((res) => {
+        setLoading(true);
+        setNewOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getDeliveredOrders()
+      .then((res) => {
+        setLoading(true);
+        setDeliveredOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getCancelledOrders()
+      .then((res) => {
+        setLoading(true);
+        setCanceledOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getPickedOrders()
+      .then((res) => {
+        setLoading(true);
+        setPickedOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getAssignOrders()
+      .then((res) => {
+        setLoading(true);
+        setAssignOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    getReassignOrders()
+      .then((res) => {
+        setLoading(true);
+        setReassignOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <main
       className={
@@ -25,36 +114,43 @@ const Home = () => {
               <h3 className="order-status">
                 <i className="fa-solid fa-check-double"></i> total orders
               </h3>
+              <h2>{totalOrders}</h2>
             </article>
             <article className="purple-overview">
               <h3 className="order-status">
                 <i className="fa-solid fa-rss"></i> new orders
               </h3>
+              <h2>{newOrders}</h2>
             </article>
             <article className="purple-overview">
               <h3 className="order-status">
                 <i className="fa-solid fa-truck"></i> delivered orders
               </h3>
+              <h2>{deliveredOrders}</h2>
             </article>
             <article className="purple-overview">
               <h3 className="order-status">
                 <i className="fa-solid fa-ban"></i> canceled orders
               </h3>
+              <h2>{canceledOrders}</h2>
             </article>
             <article className="blue-overview">
               <h3 className="order-status">
                 <i className="fa-solid fa-truck-fast"></i> picked orders
               </h3>
+              <h2>{pickedOrders}</h2>
             </article>
             <article className="blue-overview">
               <h3 className="order-status">
                 <i className="fa-solid fa-check-to-slot"></i> assigned orders
               </h3>
+              <h2>{assignOrders}</h2>
             </article>
             <article className="blue-overview">
               <h3 className="order-status">
                 <i className="fa-solid fa-list-check"></i> reassigned orders
               </h3>
+              <h2>{reassignOrders}</h2>
             </article>
           </section>
         </>

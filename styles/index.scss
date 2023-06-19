@@ -10,6 +10,15 @@
 
 .overview {
   @include grid(3rem, 14vw, 15rem);
+  @include mQ(1248px) {
+    @include grid(2rem, 20vw, 15rem);
+  }
+  @include mQ(1022px) {
+    @include grid(2rem, 30vw, 15rem);
+  }
+  @include mQ(450px) {
+    @include grid(1rem, 50vw, 15rem);
+  }
   .blue-overview {
     background-color: #77d0e849;
   }
@@ -24,6 +33,9 @@
       i {
         margin-right: 1rem;
       }
+    }
+    h2 {
+      margin-top: 3rem;
     }
   }
 }
