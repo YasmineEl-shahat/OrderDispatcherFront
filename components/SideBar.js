@@ -6,8 +6,7 @@ import { useEffect, useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 
 const SideBar = ({ translate }) => {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const { permissions } = useContext(AuthContext);
   const router = useRouter();
   const [activeLink, setActiveLink] = useState(router.pathname);
 
@@ -33,81 +32,100 @@ const SideBar = ({ translate }) => {
       </div>
 
       <div className="sideBar-menu">
-        <Link href="/" passHref>
-          <div
-            className={`sideItem  ${activeLink === "/" ? "selected" : ""}`}
-            onClick={() => setActiveLink("/")}
-          >
-            <i className="fa-solid fa-house "></i>
-            {translate("dasboard")}
-          </div>
-        </Link>
-        <Link href="/users" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink.includes("/users") ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/users")}
-          >
-            <i className="fa-solid fa-user-group"></i>
-            {translate("users")}
-          </div>
-        </Link>
-        <Link href="/roles" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink.includes("/roles") ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/roles")}
-          >
-            <i className="fa-solid fa-lock"></i> {translate("roles")}
-          </div>
-        </Link>
-        <Link href="/orders" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink.includes("/orders") ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/orders")}
-          >
-            <i className="fa-solid fa-box"></i>
-            {translate("orders")}
-          </div>
-        </Link>
+        {permissions?.statistics?.viewAll && (
+          <Link href="/" passHref>
+            <div
+              className={`sideItem  ${activeLink === "/" ? "selected" : ""}`}
+              onClick={() => setActiveLink("/")}
+            >
+              <i className="fa-solid fa-house "></i>
+              {translate("dasboard")}
+            </div>
+          </Link>
+        )}
+        {permissions?.users?.viewAll && (
+          <Link href="/users" passHref>
+            <div
+              className={`sideItem  ${
+                activeLink.includes("/users") ? "selected" : ""
+              }`}
+              onClick={() => setActiveLink("/users")}
+            >
+              <i className="fa-solid fa-user-group"></i>
+              {translate("users")}
+            </div>
+          </Link>
+        )}
 
-        <Link href="/drivers" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink.includes("/drivers") ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/drivers")}
-          >
-            <i className="fa-solid fa-car"></i>
-            {translate("drivers")}
-          </div>
-        </Link>
-        <Link href="/customers" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink.includes("/customers") ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/customers")}
-          >
-            <i className="fa-solid fa-users"></i>
-            {translate("customers")}
-          </div>
-        </Link>
-        <Link href="/locations" passHref>
-          <div
-            className={`sideItem  ${
-              activeLink.includes("/locations") ? "selected" : ""
-            }`}
-            onClick={() => setActiveLink("/locations")}
-          >
-            <i className="fa-solid fa-map-location"></i>
-            {translate("locations")}
-          </div>
-        </Link>
+        {permissions?.roles?.viewAll && (
+          <Link href="/roles" passHref>
+            <div
+              className={`sideItem  ${
+                activeLink.includes("/roles") ? "selected" : ""
+              }`}
+              onClick={() => setActiveLink("/roles")}
+            >
+              <i className="fa-solid fa-lock"></i> {translate("roles")}
+            </div>
+          </Link>
+        )}
+
+        {permissions?.orders?.viewAll && (
+          <Link href="/orders" passHref>
+            <div
+              className={`sideItem  ${
+                activeLink.includes("/orders") ? "selected" : ""
+              }`}
+              onClick={() => setActiveLink("/orders")}
+            >
+              <i className="fa-solid fa-box"></i>
+              {translate("orders")}
+            </div>
+          </Link>
+        )}
+
+        {permissions?.drivers?.viewAll && (
+          <Link href="/drivers" passHref>
+            <div
+              className={`sideItem  ${
+                activeLink.includes("/drivers") ? "selected" : ""
+              }`}
+              onClick={() => setActiveLink("/drivers")}
+            >
+              <i className="fa-solid fa-car"></i>
+              {translate("drivers")}
+            </div>
+          </Link>
+        )}
+
+        {permissions?.customers?.viewAll && (
+          <Link href="/customers" passHref>
+            <div
+              className={`sideItem  ${
+                activeLink.includes("/customers") ? "selected" : ""
+              }`}
+              onClick={() => setActiveLink("/customers")}
+            >
+              <i className="fa-solid fa-users"></i>
+              {translate("customers")}
+            </div>
+          </Link>
+        )}
+
+        {permissions?.locations?.view && (
+          <Link href="/locations" passHref>
+            <div
+              className={`sideItem  ${
+                activeLink.includes("/locations") ? "selected" : ""
+              }`}
+              onClick={() => setActiveLink("/locations")}
+            >
+              <i className="fa-solid fa-map-location"></i>
+              {translate("locations")}
+            </div>
+          </Link>
+        )}
+
         <Link href="/reports" passHref>
           <div
             className={`sideItem  ${

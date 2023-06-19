@@ -4,6 +4,7 @@ import cookieCutter from "cookie-cutter";
 import { useRouter } from "next/router";
 import { userLogin } from "../pages/api/auth";
 import { useTranslation } from "../util/useTranslation";
+import { viewRole } from "../pages/api/roles";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -40,6 +41,13 @@ export const AuthProvider = ({ children }) => {
     typeof window !== "undefined" &&
     localStorage.getItem("image") != "undefined"
       ? JSON.parse(localStorage.getItem("image"))
+      : ""
+  );
+
+  const [permissions, setPermissions] = useState(() =>
+    typeof window !== "undefined" &&
+    localStorage.getItem("permissions") != "undefined"
+      ? JSON.parse(localStorage.getItem("permissions"))
       : ""
   );
 
@@ -124,7 +132,19 @@ export const AuthProvider = ({ children }) => {
           cookieCutter.set("auth", token);
           setUser(jwt_decode(token));
           setBackError("");
-          router.replace("/");
+
+          viewRole(jwt_decode(token).roleId)
+            .then((response) => {
+              localStorage.setItem(
+                "permissions",
+                JSON.stringify(response.data.permissions)
+              );
+              setPermissions(response.data.permissions);
+              router.replace("/");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         })
         .catch((error) => {
           setBackError(error.response.data.message);
@@ -174,6 +194,7 @@ export const AuthProvider = ({ children }) => {
     setSubmitting,
     logoutUser,
     onChangeHandler,
+    permissions,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

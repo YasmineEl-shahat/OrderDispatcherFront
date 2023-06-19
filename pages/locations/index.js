@@ -2,10 +2,11 @@ import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { deleteLocation, getAllLocations } from "../api/locations";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useTranslation } from "../../util/useTranslation";
 import Link from "next/link";
 import CustomModal from "../../src/sharedui/modal";
+import AuthContext from "../../context/AuthContext";
 
 const Locations = () => {
   const tabData = ["governates", "cities", "areas"];
@@ -21,6 +22,8 @@ const Locations = () => {
   const [selectedLocation, setSelectedLocation] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [changeHappened, setChangeHappened] = useState(false);
+
+  const { permissions } = useContext(AuthContext);
 
   const { t } = useTranslation();
 
@@ -73,9 +76,11 @@ const Locations = () => {
           <>
             <article className="addWrapper">
               <div></div>
-              <Link href="/locations/add" passHref>
-                <button className="btn--global ">Add New Location</button>
-              </Link>
+              {permissions?.locations?.add && (
+                <Link href="/locations/add" passHref>
+                  <button className="btn--global ">Add New Location</button>
+                </Link>
+              )}
             </article>
             <section className="tabWrapper">
               {tabData.map((data, index) => (
@@ -97,8 +102,10 @@ const Locations = () => {
               setSearchKey={setSearchKey}
               setNum={setShownNumber}
               total={totalLocations}
-              canEdit={true}
-              handleDelete={handleDelete}
+              canEdit={permissions?.locations?.edit}
+              handleDelete={
+                permissions?.locations?.delete ? handleDelete : false
+              }
               setSelectedItem={setSelectedLocation}
               location={location}
             />

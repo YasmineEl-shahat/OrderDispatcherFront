@@ -4,8 +4,9 @@ import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { getAllRoles } from "../api/roles";
 import { deleteUser, getAllUsers } from "../api/users";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CustomModal from "../../src/sharedui/modal";
+import AuthContext from "../../context/AuthContext";
 
 const Users = () => {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,8 @@ const Users = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [changeHappened, setChangeHappened] = useState(false);
+
+  const { permissions } = useContext(AuthContext);
 
   // handlers
   const handleSetActive = (e) => {
@@ -136,9 +139,11 @@ const Users = () => {
                   inactive
                 </label>
               </div>
-              <Link href="/users/add" passHref>
-                <button className="btn--global ">Add New User</button>
-              </Link>
+              {permissions?.users?.add && (
+                <Link href="/users/add" passHref>
+                  <button className="btn--global ">Add New User</button>
+                </Link>
+              )}
             </article>
             <Table
               columnNames={columnNames}
@@ -152,8 +157,8 @@ const Users = () => {
               filter1={role}
               setFilter1={setRole}
               filter1_placeholder={"Role"}
-              canEdit={true}
-              handleDelete={handleDelete}
+              canEdit={permissions?.users?.edit}
+              handleDelete={permissions?.users?.delete ? handleDelete : false}
               setSelectedItem={setSelectedUser}
             />
           </>

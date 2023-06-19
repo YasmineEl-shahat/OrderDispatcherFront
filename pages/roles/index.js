@@ -3,7 +3,8 @@ import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { getAllRoles } from "../api/roles";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const Roles = () => {
   const [loading, setLoading] = useState(true);
@@ -11,6 +12,8 @@ const Roles = () => {
   const [columnNames, setColumnNames] = useState([]);
   const [totalRoles, setTotalRoles] = useState(0);
   const [roleNum, setRoleNum] = useState(7);
+
+  const { permissions } = useContext(AuthContext);
 
   // handler
   const getPermissionList = (permissions) => {
@@ -82,9 +85,11 @@ const Roles = () => {
         <>
           <article className="addWrapper">
             <div></div>
-            <Link href="/roles/add" passHref>
-              <button className="btn--global ">Add New Role</button>
-            </Link>
+            {permissions?.roles?.add && (
+              <Link href="/roles/add" passHref>
+                <button className="btn--global ">Add New Role</button>
+              </Link>
+            )}
           </article>
           <Table
             columnNames={columnNames}
@@ -92,7 +97,7 @@ const Roles = () => {
             total={totalRoles}
             num={roleNum}
             setNum={setRoleNum}
-            canEdit={true}
+            canEdit={permissions?.roles?.edit}
           />
         </>
       )}

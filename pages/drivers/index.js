@@ -3,8 +3,9 @@ import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { deleteDriver, getAllDrivers } from "../api/drivers";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CustomModal from "../../src/sharedui/modal";
+import AuthContext from "../../context/AuthContext";
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
@@ -16,6 +17,8 @@ const Drivers = () => {
   const [selectedDriver, setSelectedDriver] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [changeHappened, setChangeHappened] = useState(false);
+
+  const { permissions } = useContext(AuthContext);
 
   // handlers
   const handleDelete = () => {
@@ -73,15 +76,17 @@ const Drivers = () => {
           <>
             <article className="addWrapper">
               <div></div>
-              <Link href="/drivers/add" passHref>
-                <button className="btn--global ">Add New Driver</button>
-              </Link>
+              {permissions?.drivers?.add && (
+                <Link href="/drivers/add" passHref>
+                  <button className="btn--global ">Add New Driver</button>
+                </Link>
+              )}
             </article>
             <Table
               columnNames={columnNames}
               tableContent={drivers}
-              canEdit={true}
-              handleDelete={handleDelete}
+              canEdit={permissions?.drivers?.edit}
+              handleDelete={permissions?.drivers?.delete ? handleDelete : false}
               num={driverNum}
               setNum={setDriverNum}
               searchKey={searchKey}
