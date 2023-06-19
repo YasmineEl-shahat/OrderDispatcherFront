@@ -22,10 +22,10 @@ const Order = () => {
             setStatusColor("#ebe234");
             break;
           case "reassigned":
-            setStatusColor("#ebe234");
+            setStatusColor("#94918a");
             break;
           case "confirm":
-            setStatusColor("#34eb34");
+            setStatusColor("#349feb");
             break;
           case "picked":
             setStatusColor("#eb8334");

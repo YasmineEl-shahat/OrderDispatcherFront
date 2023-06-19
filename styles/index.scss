@@ -1,0 +1,29 @@
+@import "./abstracts/variables.scss";
+@import "./abstracts/mixins.scss";
+
+.headline {
+  text-transform: capitalize;
+  font-size: $HeadFont;
+  line-height: $HeadLineSpacing;
+  font-weight: 900;
+}
+
+.overview {
+  @include grid(3rem, 14vw, 15rem);
+  .blue-overview {
+    background-color: #77d0e849;
+  }
+  .purple-overview {
+    background-color: rgba(146, 122, 244, 0.089);
+  }
+  article {
+    border-radius: 10px;
+    padding: 2rem 1.5rem;
+    h3 {
+      text-transform: capitalize;
+      i {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
