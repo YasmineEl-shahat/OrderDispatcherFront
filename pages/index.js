@@ -12,7 +12,8 @@ import {
   getTotalOrders,
 } from "./api/statistics";
 
-import { Pie, Line } from "react-chartjs-2";
+import { Doughnut_ } from "../src/sharedui/charts/donught";
+import { Bar_ } from "../src/sharedui/charts/bar";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -157,38 +158,37 @@ const Home = () => {
           </section>
 
           <section className="charts">
-            {/* <Line
+            <Bar_
               data={{
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                labels: [
+                  "Total Orders",
+                  "New Orders",
+                  "Delivered Orders",
+                  "Canceled Orders",
+                  "Picked Orders",
+                  "Assign Orders",
+                  "Reassign Orders",
+                ],
                 datasets: [
                   {
-                    label: "Total Orders",
-                    data: [totalOrders, 20, 30, 40, 50, 60, 70],
-                    fill: false,
-                    borderColor: "#4BC0C0",
-                  },
-                  {
-                    label: "New Orders",
-                    data: [newOrders, 10, 20, 30, 40, 50, 60],
-                    fill: false,
-                    borderColor: "#36A2EB",
-                  },
-                  {
-                    label: "Delivered Orders",
-                    data: [deliveredOrders, 5, 10, 15, 20, 25, 30],
-                    fill: false,
-                    borderColor: "#FFCE56",
-                  },
-                  {
-                    label: "Canceled Orders",
-                    data: [canceledOrders, 2, 4, 6, 8, 10, 12],
-                    fill: false,
-                    borderColor: "#E7E9ED",
+                    label: "Order Data",
+                    data: [
+                      totalOrders,
+                      newOrders,
+                      deliveredOrders,
+                      canceledOrders,
+                      pickedOrders,
+                      assignOrders,
+                      reassignOrders,
+                    ],
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1,
                   },
                 ],
               }}
-            /> */}
-            <Pie
+            />
+            <Doughnut_
               data={{
                 labels: [
                   "Total Orders",

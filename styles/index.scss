@@ -38,3 +38,18 @@
     }
   }
 }
+
+.charts {
+  margin-top: 1rem;
+  @include flexBet;
+  flex-wrap: wrap;
+  canvas {
+    width: 30vw !important;
+    height: 40vh !important;
+    @include mQ(570px) {
+      width: 100% !important;
+      height: 90vh !important;
+      margin: 1rem 0;
+    }
+  }
+}

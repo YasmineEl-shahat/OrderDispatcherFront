@@ -19,7 +19,6 @@ const UpdateUser = () => {
     // get user data
     viewCustomer(id)
       .then((res) => {
-        console.log(res.data);
         setData(res.data.data);
       })
       .catch((error) => {
