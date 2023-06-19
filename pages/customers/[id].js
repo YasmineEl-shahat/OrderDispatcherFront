@@ -45,6 +45,10 @@ const UpdateUser = () => {
 };
 
 UpdateUser.getLayout = function getLayout(page) {
-  return <Layout title="User">{page}</Layout>;
+  return (
+    <Layout title="customer-details" navTitle="customer-details">
+      {page}
+    </Layout>
+  );
 };
 export default UpdateUser;

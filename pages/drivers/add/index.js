@@ -91,6 +91,10 @@ const AddDriver = () => {
   );
 };
 AddDriver.getLayout = function getLayout(page) {
-  return <Layout title="Add Driver">{page}</Layout>;
+  return (
+    <Layout title="add-driver" navTitle="add-driver">
+      {page}
+    </Layout>
+  );
 };
 export default AddDriver;

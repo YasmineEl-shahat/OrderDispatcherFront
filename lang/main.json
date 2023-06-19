@@ -22,7 +22,19 @@
     "submitting": "submitting...",
     "governate": "governates",
     "cities": "cities",
-    "areas": "areas"
+    "areas": "areas",
+    "add-user": "Add User",
+    "user-details": "User Details",
+    "add-role": "Add Role",
+    "role-details": "Role Details",
+    "order-details": "Order Details",
+    "add-driver": "Add Driver",
+    "driver-details": "Driver Details",
+    "customer-details": "Customer Details",
+    "add-location": "Add Location",
+    "governate-details": "Governate Details",
+    "city-details": "City Details",
+    "area-details": "Area Details"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -47,6 +59,18 @@
     "submitting": "...إرسال",
     "governate": "محافظات",
     "cities": "مدن",
-    "areas": "مناطق"
+    "areas": "مناطق",
+    "add-user": "إضافة مستخدم",
+    "user-details": "تفاصيل المستخدم",
+    "add-role": "إضافة دور",
+    "role-details": "تفاصيل الدور",
+    "order-details": "تفاصيل الطلب",
+    "add-driver": "إضافة سائق",
+    "driver-details": "تفاصيل السائق",
+    "customer-details": "تفاصيل العميل",
+    "add-location": "إضافة مكان",
+    "governate-details": "تفاصيل المحافظة",
+    "city-details": "تفاصيل المدينة",
+    "area-details": "تفاصيل المنطقة"
   }
 }

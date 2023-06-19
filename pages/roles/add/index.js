@@ -82,6 +82,10 @@ const AddRole = () => {
   );
 };
 AddRole.getLayout = function getLayout(page) {
-  return <Layout title="Add Role">{page}</Layout>;
+  return (
+    <Layout title="add-role" navTitle="add-role">
+      {page}
+    </Layout>
+  );
 };
 export default AddRole;

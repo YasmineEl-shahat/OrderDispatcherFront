@@ -3,12 +3,14 @@ import Layout from "../../components/Layout";
 import { viewOrder } from "../api/orders";
 import { useRouter } from "next/router";
 import Spinner from "../../components/Spinner";
+import { useTranslation } from "../../util/useTranslation";
 
 const Order = () => {
   const [loading, setLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState(null);
   const [statusColor, setStatusColor] = useState(null);
 
+  const { t } = useTranslation();
   const router = useRouter();
   const { id } = router.query;
 
@@ -49,7 +51,7 @@ const Order = () => {
   }, []);
 
   const renderProductTableRows = () => {
-    return orderDetails.Product.map(
+    return orderDetails?.Product.map(
       ({ product_id, name_en, quantity, price, _id }) => (
         <tr key={_id}>
           <td>{product_id}</td>
@@ -74,41 +76,43 @@ const Order = () => {
         <Spinner />
       ) : (
         <div className="order">
-          <h1>Order Details: #{id}</h1>
+          <h1>
+            {t("order-details")}: #{id}
+          </h1>
           <h2>
-            Status :{" "}
-            <span style={{ color: statusColor }}>{orderDetails.Status}</span>
+            Status :
+            <span style={{ color: statusColor }}>{orderDetails?.Status}</span>
           </h2>
           <table>
             <tbody>
               <tr>
                 <td>Customer ID:</td>
-                <td>{orderDetails.CustomerID}</td>
+                <td>{orderDetails?.CustomerID}</td>
               </tr>
               <tr>
                 <td>Customer Name:</td>
-                <td>{orderDetails.CustomerName}</td>
+                <td>{orderDetails?.CustomerName}</td>
               </tr>
               <tr>
                 <td>Customer Email:</td>
-                <td>{orderDetails.CustomerEmail}</td>
+                <td>{orderDetails?.CustomerEmail}</td>
               </tr>
               <tr>
                 <td>Payment Method:</td>
-                <td>{orderDetails.PaymentMethod}</td>
+                <td>{orderDetails?.PaymentMethod}</td>
               </tr>
               <tr>
                 <td>Driver ID:</td>
-                <td>{orderDetails.DriverID}</td>
+                <td>{orderDetails?.DriverID}</td>
               </tr>
               <tr>
                 <td>Address:</td>
-                <td>{`${orderDetails.Address.Governate}, ${orderDetails.Address.City}, ${orderDetails.Address.Area}`}</td>
+                <td>{`${orderDetails?.Address.Governate}, ${orderDetails?.Address?.City}, ${orderDetails?.Address?.Area}`}</td>
               </tr>
 
               <tr>
                 <td>Total Price:</td>
-                <td>{orderDetails.TotalPrice}</td>
+                <td>{orderDetails?.TotalPrice}</td>
               </tr>
             </tbody>
           </table>
@@ -132,7 +136,11 @@ const Order = () => {
 };
 
 Order.getLayout = function getLayout(page) {
-  return <Layout title="Order">{page}</Layout>;
+  return (
+    <Layout title="order-details" navTitle="order-details">
+      {page}
+    </Layout>
+  );
 };
 
 export default Order;

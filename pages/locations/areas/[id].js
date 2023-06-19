@@ -111,6 +111,10 @@ const Area = () => {
   );
 };
 Area.getLayout = function getLayout(page) {
-  return <Layout title="Area">{page}</Layout>;
+  return (
+    <Layout title="area-details" navTitle="area-details">
+      {page}
+    </Layout>
+  );
 };
 export default Area;

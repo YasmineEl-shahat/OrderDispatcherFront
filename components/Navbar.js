@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
 
-const Navbar = ({ locale, translate }) => {
+const Navbar = ({ locale, translate, navTitle }) => {
   const { logoutUser, name, image } = useContext(AuthContext);
 
   const router = useRouter();
@@ -59,7 +59,7 @@ const Navbar = ({ locale, translate }) => {
   return (
     <nav className="navbar navbar-expand-lg sticky-top d-flex align-items-center justify-content-between">
       <article className="title">
-        {translate(router.asPath.substring(1))}
+        {navTitle ? translate(navTitle) : translate(router.asPath.substring(1))}
       </article>
       <article className="d-flex align-items-center flex-row-reverse">
         <div className="main d-flex align-items-center flex-row gap-3">

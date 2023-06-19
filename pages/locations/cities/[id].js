@@ -117,6 +117,10 @@ const City = () => {
   );
 };
 City.getLayout = function getLayout(page) {
-  return <Layout title="City">{page}</Layout>;
+  return (
+    <Layout title="city-details" navTitle="city-details">
+      {page}
+    </Layout>
+  );
 };
 export default City;

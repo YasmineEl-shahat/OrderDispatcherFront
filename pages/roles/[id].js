@@ -103,6 +103,10 @@ const Role = () => {
   );
 };
 Role.getLayout = function getLayout(page) {
-  return <Layout title="Role">{page}</Layout>;
+  return (
+    <Layout title="role-details" navTitle="role-details">
+      {page}
+    </Layout>
+  );
 };
 export default Role;

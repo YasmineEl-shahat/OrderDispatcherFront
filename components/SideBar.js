@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import AuthContext from "../context/AuthContext";
 
 const SideBar = ({ translate }) => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const router = useRouter();
   const [activeLink, setActiveLink] = useState(router.pathname);
 

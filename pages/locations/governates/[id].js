@@ -125,6 +125,10 @@ const Governate = () => {
   );
 };
 Governate.getLayout = function getLayout(page) {
-  return <Layout title="Governate">{page}</Layout>;
+  return (
+    <Layout title="governate-details" navTitle="governate-details">
+      {page}
+    </Layout>
+  );
 };
 export default Governate;

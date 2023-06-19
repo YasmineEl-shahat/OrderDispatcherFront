@@ -114,6 +114,10 @@ const UpdateDriver = () => {
 };
 
 UpdateDriver.getLayout = function getLayout(page) {
-  return <Layout title="Driver">{page}</Layout>;
+  return (
+    <Layout title="driver-details" navTitle="driver-details">
+      {page}
+    </Layout>
+  );
 };
 export default UpdateDriver;

@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import { useTranslation } from "../util/useTranslation";
 import Navbar from "./Navbar";
 
-const Layout = ({ title, children }) => {
+const Layout = ({ title, children, navTitle }) => {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation();
@@ -20,7 +20,7 @@ const Layout = ({ title, children }) => {
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar locale={locale} translate={t} />
+      <Navbar locale={locale} translate={t} navTitle={navTitle} />
       <SideBar translate={t} />
       {children}
     </div>

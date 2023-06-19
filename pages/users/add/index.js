@@ -88,6 +88,10 @@ const AddUser = () => {
   );
 };
 AddUser.getLayout = function getLayout(page) {
-  return <Layout title="Add User">{page}</Layout>;
+  return (
+    <Layout title="add-user" navTitle="add-user">
+      {page}
+    </Layout>
+  );
 };
 export default AddUser;

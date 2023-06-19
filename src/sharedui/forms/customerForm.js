@@ -6,7 +6,7 @@ const CustomerForm = ({ data, t }) => {
         <input
           className="text--global"
           type="text"
-          value={data.CustomerName}
+          value={data?.CustomerName}
           disabled
         />
       </div>
@@ -16,7 +16,7 @@ const CustomerForm = ({ data, t }) => {
         <input
           className="text--global"
           type="email"
-          value={data.CustomerEmail}
+          value={data?.CustomerEmail}
           disabled
         />
       </div>
@@ -26,7 +26,7 @@ const CustomerForm = ({ data, t }) => {
         <input
           className="text--global"
           type="text"
-          value={data.Address.Governate}
+          value={data?.Address?.Governate}
           disabled
         />
       </div>
@@ -36,7 +36,7 @@ const CustomerForm = ({ data, t }) => {
         <input
           className="text--global"
           type="text"
-          value={data.Address.City}
+          value={data?.Address?.City}
           disabled
         />
       </div>
@@ -46,7 +46,7 @@ const CustomerForm = ({ data, t }) => {
         <input
           className="text--global"
           type="text"
-          value={data.Address.Area}
+          value={data?.Address?.Area}
           disabled
         />
       </div>
@@ -63,7 +63,7 @@ const CustomerForm = ({ data, t }) => {
           </tr>
         </thead>
         <tbody>
-          {data.Orders.map((order) => (
+          {data?.Orders?.map((order) => (
             <tr key={order._id}>
               <td>{order._id}</td>
               <td>

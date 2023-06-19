@@ -57,6 +57,10 @@ const AddLocation = () => {
   );
 };
 AddLocation.getLayout = function getLayout(page) {
-  return <Layout title="Add Location">{page}</Layout>;
+  return (
+    <Layout title="add-location" navTitle="add-location">
+      {page}
+    </Layout>
+  );
 };
 export default AddLocation;
