@@ -34,7 +34,12 @@
     "add-location": "Add Location",
     "governate-details": "Governate Details",
     "city-details": "City Details",
-    "area-details": "Area Details"
+    "area-details": "Area Details",
+    "fill-data": "Fill the required data",
+    "email": "Email",
+    "password": "Password",
+    "required": "is required!",
+    "female-required": "is required"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -71,6 +76,11 @@
     "add-location": "إضافة مكان",
     "governate-details": "تفاصيل المحافظة",
     "city-details": "تفاصيل المدينة",
-    "area-details": "تفاصيل المنطقة"
+    "area-details": "تفاصيل المنطقة",
+    "fill-data": "املأ البيانات المطلوبة",
+    "email": "الإيميل",
+    "password": "كلمة السر",
+    "required": "مطلوب!",
+    "female-required": "مطلوبة!"
   }
 }

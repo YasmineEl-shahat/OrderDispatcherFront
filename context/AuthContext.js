@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import cookieCutter from "cookie-cutter";
 import { useRouter } from "next/router";
 import { userLogin } from "../pages/api/auth";
+import { useTranslation } from "../util/useTranslation";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -11,6 +12,8 @@ const baseUrl = process.env.API_URL;
 
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
+
+  const { t } = useTranslation();
 
   //state
   const [data, setData] = useState({});
@@ -86,7 +89,12 @@ export const AuthProvider = ({ children }) => {
     let err = { ...errors };
     let newData = { ...data };
     if (e.target.value == "")
-      err[e.target.name] = e.target.name + " is required!";
+      err[e.target.name] =
+        t(e.target.name) +
+        " " +
+        (t(e.target.name).split(" ")[0].endsWith("ة")
+          ? t("female-required")
+          : t("required"));
     else err[e.target.name] = "";
     newData[e.target.name] = e.target.value;
     setBackError("");
@@ -96,7 +104,7 @@ export const AuthProvider = ({ children }) => {
 
   const validate = () => {
     if (!data["email"] || !data["password"]) {
-      setBackError("Fill the required data");
+      setBackError(t("fill-data"));
       return false;
     }
 
@@ -162,6 +170,7 @@ export const AuthProvider = ({ children }) => {
     setName,
     setImage,
     setBackError,
+    setErrors,
     setSubmitting,
     logoutUser,
     onChangeHandler,
