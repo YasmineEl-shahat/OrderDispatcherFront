@@ -157,7 +157,7 @@ const Home = () => {
           </section>
 
           <section className="charts">
-            <Line
+            {/* <Line
               data={{
                 labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
                 datasets: [
@@ -187,7 +187,7 @@ const Home = () => {
                   },
                 ],
               }}
-            />
+            /> */}
             <Pie
               data={{
                 labels: [

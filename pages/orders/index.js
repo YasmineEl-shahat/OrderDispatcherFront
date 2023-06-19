@@ -3,7 +3,8 @@ import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { assignOrder, getAllOrders, getAllStatuses } from "../api/orders";
 import { useState, useEffect } from "react";
-import { generalSocket } from "../api/io";
+// import { generalSocket } from "../api/io";
+import { channel } from "../api/pusher";
 import { getAllCities, getAllGovernates } from "../api/locations";
 
 const Orders = () => {
@@ -82,8 +83,25 @@ const Orders = () => {
     // eslint-disable-next-line
   }, [orderNum, searchKey, governate, city, status]);
 
+  // useEffect(() => {
+  //   generalSocket.on("newOrder", async (orderData) => {
+  //     try {
+  //       // Send a request to orderController.saveOrder()
+  //       saveOrder(orderData);
+
+  //       // Send a request to orderController.getall()
+  //       getData();
+
+  //       assignOrder(orderData._id);
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   });
+  //   // eslint-disable-next-line
+  // }, []);
+
   useEffect(() => {
-    generalSocket.on("newOrder", async (orderData) => {
+    channel.bind("newOrder", function (orderData) {
       try {
         // Send a request to orderController.saveOrder()
         saveOrder(orderData);

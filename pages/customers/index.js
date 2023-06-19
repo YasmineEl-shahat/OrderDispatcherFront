@@ -16,7 +16,7 @@ const Customers = () => {
     getAllCustomers(shownNum, searchKey)
       .then((res) => {
         let customersArray = [];
-
+        // setTotalCustomers(res.data.totalCount)
         res.data.forEach((customer) => {
           customersArray.push({
             id: customer.CustomerID,
@@ -59,6 +59,7 @@ const Customers = () => {
             setNum={setShownNum}
             searchKey={searchKey}
             setSearchKey={setSearchKey}
+            // total={totalCustomers}
           />
         </>
       )}

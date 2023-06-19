@@ -35,6 +35,7 @@
     "next": "^12.1.0",
     "path": "^0.12.7",
     "plugin": "^0.1.0",
+    "pusher-js": "^8.2.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.4.0",
     "react-chartjs-2": "^5.2.0",
