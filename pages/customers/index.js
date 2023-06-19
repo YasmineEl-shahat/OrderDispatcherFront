@@ -8,9 +8,12 @@ const Customers = () => {
   const [loading, setLoading] = useState(true);
   const [customers, setCustomers] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
+  const [totalCustomers, setTotalCustomers] = useState(0);
+  const [shownNum, setShownNum] = useState(7);
+  const [searchKey, setSearchKey] = useState("");
 
   useEffect(() => {
-    getAllCustomers()
+    getAllCustomers(shownNum, searchKey)
       .then((res) => {
         let customersArray = [];
 
@@ -35,7 +38,7 @@ const Customers = () => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+  }, [shownNum, searchKey]);
 
   return (
     <main
@@ -49,7 +52,14 @@ const Customers = () => {
         <Spinner />
       ) : (
         <>
-          <Table columnNames={columnNames} tableContent={customers} />
+          <Table
+            columnNames={columnNames}
+            tableContent={customers}
+            num={shownNum}
+            setNum={setShownNum}
+            searchKey={searchKey}
+            setSearchKey={setSearchKey}
+          />
         </>
       )}
     </main>

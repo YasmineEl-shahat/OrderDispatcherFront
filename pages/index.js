@@ -16,13 +16,13 @@ import { Pie, Line } from "react-chartjs-2";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
-  const [totalOrders, setTotalOrders] = useState();
-  const [newOrders, setNewOrders] = useState();
-  const [deliveredOrders, setDeliveredOrders] = useState();
-  const [canceledOrders, setCanceledOrders] = useState();
-  const [pickedOrders, setPickedOrders] = useState();
-  const [assignOrders, setAssignOrders] = useState();
-  const [reassignOrders, setReassignOrders] = useState();
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [newOrders, setNewOrders] = useState(0);
+  const [deliveredOrders, setDeliveredOrders] = useState(0);
+  const [canceledOrders, setCanceledOrders] = useState(0);
+  const [pickedOrders, setPickedOrders] = useState(0);
+  const [assignOrders, setAssignOrders] = useState(0);
+  const [reassignOrders, setReassignOrders] = useState(0);
 
   const { t } = useTranslation();
 
@@ -196,8 +196,8 @@ const Home = () => {
                   "Delivered Orders",
                   "Canceled Orders",
                   "Picked Orders",
-                  "Assign Orders",
-                  "Reassign Orders",
+                  "Assigned Orders",
+                  "Reassigned Orders",
                 ],
                 datasets: [
                   {
@@ -217,7 +217,7 @@ const Home = () => {
                       "#E7E9ED",
                       "#4BC0C0",
                       "#9966FF",
-                      "#FF9933",
+                      "#FF9F40",
                     ],
                     hoverBackgroundColor: [
                       "#FF6384",
@@ -226,7 +226,7 @@ const Home = () => {
                       "#E7E9ED",
                       "#4BC0C0",
                       "#9966FF",
-                      "#FF9933",
+                      "#FF9F40",
                     ],
                   },
                 ],
