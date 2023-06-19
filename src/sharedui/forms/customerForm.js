@@ -50,6 +50,43 @@ const CustomerForm = ({ data, t }) => {
           disabled
         />
       </div>
+
+      <table className="customer-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.Orders.map((order) => (
+            <tr key={order._id}>
+              <td>{order._id}</td>
+              <td>
+                {order.Product.map((product) => (
+                  <div key={product._id}>{product.name_en}</div>
+                ))}
+              </td>
+              <td>
+                {order.Product.map((product) => (
+                  <div key={product._id}>{product.quantity}</div>
+                ))}
+              </td>
+              <td>
+                {order.Product.map((product) => (
+                  <div key={product._id}>{product.price}</div>
+                ))}
+              </td>
+              <td>{order.TotalPrice}</td>
+              <td>{order.Status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 };

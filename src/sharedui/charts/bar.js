@@ -18,17 +18,6 @@ ChartJS.register(
   Legend
 );
 
-const chartOptions = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
-};
 export function Bar_({ data }) {
-  return <Bar data={data} options={chartOptions} />;
+  return <Bar data={data} />;
 }

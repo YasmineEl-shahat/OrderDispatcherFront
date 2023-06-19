@@ -14,12 +14,14 @@ const UpdateUser = () => {
 
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
+  const { t } = useTranslation();
 
   useEffect(() => {
     // get user data
     viewCustomer(id)
       .then((res) => {
-        setData(res.data.data);
+        setData(res.data[0]);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
