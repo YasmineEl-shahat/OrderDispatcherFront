@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { userLogin } from "../pages/api/auth";
 import { useTranslation } from "../util/useTranslation";
 import { viewRole } from "../pages/api/roles";
+import { viewUser } from "../pages/api/users";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -140,7 +141,19 @@ export const AuthProvider = ({ children }) => {
                 JSON.stringify(response.data.permissions)
               );
               setPermissions(response.data.permissions);
-              router.replace("/");
+              viewUser(jwt_decode(token).id)
+                .then((res) => {
+                  setName(`${res.data.firstName} ${res.data.lastName}`);
+                  localStorage.setItem(
+                    "name",
+                    JSON.stringify(`${res.data.firstName} ${res.data.lastName}`)
+                  );
+                  router.replace("/");
+                })
+                .catch((error) => {
+                  console.log(error);
+                  setLoading(false);
+                });
             })
             .catch((error) => {
               console.log(error);
@@ -156,20 +169,7 @@ export const AuthProvider = ({ children }) => {
       //   const { profile_picture } = await resDes.json();
       //   setImage(profile_picture);
       //   localStorage.setItem("image", JSON.stringify(profile_picture));
-      //   let response = await fetch(baseUrl + "seeker/profile/info", {
-      //     headers: {
-      //       Authorization: "Bearer" + " " + auth,
-      //     },
-      //   });
-      //   const res = await response.json();
-      //   if (res) {
-      //     setName(`${res.fname} ${res.lname}`);
-      //     localStorage.setItem(
-      //       "name",
-      //       JSON.stringify(`${res.fname} ${res.lname}`)
-      //     );
-      //   }
-      //   router.replace("/");
+
       // }
 
       setSubmitting(false);
