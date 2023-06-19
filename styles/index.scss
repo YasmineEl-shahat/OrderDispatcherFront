@@ -9,15 +9,15 @@
 }
 
 .overview {
-  @include grid(3rem, 14vw, 15rem);
+  @include grid(3rem, 14vw, 11rem);
   @include mQ(1248px) {
-    @include grid(2rem, 20vw, 15rem);
+    @include grid(2rem, 20vw, 11rem);
   }
   @include mQ(1022px) {
-    @include grid(2rem, 30vw, 15rem);
+    @include grid(2rem, 30vw, 11rem);
   }
   @include mQ(450px) {
-    @include grid(1rem, 50vw, 15rem);
+    @include grid(1rem, 50vw, 11rem);
   }
   .blue-overview {
     background-color: #77d0e849;
@@ -28,14 +28,13 @@
   article {
     border-radius: 10px;
     padding: 2rem 1.5rem;
+    @include flexBet;
+    flex-direction: column;
     h3 {
       text-transform: capitalize;
       i {
         margin-right: 1rem;
       }
-    }
-    h2 {
-      margin-top: 3rem;
     }
   }
 }

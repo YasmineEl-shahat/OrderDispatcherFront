@@ -12,6 +12,8 @@ import {
   getTotalOrders,
 } from "./api/statistics";
 
+import { Pie, Line } from "react-chartjs-2";
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [totalOrders, setTotalOrders] = useState();
@@ -152,6 +154,84 @@ const Home = () => {
               </h3>
               <h2>{reassignOrders}</h2>
             </article>
+          </section>
+
+          <section className="charts">
+            <Line
+              data={{
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [
+                  {
+                    label: "Total Orders",
+                    data: [totalOrders, 20, 30, 40, 50, 60, 70],
+                    fill: false,
+                    borderColor: "#4BC0C0",
+                  },
+                  {
+                    label: "New Orders",
+                    data: [newOrders, 10, 20, 30, 40, 50, 60],
+                    fill: false,
+                    borderColor: "#36A2EB",
+                  },
+                  {
+                    label: "Delivered Orders",
+                    data: [deliveredOrders, 5, 10, 15, 20, 25, 30],
+                    fill: false,
+                    borderColor: "#FFCE56",
+                  },
+                  {
+                    label: "Canceled Orders",
+                    data: [canceledOrders, 2, 4, 6, 8, 10, 12],
+                    fill: false,
+                    borderColor: "#E7E9ED",
+                  },
+                ],
+              }}
+            />
+            <Pie
+              data={{
+                labels: [
+                  "Total Orders",
+                  "New Orders",
+                  "Delivered Orders",
+                  "Canceled Orders",
+                  "Picked Orders",
+                  "Assign Orders",
+                  "Reassign Orders",
+                ],
+                datasets: [
+                  {
+                    data: [
+                      totalOrders,
+                      newOrders,
+                      deliveredOrders,
+                      canceledOrders,
+                      pickedOrders,
+                      assignOrders,
+                      reassignOrders,
+                    ],
+                    backgroundColor: [
+                      "#FF6384",
+                      "#36A2EB",
+                      "#FFCE56",
+                      "#E7E9ED",
+                      "#4BC0C0",
+                      "#9966FF",
+                      "#FF9933",
+                    ],
+                    hoverBackgroundColor: [
+                      "#FF6384",
+                      "#36A2EB",
+                      "#FFCE56",
+                      "#E7E9ED",
+                      "#4BC0C0",
+                      "#9966FF",
+                      "#FF9933",
+                    ],
+                  },
+                ],
+              }}
+            />
           </section>
         </>
       )}
