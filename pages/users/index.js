@@ -169,7 +169,7 @@ const Users = () => {
   );
 };
 Users.getLayout = function getLayout(page) {
-  return <Layout title="Users">{page}</Layout>;
+  return <Layout title="users">{page}</Layout>;
 };
 
 export default Users;

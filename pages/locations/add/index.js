@@ -4,7 +4,7 @@ import Layout from "../../../components/Layout";
 import AuthContext from "../../../context/AuthContext";
 import { useTranslation } from "../../../util/useTranslation";
 import { addLocation } from "../../api/locations";
-import LocaitonForm from "../../../src/sharedui/forms/locaitonForm";
+import LocationForm from "../../../src/sharedui/forms/locationForm";
 
 const AddLocation = () => {
   const router = useRouter();
@@ -34,8 +34,8 @@ const AddLocation = () => {
       .then((res) => {
         setSubmitting(false);
         setData({});
-        router.replace("/locations");
         setBackError("");
+        router.replace("/locations");
       })
       .catch((error) => {
         setBackError(error.response.data.message);
@@ -44,7 +44,7 @@ const AddLocation = () => {
   };
   return (
     <main className={`mainContainer formContainer`}>
-      <LocaitonForm
+      <LocationForm
         data={data}
         errors={errors}
         backError={backError}

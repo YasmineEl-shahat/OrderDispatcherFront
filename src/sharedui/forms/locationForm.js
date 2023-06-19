@@ -1,4 +1,4 @@
-const LocaitonForm = ({
+const LocationForm = ({
   data,
   errors,
   backError,
@@ -72,4 +72,4 @@ const LocaitonForm = ({
   );
 };
 
-export default LocaitonForm;
+export default LocationForm;

@@ -49,6 +49,7 @@ const Roles = () => {
       .then((res) => {
         let rolesArray = [];
         if (roleNum > res.data.rolesCount) setRoleNum(res.data.rolesCount);
+
         res.data.roles.forEach((role) => {
           rolesArray.push({
             id: role._id,
@@ -81,7 +82,7 @@ const Roles = () => {
         <>
           <article className="addWrapper">
             <div></div>
-            <Link href="/roles?operation=add" passHref>
+            <Link href="/roles/add" passHref>
               <button className="btn--global ">Add New Role</button>
             </Link>
           </article>
