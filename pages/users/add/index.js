@@ -34,6 +34,7 @@ const AddUser = () => {
         setLoading(true);
         if (roleNum !== res.data.rolesCount) setRoleNum(res.data.rolesCount);
         setRoles(res.data.roles);
+        console.log(res.data.roles);
         setLoading(false);
       })
       .catch((error) => {
@@ -50,7 +51,7 @@ const AddUser = () => {
     newData["role_id"] = Number(data["role_id"]);
     setData(newData);
 
-    addUser(JSON.stringify(data))
+    addUser(JSON.stringify(newData))
       .then((res) => {
         setSubmitting(false);
         setData({});

@@ -62,8 +62,7 @@ const UpdateUser = () => {
     let newData = { ...data };
     newData["role_id"] = Number(data["role_id"]);
     setData(newData);
-
-    updateUser(id, JSON.stringify(data))
+    updateUser(id, JSON.stringify(newData))
       .then((res) => {
         setSubmitting(false);
         setData({});
