@@ -148,7 +148,26 @@ export const AuthProvider = ({ children }) => {
                     "name",
                     JSON.stringify(`${res.data.firstName} ${res.data.lastName}`)
                   );
-                  router.replace("/");
+                  let allPermissions = response.data.permissions;
+                  if (!allPermissions.statistics?.viewAll) {
+                    let firstTrueKey;
+
+                    for (const outerKey in allPermissions) {
+                      const innerObj = allPermissions[outerKey];
+                      for (const innerKey in innerObj) {
+                        if (innerObj[innerKey]) {
+                          firstTrueKey = outerKey;
+                          break;
+                        }
+
+                        if (firstTrueKey) {
+                          break;
+                        }
+                      }
+                    }
+                    console.log(firstTrueKey);
+                    router.replace("/" + firstTrueKey);
+                  } else router.replace("/");
                 })
                 .catch((error) => {
                   console.log(error);
