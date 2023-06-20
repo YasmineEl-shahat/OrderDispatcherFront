@@ -13,6 +13,8 @@ const ResetPassword = () => {
 
   const router = useRouter();
 
+  const { locale } = router;
+
   const {
     data,
     backError,
@@ -44,59 +46,63 @@ const ResetPassword = () => {
           {t("reset")} | {t("order-dispatcher")}
         </title>
       </Head>
-      <main className="login-container">
-        {/* eslint-disable */}
-        <figure>
-          <img src="/assets/logo.png" className="logo" alt="logo" />
-          <figcaption>{t("order-dispatcher")}</figcaption>
-        </figure>
-        <div className="container" id="container">
-          <div className="form-container sign-in-container">
-            <form onSubmit={(e) => submit(e)}>
-              <h1> {t("data")} </h1>
-              <input
-                type="text"
-                placeholder="Code"
-                name="code"
-                onChange={(e) => onChangeHandler(e)}
-              />
-              <span className="invalid">{errors.code ? errors.code : ""}</span>
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={(e) => onChangeHandler(e)}
-              />
-              <span className="invalid">
-                {errors.password ? errors.password : ""}
-              </span>
-              <input
-                type="password"
-                placeholder="Re Enter Password"
-                name="confirmPassword"
-                onChange={(e) => onChangeHandler(e)}
-              />
-              <span className="invalid">
-                {errors.confirmPassword ? errors.confirmPassword : ""}
-              </span>
-              <span className="invalid">{backError}</span>
-              <button> {submitting ? t("submitting") : t("reset")}</button>
-            </form>
-          </div>
-          <div className="overlay-container">
-            <div className="overlay">
-              <div className="overlay-panel overlay-right">
-                <Image
-                  width={400}
-                  height={400}
-                  alt="welcome"
-                  src={"/assets/login.png"}
+      <div className={locale == "ar" ? "arabicContainer" : ""}>
+        <main className="login-container">
+          {/* eslint-disable */}
+          <figure>
+            <img src="/assets/logo.png" className="logo" alt="logo" />
+            <figcaption>{t("order-dispatcher")}</figcaption>
+          </figure>
+          <div className="container" id="container">
+            <div className="form-container sign-in-container">
+              <form onSubmit={(e) => submit(e)}>
+                <h1> {t("data")} </h1>
+                <input
+                  type="text"
+                  placeholder={t("code")}
+                  name="code"
+                  onChange={(e) => onChangeHandler(e)}
                 />
+                <span className="invalid">
+                  {errors.code ? errors.code : ""}
+                </span>
+                <input
+                  type="password"
+                  placeholder={t("password")}
+                  name="password"
+                  onChange={(e) => onChangeHandler(e)}
+                />
+                <span className="invalid">
+                  {errors.password ? errors.password : ""}
+                </span>
+                <input
+                  type="password"
+                  placeholder={t("confirmPassword")}
+                  name="confirmPassword"
+                  onChange={(e) => onChangeHandler(e)}
+                />
+                <span className="invalid">
+                  {errors.confirmPassword ? errors.confirmPassword : ""}
+                </span>
+                <span className="invalid">{backError}</span>
+                <button> {submitting ? t("submitting") : t("reset")}</button>
+              </form>
+            </div>
+            <div className="overlay-container">
+              <div className="overlay">
+                <div className="overlay-panel overlay-right">
+                  <Image
+                    width={400}
+                    height={400}
+                    alt="welcome"
+                    src={"/assets/login.png"}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </>
   );
 };

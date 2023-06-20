@@ -36,7 +36,12 @@
   .invalid {
     text-align: right;
   }
-  .login-container .overlay {
-    left: 0;
+  .login-container {
+    .overlay {
+      left: 0;
+    }
+    figure {
+      left: calc(100vw - 140px);
+    }
   }
 }

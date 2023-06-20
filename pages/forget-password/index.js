@@ -62,7 +62,7 @@ const Forget = () => {
           <div className="container" id="container">
             <div className="form-container sign-in-container">
               <form onSubmit={(e) => submit(e)}>
-                <h1>{t("code")}</h1>
+                <h1>{t("code-msg")}</h1>
                 <input
                   name="email"
                   type="email"

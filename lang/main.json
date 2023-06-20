@@ -15,7 +15,7 @@
     "login": "Login",
     "signin": "sign in",
     "forget": "Forgot your password?",
-    "code": "Enter your Email to recieve the code",
+    "code-msg": "Enter your Email to recieve the code",
     "submit": "submit",
     "reset": "reset password",
     "data": "enter your data",
@@ -39,7 +39,9 @@
     "email": "Email",
     "password": "Password",
     "required": "is required!",
-    "female-required": "is required"
+    "female-required": "is required",
+    "code": "Code",
+    "confirmPassword": "Confirm Password"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -57,7 +59,7 @@
     "login": "تسجيل الدخول",
     "signin": "تسجيل الدخول",
     "forget": "نسيت كلمة السر؟",
-    "code": "أدخل بريدك الإلكتروني لتلقي الرمز",
+    "code-msg": "أدخل بريدك الإلكتروني لتلقي الرمز",
     "submit": "إرسال",
     "reset": "إعادة تعيين كلمة السر",
     "data": "أدخل بياناتك",
@@ -81,6 +83,8 @@
     "email": "الإيميل",
     "password": "كلمة السر",
     "required": "مطلوب!",
-    "female-required": "مطلوبة!"
+    "female-required": "مطلوبة!",
+    "code": "الكود",
+    "confirmPassword": "تأكيد كلمة السر"
   }
 }
