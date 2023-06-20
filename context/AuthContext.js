@@ -15,6 +15,7 @@ const baseUrl = process.env.API_URL;
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
+  const { locale } = router;
   const { t } = useTranslation();
 
   //state
@@ -58,7 +59,8 @@ export const AuthProvider = ({ children }) => {
     document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     localStorage.removeItem("name");
     localStorage.removeItem("image");
-    router.replace("/login");
+    if (locale == "ar") router.replace("/ar/login");
+    else router.replace("/login");
   };
 
   //handle Expired tokens
@@ -78,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     const path = ["/login", "/forget-password", "/reset-password"];
     if (!path.includes(router.asPath) && auth) checkToken();
     else if (!path.includes(router.asPath) && router.asPath !== "/login")
-      router.replace("/login");
+      logoutUser();
     else if (path.includes(router.asPath) && auth && checkToken())
       router.replace("/");
 
@@ -141,38 +143,39 @@ export const AuthProvider = ({ children }) => {
                 JSON.stringify(response.data.permissions)
               );
               setPermissions(response.data.permissions);
-              viewUser(jwt_decode(token).id)
-                .then((res) => {
-                  setName(`${res.data.firstName} ${res.data.lastName}`);
-                  localStorage.setItem(
-                    "name",
-                    JSON.stringify(`${res.data.firstName} ${res.data.lastName}`)
-                  );
-                  let allPermissions = response.data.permissions;
-                  if (!allPermissions.statistics?.viewAll) {
-                    let firstTrueKey;
+              // viewUser(jwt_decode(token).id)
+              //   .then((userRes) => {
+              //     setName(`${userRes.data.firstName} ${userRes.data.lastName}`);
+              //     localStorage.setItem(
+              //       "name",
+              //       JSON.stringify(
+              //         `${userRes.data.firstName} ${userRes.data.lastName}`
+              //       )
+              //     );
+              let allPermissions = response.data.permissions;
+              if (!allPermissions.statistics?.viewAll) {
+                let firstTrueKey;
 
-                    for (const outerKey in allPermissions) {
-                      const innerObj = allPermissions[outerKey];
-                      for (const innerKey in innerObj) {
-                        if (innerObj[innerKey]) {
-                          firstTrueKey = outerKey;
-                          break;
-                        }
-
-                        if (firstTrueKey) {
-                          break;
-                        }
-                      }
+                for (const outerKey in allPermissions) {
+                  const innerObj = allPermissions[outerKey];
+                  for (const innerKey in innerObj) {
+                    if (innerObj[innerKey]) {
+                      firstTrueKey = outerKey;
+                      break;
                     }
-                    console.log(firstTrueKey);
-                    router.replace("/" + firstTrueKey);
-                  } else router.replace("/");
-                })
-                .catch((error) => {
-                  console.log(error);
-                  setLoading(false);
-                });
+
+                    if (firstTrueKey) {
+                      break;
+                    }
+                  }
+                }
+                console.log(firstTrueKey);
+                router.replace("/" + firstTrueKey);
+              } else router.replace("/");
+              // })
+              // .catch((error) => {
+              //   console.log(error);
+              // });
             })
             .catch((error) => {
               console.log(error);
