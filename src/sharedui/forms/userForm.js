@@ -64,9 +64,7 @@ const UserForm = ({
           />
           <span className="invalid">{errors.email ? errors.email : ""}</span>
         </div>
-        {viewOnly ? (
-          <></>
-        ) : (
+        {!viewOnly && (
           <div className="field--wrapper">
             <label className="label--global" htmlFor="password">
               Password

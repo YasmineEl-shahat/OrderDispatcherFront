@@ -20,5 +20,5 @@ export async function viewDriver(id) {
 }
 
 export async function updateDriver(id, data) {
-  return await authorizedHttpJson.put(`${api_url}/drivers/${id}`, data);
+  return await authorizedHttpJson.patch(`${api_url}/drivers/${id}`, data);
 }

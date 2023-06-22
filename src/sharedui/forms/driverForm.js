@@ -167,6 +167,25 @@ const DriverForm = ({
             isDisabled={viewOnly}
           />
         </div>
+
+        {!viewOnly && (
+          <div className="field--wrapper">
+            <label className="label--global" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="text--global"
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={data.password}
+              onChange={(e) => onChangeHandler(e)}
+            />
+            <span className="invalid">
+              {errors.password ? errors.password : ""}
+            </span>
+          </div>
+        )}
       </section>
 
       <span className="invalid">{backError}</span>
