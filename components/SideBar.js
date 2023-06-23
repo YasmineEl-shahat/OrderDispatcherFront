@@ -10,18 +10,18 @@ const SideBar = ({ translate }) => {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState(router.pathname);
 
-  useEffect(() => {
+  const hideSideBar = () => {
     let navbar = document.querySelector(".navbar");
     let main = document.querySelector(".mainContainer");
-
+    document.getElementById("sideBar").classList.add("invisible");
+    navbar.style.marginRight = "0rem";
+    main.style.marginRight = "0rem";
+    navbar.style.marginLeft = "0rem";
+    main.style.marginLeft = "0rem";
+  };
+  useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
-    if (mediaQuery.matches) {
-      document.getElementById("sideBar").classList.add("invisible");
-      navbar.style.marginRight = "0rem";
-      main.style.marginRight = "0rem";
-      navbar.style.marginLeft = "0rem";
-      main.style.marginLeft = "0rem";
-    }
+    if (mediaQuery.matches) hideSideBar();
   }, []);
 
   return (
@@ -29,6 +29,7 @@ const SideBar = ({ translate }) => {
       <div className="sideBar-title">
         <Image src={"/assets/logo.png"} width={48} height={45} alt="logo" />
         <h1>{translate("order-dispatcher")}</h1>
+        <i onClick={hideSideBar} className="fa-solid fa-xmark"></i>
       </div>
 
       <div className="sideBar-menu">

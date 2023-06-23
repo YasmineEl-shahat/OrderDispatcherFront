@@ -13,6 +13,19 @@
   text-transform: capitalize;
   color: $primaryGray;
   padding: 2rem 1rem;
+
+  .fa-xmark {
+    display: none;
+    @include mQ(768px) {
+      display: block;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      font-size: $HeadFont;
+      cursor: pointer;
+    }
+  }
+
   .sideBar-title {
     display: flex;
     h1 {

@@ -62,7 +62,15 @@ const UpdateUser = () => {
     let newData = { ...data };
     newData["role_id"] = Number(data["role_id"]);
     setData(newData);
-    updateUser(id, JSON.stringify(newData))
+    let formData = new FormData();
+    for (const key in newData) {
+      if (data.hasOwnProperty(key)) {
+        if (data[key] !== "" && data[key] !== null) {
+          formData.append(key, data[key]);
+        }
+      }
+    }
+    updateUser(id, formData)
       .then((res) => {
         setSubmitting(false);
         setData({});
