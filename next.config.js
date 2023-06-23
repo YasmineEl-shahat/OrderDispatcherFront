@@ -55,6 +55,6 @@ module.exports = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: ["via.placeholder.com", "http://localhost:8000"],
+    domains: ["http://localhost:8080", "jimmy.nader-mo.tech"],
   },
 };

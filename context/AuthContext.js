@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { userLogin } from "../pages/api/auth";
 import { useTranslation } from "../util/useTranslation";
 import { viewRole } from "../pages/api/roles";
-import { viewUser } from "../pages/api/users";
+import { getNavData } from "../pages/api/users";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -36,13 +36,13 @@ export const AuthProvider = ({ children }) => {
   );
   const [name, setName] = useState(() =>
     typeof window !== "undefined" && localStorage.getItem("name") != "undefined"
-      ? JSON.parse(localStorage.getItem("name"))
+      ? localStorage.getItem("name")
       : ""
   );
   const [image, setImage] = useState(() =>
     typeof window !== "undefined" &&
     localStorage.getItem("image") != "undefined"
-      ? JSON.parse(localStorage.getItem("image"))
+      ? localStorage.getItem("image")
       : ""
   );
 
@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     localStorage.removeItem("name");
     localStorage.removeItem("image");
+    localStorage.removeItem("permissions");
     if (locale == "ar") router.replace("/ar/login");
     else router.replace("/login");
   };
@@ -99,6 +100,8 @@ export const AuthProvider = ({ children }) => {
   const onChangeHandler = (e) => {
     let err = { ...errors };
     let newData = { ...data };
+
+    // setting errors
     if (e.target.value == "")
       err[e.target.name] =
         t(e.target.name) +
@@ -107,7 +110,17 @@ export const AuthProvider = ({ children }) => {
           ? t("female-required")
           : t("required"));
     else err[e.target.name] = "";
-    newData[e.target.name] = e.target.value;
+
+    // setting data
+    if (e.target.name === "image") {
+      const reader = new FileReader(e.target.files[0]);
+      reader.addEventListener("load", () => {
+        newData[e.target.name] = e.target.files[0];
+        setImage(URL.createObjectURL(e.target.files[0]));
+      });
+      reader.readAsDataURL(e.target.files[0]);
+    } else newData[e.target.name] = e.target.value;
+
     setBackError("");
     setErrors(err);
     setData(newData);
@@ -143,39 +156,43 @@ export const AuthProvider = ({ children }) => {
                 JSON.stringify(response.data.permissions)
               );
               setPermissions(response.data.permissions);
-              // viewUser(jwt_decode(token).id)
-              //   .then((userRes) => {
-              //     setName(`${userRes.data.firstName} ${userRes.data.lastName}`);
-              //     localStorage.setItem(
-              //       "name",
-              //       JSON.stringify(
-              //         `${userRes.data.firstName} ${userRes.data.lastName}`
-              //       )
-              //     );
-              let allPermissions = response.data.permissions;
-              if (!allPermissions.statistics?.viewAll) {
-                let firstTrueKey;
 
-                for (const outerKey in allPermissions) {
-                  const innerObj = allPermissions[outerKey];
-                  for (const innerKey in innerObj) {
-                    if (innerObj[innerKey]) {
-                      firstTrueKey = outerKey;
-                      break;
-                    }
+              getNavData(jwt_decode(token).id)
+                .then((userRes) => {
+                  setName(userRes.data.name);
+                  localStorage.setItem("name", userRes.data.name);
 
-                    if (firstTrueKey) {
-                      break;
+                  setImage(
+                    "jimmy.nader-mo.tech/Core/images/User/" + userRes.data.image
+                  );
+                  localStorage.setItem(
+                    "image",
+                    "jimmy.nader-mo.tech/Core/images/User/" + userRes.data.image
+                  );
+                  let allPermissions = response.data.permissions;
+                  if (!allPermissions.statistics?.viewAll) {
+                    let firstTrueKey;
+
+                    for (const outerKey in allPermissions) {
+                      const innerObj = allPermissions[outerKey];
+                      for (const innerKey in innerObj) {
+                        if (innerObj[innerKey]) {
+                          firstTrueKey = outerKey;
+                          break;
+                        }
+
+                        if (firstTrueKey) {
+                          break;
+                        }
+                      }
                     }
-                  }
-                }
-                console.log(firstTrueKey);
-                router.replace("/" + firstTrueKey);
-              } else router.replace("/");
-              // })
-              // .catch((error) => {
-              //   console.log(error);
-              // });
+                    console.log(firstTrueKey);
+                    router.replace("/" + firstTrueKey);
+                  } else router.replace("/");
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             })
             .catch((error) => {
               console.log(error);
@@ -184,15 +201,6 @@ export const AuthProvider = ({ children }) => {
         .catch((error) => {
           setBackError(error.response.data.message);
         });
-
-      //   const resDes = await fetch(
-      //     baseUrl + "seeker/details/view/" + user.id
-      //   );
-      //   const { profile_picture } = await resDes.json();
-      //   setImage(profile_picture);
-      //   localStorage.setItem("image", JSON.stringify(profile_picture));
-
-      // }
 
       setSubmitting(false);
     }

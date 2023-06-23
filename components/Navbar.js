@@ -2,6 +2,7 @@ import { toggleElement } from "../functions/toggleElement";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
+import Link from "next/link";
 
 const Navbar = ({ locale, translate, navTitle }) => {
   const { logoutUser, name, image } = useContext(AuthContext);
@@ -126,13 +127,17 @@ const Navbar = ({ locale, translate, navTitle }) => {
             />
             <div className="menu">
               <ul>
-                <img
-                  src={image ? image : `/assets/avatar.png`}
-                  alt="profile img"
-                  width={30}
-                  height={30}
-                />
-                <h5>{name ? name : "Name"}</h5>
+                <Link href="/update-profile" passHref>
+                  <div>
+                    <img
+                      src={image ? image : `/assets/avatar.png`}
+                      alt="profile img"
+                      width={30}
+                      height={30}
+                    />
+                    <h5>{name ? name : "Name"}</h5>
+                  </div>
+                </Link>
 
                 <li onClick={() => logoutUser()}>
                   <i className="fa-solid fa-arrow-right-from-bracket"></i>

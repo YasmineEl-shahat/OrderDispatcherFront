@@ -22,6 +22,18 @@
 }
 .table-responsive {
   overflow-x: hidden !important;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient($secondary, transparent);
+    border-radius: 6px;
+  }
+  @include mQ(1350px) {
+    overflow-x: auto !important;
+  }
 }
 .table-title {
   padding-bottom: 10px;

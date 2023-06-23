@@ -9,10 +9,39 @@ const UserForm = ({
   t,
   viewOnly,
   emailView,
+  isProfile,
+  image,
+  removeImage,
 }) => {
   return (
     <form onSubmit={(e) => submit(e)}>
       <section className="form--section">
+        {isProfile && (
+          <div className="img-container">
+            {image && (
+              <i onClick={removeImage} className="fa-solid fa-xmark"></i>
+            )}
+            {/* eslint-disable */}
+            <img
+              src={image ? image : "/assets/avatar.png"}
+              width="250"
+              height="250"
+              alt="profile"
+            />
+
+            <input
+              id="image"
+              name="image"
+              type="file"
+              accept="image/jpg, image/jpeg, image/png"
+              onChange={(e) => onChangeHandler(e)}
+            />
+
+            <label htmlFor="image">
+              <i className="fa-solid fa-upload"></i>Upload Image
+            </label>
+          </div>
+        )}
         <div className="field--wrapper">
           <label className="label--global" htmlFor="firstName">
             First Name
@@ -101,61 +130,67 @@ const UserForm = ({
           </span>
         </div>
 
-        <div className="field--wrapper">
-          <label className="label--global" htmlFor="role_id">
-            Role
-          </label>
-          <input
-            className="form-select text--global "
-            name="role_id"
-            type="text"
-            placeholder="Role..."
-            value={data.role_id}
-            disabled={viewOnly}
-            onChange={(e) => onChangeHandler(e)}
-            list="roles"
-          />
-
-          <datalist id="roles">
-            {roles.map((role) => (
-              <option value={role._id} key={"role" + role._id}>
-                {role.name}
-              </option>
-            ))}
-          </datalist>
-          <span className="invalid">{errors.role ? errors.role : ""}</span>
-        </div>
-
-        <div className="field--wrapper" style={{ width: "100%" }}>
-          <label className="label--global" htmlFor="active">
-            Active
-          </label>
-          <div className="radio-buttons">
-            <label>
+        {!isProfile && (
+          <>
+            <div className="field--wrapper">
+              <label className="label--global" htmlFor="role_id">
+                Role
+              </label>
               <input
-                type="radio"
-                name="active"
-                value={1}
+                className="form-select text--global "
+                name="role_id"
+                type="text"
+                placeholder="Role..."
+                value={data.role_id}
                 disabled={viewOnly}
-                checked={data.active == 1 || data.active === true}
                 onChange={(e) => onChangeHandler(e)}
+                list="roles"
               />
-              yes
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="active"
-                value={0}
-                disabled={viewOnly}
-                checked={data.active == 0 || data.active === false}
-                onChange={(e) => onChangeHandler(e)}
-              />
-              no
-            </label>
-          </div>
-          <span className="invalid">{errors.active ? errors.active : ""}</span>
-        </div>
+
+              <datalist id="roles">
+                {roles.map((role) => (
+                  <option value={role._id} key={"role" + role._id}>
+                    {role.name}
+                  </option>
+                ))}
+              </datalist>
+              <span className="invalid">{errors.role ? errors.role : ""}</span>
+            </div>
+
+            <div className="field--wrapper" style={{ width: "100%" }}>
+              <label className="label--global" htmlFor="active">
+                Active
+              </label>
+              <div className="radio-buttons">
+                <label>
+                  <input
+                    type="radio"
+                    name="active"
+                    value={1}
+                    disabled={viewOnly}
+                    checked={data.active == 1 || data.active === true}
+                    onChange={(e) => onChangeHandler(e)}
+                  />
+                  yes
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="active"
+                    value={0}
+                    disabled={viewOnly}
+                    checked={data.active == 0 || data.active === false}
+                    onChange={(e) => onChangeHandler(e)}
+                  />
+                  no
+                </label>
+              </div>
+              <span className="invalid">
+                {errors.active ? errors.active : ""}
+              </span>
+            </div>
+          </>
+        )}
       </section>
 
       <span className="invalid">{backError}</span>

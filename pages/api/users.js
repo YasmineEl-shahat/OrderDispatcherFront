@@ -1,5 +1,9 @@
 import { api_url } from "../../config/config";
-import { authorizedHttpJson } from "../../config/http";
+import {
+  httpJson,
+  authorizedHttpJson,
+  authorizedHttpForm,
+} from "../../config/http";
 
 export async function getAllUsers(
   userNum = 6,
@@ -23,9 +27,13 @@ export async function viewUser(id) {
 }
 
 export async function updateUser(id, data) {
-  return await authorizedHttpJson.patch(`${api_url}/users/${id}`, data);
+  return await authorizedHttpForm.patch(`${api_url}/users/${id}`, data);
 }
 
 export async function deleteUser(id) {
   return await authorizedHttpJson.delete(`${api_url}/users/${id}`);
+}
+
+export async function getNavData(id) {
+  return await httpJson.get(`${api_url}/nav/users/${id}`);
 }

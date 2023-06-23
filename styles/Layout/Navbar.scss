@@ -91,13 +91,14 @@
 
     ul {
       color: $primary;
+      cursor: pointer;
       li {
         &:first-of-type,
         &:last-of-type {
           border-top: 1px solid rgba(0, 0, 0, 0.05);
           border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
-        cursor: pointer;
+
         text-align: start;
         padding: 0.8rem 8rem 0.8rem 0.8rem;
         &:hover {
