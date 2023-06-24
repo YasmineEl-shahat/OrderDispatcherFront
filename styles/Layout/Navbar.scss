@@ -3,6 +3,9 @@
 
 .navbar {
   background-color: #fff;
+  margin-left: 25.1rem;
+  box-shadow: $globalShadow;
+  padding: 1rem 2rem !important;
 
   .title {
     font-size: $HeadFont;
@@ -67,9 +70,6 @@
   .dropdown-menu.show {
     top: 3rem;
   }
-  margin-left: 25.1rem;
-  box-shadow: $globalShadow;
-  padding: 1rem 2rem !important;
 
   .photo {
     vertical-align: middle;

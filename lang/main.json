@@ -42,7 +42,8 @@
     "female-required": "is required",
     "code": "Code",
     "confirmPassword": "Confirm Password",
-    "profile": "Profile"
+    "profile": "Profile",
+    "notifications": "notifications"
   },
   "ar": {
     "order-dispatcher": "أيدسباتش",
@@ -87,6 +88,7 @@
     "female-required": "مطلوبة!",
     "code": "الكود",
     "confirmPassword": "تأكيد كلمة السر",
-    "profile": "الحساب"
+    "profile": "الحساب",
+    "notifications": "الإشعارات"
   }
 }

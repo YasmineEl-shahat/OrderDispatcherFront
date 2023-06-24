@@ -123,7 +123,9 @@ const Navbar = ({ locale, translate, navTitle }) => {
                 className="dropdown-menu dropdown-menu-end notificationDropdown "
                 aria-labelledby="dropdownMenuButton1"
               >
-                <li className="notificationHeader">notifications</li>
+                <li className="notificationHeader">
+                  {translate("notifications")}
+                </li>
                 <div>
                   {newOrders.map((order) => (
                     <li
