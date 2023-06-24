@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -135,54 +136,29 @@ const Table = ({
             </div>
           </div>
         </div>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              {columnNames.map((column, index) => (
-                <th key={"column" + index} scope="col">
-                  {column}
-                </th>
-              ))}
-              {!notView && <th>Actions</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {tableContent.map((item) => {
-              const keys = Object.keys(item);
-              return (
-                <tr key={item.id}>
-                  {keys.map((key) => {
-                    const value = item[key];
-                    return <td key={`${item.id} ${key}`}>{value}</td>;
-                  })}
-                  {!notView && (
-                    <td>
-                      <Link
-                        href={
-                          location
-                            ? router.pathname +
-                              "/" +
-                              location +
-                              "/" +
-                              item.id +
-                              "?operation=view"
-                            : router.pathname +
-                              "/" +
-                              item.id +
-                              "?operation=view"
-                        }
-                        passHref
-                      >
-                        <button
-                          className="view"
-                          title="View"
-                          data-toggle="tooltip"
-                        >
-                          <i className="material-icons">&#xE417;</i>
-                        </button>
-                      </Link>
-
-                      {canEdit && (
+        {tableContent.length ? (
+          <table className="table table-bordered">
+            <thead>
+              <tr>
+                {columnNames.map((column, index) => (
+                  <th key={"column" + index} scope="col">
+                    {column}
+                  </th>
+                ))}
+                {!notView && <th>Actions</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {tableContent.map((item) => {
+                const keys = Object.keys(item);
+                return (
+                  <tr key={item.id}>
+                    {keys.map((key) => {
+                      const value = item[key];
+                      return <td key={`${item.id} ${key}`}>{value}</td>;
+                    })}
+                    {!notView && (
+                      <td>
                         <Link
                           href={
                             location
@@ -191,44 +167,81 @@ const Table = ({
                                 location +
                                 "/" +
                                 item.id +
-                                "?operation=edit"
+                                "?operation=view"
                               : router.pathname +
                                 "/" +
                                 item.id +
-                                "?operation=edit"
+                                "?operation=view"
                           }
                           passHref
                         >
                           <button
-                            className="edit"
-                            title="Edit"
+                            className="view"
+                            title="View"
                             data-toggle="tooltip"
                           >
-                            <i className="material-icons">&#xE254;</i>
+                            <i className="material-icons">&#xE417;</i>
                           </button>
                         </Link>
-                      )}
 
-                      {handleDelete && (
-                        <button
-                          className="delete"
-                          title="Delete"
-                          data-toggle="tooltip"
-                          onClick={() => {
-                            setSelectedItem(item);
-                            handleDelete();
-                          }}
-                        >
-                          <i className="material-icons ">&#xE872;</i>
-                        </button>
-                      )}
-                    </td>
-                  )}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                        {canEdit && (
+                          <Link
+                            href={
+                              location
+                                ? router.pathname +
+                                  "/" +
+                                  location +
+                                  "/" +
+                                  item.id +
+                                  "?operation=edit"
+                                : router.pathname +
+                                  "/" +
+                                  item.id +
+                                  "?operation=edit"
+                            }
+                            passHref
+                          >
+                            <button
+                              className="edit"
+                              title="Edit"
+                              data-toggle="tooltip"
+                            >
+                              <i className="material-icons">&#xE254;</i>
+                            </button>
+                          </Link>
+                        )}
+
+                        {handleDelete && (
+                          <button
+                            className="delete"
+                            title="Delete"
+                            data-toggle="tooltip"
+                            onClick={() => {
+                              setSelectedItem(item);
+                              handleDelete();
+                            }}
+                          >
+                            <i className="material-icons ">&#xE872;</i>
+                          </button>
+                        )}
+                      </td>
+                    )}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <section className="no-data invalid">
+            <Image
+              alt="empty"
+              width={400}
+              height={400}
+              src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/9e826e104101523.5f5b6309548e8.jpg"
+            />
+            <p className="">No data found</p>
+          </section>
+        )}
       </div>
     </div>
   );

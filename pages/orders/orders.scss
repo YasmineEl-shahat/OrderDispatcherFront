@@ -23,5 +23,7 @@
 
 .no-data {
   font-size: $HeadFont;
-  @include centerX;
+  min-height: 60vh;
+  @include flexCenter;
+  flex-direction: column;
 }

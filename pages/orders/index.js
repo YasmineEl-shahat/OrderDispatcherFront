@@ -118,7 +118,7 @@ const Orders = () => {
     >
       {loading ? (
         <Spinner />
-      ) : orders.length ? (
+      ) : (
         <Table
           columnNames={columnNames}
           tableContent={orders}
@@ -140,8 +140,6 @@ const Orders = () => {
           setSearchKey={setSearchKey}
           setNum={setOrderNum}
         />
-      ) : (
-        <p className="formContainer no-data invalid">No {status} orders now</p>
       )}
     </main>
   );

@@ -55,6 +55,10 @@ module.exports = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: ["http://localhost:8080", "jimmy.nader-mo.tech"],
+    domains: [
+      "http://localhost:8080",
+      "jimmy.nader-mo.tech",
+      "mir-s3-cdn-cf.behance.net",
+    ],
   },
 };
