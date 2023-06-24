@@ -5,10 +5,10 @@ import Layout from "../../components/Layout";
 import AuthContext from "../../context/AuthContext";
 import { useTranslation } from "../../util/useTranslation";
 import { updateUser, viewUser } from "../api/users";
-import { getAllRoles } from "../api/roles";
 import Spinner from "../../components/Spinner";
 import UserForm from "../../src/sharedui/forms/userForm";
 
+const baseUrl = process.env.API_URL;
 const UpdateUser = () => {
   const router = useRouter();
 
@@ -35,7 +35,6 @@ const UpdateUser = () => {
     viewUser(user.id)
       .then((res) => {
         setData(res.data);
-        setImage(res.data.image);
         setLoading(false);
       })
       .catch((error) => {
@@ -73,6 +72,16 @@ const UpdateUser = () => {
 
     updateUser(user.id, formData)
       .then((res) => {
+        if (data["image"]) {
+          localStorage.setItem(
+            "image",
+            baseUrl + "/images/" + user.id + ".jpg"
+          );
+          setImage(baseUrl + "/images/" + user.id + ".jpg");
+        } else {
+          localStorage.setItem("image", baseUrl + "/images/default.jpg");
+          setImage(baseUrl + "/images/default.jpg");
+        }
         setSubmitting(false);
         setData({});
         setBackError("");

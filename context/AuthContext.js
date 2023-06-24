@@ -162,12 +162,10 @@ export const AuthProvider = ({ children }) => {
                   setName(userRes.data.name);
                   localStorage.setItem("name", userRes.data.name);
 
-                  setImage(
-                    "jimmy.nader-mo.tech/Core/images/User/" + userRes.data.image
-                  );
+                  setImage(baseUrl + "/images/" + userRes.data.image);
                   localStorage.setItem(
                     "image",
-                    "jimmy.nader-mo.tech/Core/images/User/" + userRes.data.image
+                    baseUrl + "/images/" + userRes.data.image
                   );
                   let allPermissions = response.data.permissions;
                   if (!allPermissions.statistics?.viewAll) {
