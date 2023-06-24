@@ -14,6 +14,7 @@ const baseUrl = process.env.API_URL;
 
 export const AuthProvider = ({ children }) => {
   const router = useRouter();
+  const ISSERVER = typeof window === "undefined";
 
   const { locale } = router;
   const { t } = useTranslation();
@@ -25,30 +26,26 @@ export const AuthProvider = ({ children }) => {
   const [submitting, setSubmitting] = useState(false);
 
   let [auth, setAuth] = useState(() =>
-    typeof window !== "undefined" && cookieCutter.get("auth")
-      ? cookieCutter.get("auth")
-      : null
+    !ISSERVER && cookieCutter.get("auth") ? cookieCutter.get("auth") : null
   );
   let [user, setUser] = useState(() =>
-    typeof window !== "undefined" && cookieCutter.get("auth")
+    !ISSERVER && cookieCutter.get("auth")
       ? jwt_decode(cookieCutter.get("auth"))
       : null
   );
   const [name, setName] = useState(() =>
-    typeof window !== "undefined" && localStorage.getItem("name") != "undefined"
+    !ISSERVER && localStorage.getItem("name") != "undefined"
       ? localStorage.getItem("name")
       : ""
   );
   const [image, setImage] = useState(() =>
-    typeof window !== "undefined" &&
-    localStorage.getItem("image") != "undefined"
+    !ISSERVER && localStorage.getItem("image") != "undefined"
       ? localStorage.getItem("image")
       : ""
   );
 
   const [permissions, setPermissions] = useState(() =>
-    typeof window !== "undefined" &&
-    localStorage.getItem("permissions") != "undefined"
+    !ISSERVER && localStorage.getItem("permissions") != "undefined"
       ? JSON.parse(localStorage.getItem("permissions"))
       : ""
   );

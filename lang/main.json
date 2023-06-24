@@ -1,6 +1,6 @@
 {
   "en": {
-    "order-dispatcher": "Order Dispatcher",
+    "order-dispatcher": "iDispatch",
     "home": "Home page",
     "orders": "Orders",
     "dashboard": "dashboard",
@@ -45,7 +45,7 @@
     "profile": "Profile"
   },
   "ar": {
-    "order-dispatcher": "مرسل الطلب",
+    "order-dispatcher": "أيدسباتش",
     "home": "الرئيسية",
     "orders": "الطلبات",
     "dashboard": "لوحة التحكم",

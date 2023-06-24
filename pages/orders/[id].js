@@ -9,7 +9,7 @@ const Order = () => {
   const [loading, setLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState(null);
   const [statusColor, setStatusColor] = useState(null);
-
+  const ISSERVER = typeof window === "undefined";
   const { t } = useTranslation();
   const router = useRouter();
   const { id } = router.query;
@@ -75,61 +75,63 @@ const Order = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="order">
-          <h1>
-            {t("order-details")}: #{id}
-          </h1>
-          <h2>
-            Status :
-            <span style={{ color: statusColor }}>{orderDetails?.Status}</span>
-          </h2>
-          <table>
-            <tbody>
-              <tr>
-                <td>Customer ID:</td>
-                <td>{orderDetails?.CustomerID}</td>
-              </tr>
-              <tr>
-                <td>Customer Name:</td>
-                <td>{orderDetails?.CustomerName}</td>
-              </tr>
-              <tr>
-                <td>Customer Email:</td>
-                <td>{orderDetails?.CustomerEmail}</td>
-              </tr>
-              <tr>
-                <td>Payment Method:</td>
-                <td>{orderDetails?.PaymentMethod}</td>
-              </tr>
-              <tr>
-                <td>Driver ID:</td>
-                <td>{orderDetails?.DriverID}</td>
-              </tr>
-              <tr>
-                <td>Address:</td>
-                <td>{`${orderDetails?.Address.Governate}, ${orderDetails?.Address?.City}, ${orderDetails?.Address?.Area}`}</td>
-              </tr>
+        !ISSERVER && (
+          <div className="order">
+            <h1>
+              {t("order-details")}: #{id}
+            </h1>
+            <h2>
+              Status :
+              <span style={{ color: statusColor }}>{orderDetails?.Status}</span>
+            </h2>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Customer ID:</td>
+                  <td>{orderDetails?.CustomerID}</td>
+                </tr>
+                <tr>
+                  <td>Customer Name:</td>
+                  <td>{orderDetails?.CustomerName}</td>
+                </tr>
+                <tr>
+                  <td>Customer Email:</td>
+                  <td>{orderDetails?.CustomerEmail}</td>
+                </tr>
+                <tr>
+                  <td>Payment Method:</td>
+                  <td>{orderDetails?.PaymentMethod}</td>
+                </tr>
+                <tr>
+                  <td>Driver ID:</td>
+                  <td>{orderDetails?.DriverID}</td>
+                </tr>
+                <tr>
+                  <td>Address:</td>
+                  <td>{`${orderDetails?.Address.Governate}, ${orderDetails?.Address?.City}, ${orderDetails?.Address?.Area}`}</td>
+                </tr>
 
-              <tr>
-                <td>Total Price:</td>
-                <td>{orderDetails?.TotalPrice}</td>
-              </tr>
-            </tbody>
-          </table>
-          <h1>Order Products</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total Price</th>
-              </tr>
-            </thead>
-            <tbody>{renderProductTableRows()}</tbody>
-          </table>
-        </div>
+                <tr>
+                  <td>Total Price:</td>
+                  <td>{orderDetails?.TotalPrice}</td>
+                </tr>
+              </tbody>
+            </table>
+            <h1>Order Products</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Product ID</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Total Price</th>
+                </tr>
+              </thead>
+              <tbody>{renderProductTableRows()}</tbody>
+            </table>
+          </div>
+        )
       )}
     </main>
   );
