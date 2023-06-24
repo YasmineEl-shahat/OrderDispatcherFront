@@ -95,28 +95,36 @@ const Governate = () => {
             </form>
           )}
           {operation === "view" && (
-            <article>
+            <article className="location-article">
               <span className="label--global title">Governate: </span>
-              <span className="description">{data.governate}</span>
+              <span className="description governate">{data.governate}</span>
             </article>
           )}
-          <article>
-            <span className="label--global title">City: </span>
+          <article className="location-article">
+            <span className="label--global title">Cities: </span>
             <span className="description">
               <ul>
                 {data?.cities?.map((city) => (
                   <>
-                    <li key={city.city}>{city.city}</li>
-                    <article>
-                      <span className="label--global title">Areas: </span>
-                      <span className="description permissionsWrapper">
-                        <ul>
-                          {city.areas?.map((area) => (
-                            <li key={area}>{area}</li>
-                          ))}
-                        </ul>
-                      </span>
-                    </article>
+                    <li className="city" key={city.city}>
+                      {city.city}
+                    </li>
+                    {city.areas.length ? (
+                      <article>
+                        <span className="label--global title">Areas: </span>
+                        <span className="description permissionsWrapper">
+                          <ul>
+                            {city.areas?.map((area) => (
+                              <li key={area} className="area">
+                                {area}
+                              </li>
+                            ))}
+                          </ul>
+                        </span>
+                      </article>
+                    ) : (
+                      <></>
+                    )}
                   </>
                 ))}
               </ul>

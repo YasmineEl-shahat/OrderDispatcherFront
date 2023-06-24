@@ -1,13 +1,17 @@
 import { toggleElement } from "../functions/toggleElement";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
 import Link from "next/link";
+import { channel } from "../pages/api/pusher";
+import { assignOrder, saveOrder } from "../pages/api/orders";
 
 const Navbar = ({ locale, translate, navTitle }) => {
   const { logoutUser, name, image } = useContext(AuthContext);
   const ISSERVER = typeof window === "undefined";
   const router = useRouter();
+
+  const [newOrders, setNewOrders] = useState([]);
 
   const toggleSideBar = () => {
     let margin = 0;
@@ -41,6 +45,20 @@ const Navbar = ({ locale, translate, navTitle }) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    channel.bind("newOrder", function (orderData) {
+      try {
+        saveOrder(orderData);
+        assignOrder(orderData._id);
+        setNewOrders((prevOrders) => [...prevOrders, orderData]);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
+
   const changeLocale = (locale) => {
     localStorage.setItem("selectedLocale", locale);
     router
@@ -95,6 +113,11 @@ const Navbar = ({ locale, translate, navTitle }) => {
             <section className="dropdown">
               <div className="notifications" data-bs-toggle="dropdown">
                 <i className="fa-solid fa-bell"></i>
+                {newOrders.length > 0 && (
+                  <span className="badge bg-danger notificationDot">
+                    {newOrders.length}
+                  </span>
+                )}
               </div>
               <ul
                 className="dropdown-menu dropdown-menu-end notificationDropdown "
@@ -102,16 +125,25 @@ const Navbar = ({ locale, translate, navTitle }) => {
               >
                 <li className="notificationHeader">notifications</li>
                 <div>
-                  <li className="align-items-start d-flex">
-                    <span className="dropdownItem d-flex justify-content-between pe-2">
-                      <span className="icon marginEnd"></span>
-                    </span>
-                    <span className="dropdownItem w-100">
-                      <div className="d-flex flex-column">
-                        <span className="issue"></span>
-                      </div>
-                    </span>
-                  </li>
+                  {newOrders.map((order) => (
+                    <li
+                      onClick={() => {
+                        setNewOrders([]);
+                        router.push("/orders");
+                      }}
+                      className="align-items-start d-flex"
+                      key={order._id}
+                    >
+                      <span className="dropdownItem d-flex justify-content-between pe-2">
+                        <span className="icon marginEnd"></span>
+                      </span>
+                      <span className="dropdownItem w-100">
+                        <div className="d-flex flex-column">
+                          <span className="issue">{`New order: ${order._id}`}</span>
+                        </div>
+                      </span>
+                    </li>
+                  ))}
                 </div>
               </ul>
             </section>

@@ -51,6 +51,14 @@
   .notifications {
     font-size: $HeadFont;
     cursor: pointer;
+    position: relative;
+    .notificationDot {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      font-size: 0.7rem;
+      border-radius: 50%;
+    }
   }
   .notificationDropdown {
     min-width: 10vw;
