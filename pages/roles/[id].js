@@ -40,6 +40,7 @@ const Role = () => {
   };
 
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     viewRole(id)
       .then((res) => {
@@ -50,6 +51,7 @@ const Role = () => {
         console.log(error);
         setLoading(false);
       });
+
     // eslint-disable-next-line
   }, []);
 

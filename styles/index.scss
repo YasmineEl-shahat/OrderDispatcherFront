@@ -26,6 +26,7 @@
     background-color: rgba(146, 122, 244, 0.089);
   }
   article {
+    cursor: pointer;
     border-radius: 10px;
     padding: 2rem 1.5rem;
     @include flexBet;

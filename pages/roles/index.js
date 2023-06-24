@@ -105,7 +105,7 @@ const Roles = () => {
   );
 };
 Roles.getLayout = function getLayout(page) {
-  return <Layout title="Roles">{page}</Layout>;
+  return <Layout title="roles">{page}</Layout>;
 };
 
 export default Roles;

@@ -14,6 +14,7 @@ import {
 
 import { Doughnut_ } from "../src/sharedui/charts/donught";
 import { Bar_ } from "../src/sharedui/charts/bar";
+import Link from "next/link";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -113,48 +114,60 @@ const Home = () => {
         <>
           <h1 className="headline">{t("overview")}</h1>
           <section className="overview">
-            <article className="blue-overview">
-              <h3 className="order-status">
-                <i className="fa-solid fa-check-double"></i> total orders
-              </h3>
-              <h2>{totalOrders}</h2>
-            </article>
-            <article className="purple-overview">
-              <h3 className="order-status">
-                <i className="fa-solid fa-rss"></i> new orders
-              </h3>
-              <h2>{newOrders}</h2>
-            </article>
-            <article className="purple-overview">
-              <h3 className="order-status">
-                <i className="fa-solid fa-truck"></i> delivered orders
-              </h3>
-              <h2>{deliveredOrders}</h2>
-            </article>
-            <article className="purple-overview">
+            <Link href="/orders" passHref>
+              <article className="blue-overview">
+                <h3 className="order-status">
+                  <i className="fa-solid fa-check-double"></i> total orders
+                </h3>
+                <h2>{totalOrders}</h2>
+              </article>
+            </Link>
+            <Link href="/orders?selectedStatus=confirm" passHref>
+              <article className="purple-overview">
+                <h3 className="order-status">
+                  <i className="fa-solid fa-rss"></i> new orders
+                </h3>
+                <h2>{newOrders}</h2>
+              </article>
+            </Link>
+            <Link href="/orders?selectedStatus=delivered" passHref>
+              <article className="purple-overview">
+                <h3 className="order-status">
+                  <i className="fa-solid fa-truck"></i> delivered orders
+                </h3>
+                <h2>{deliveredOrders}</h2>
+              </article>
+            </Link>
+            {/* <article className="purple-overview">
               <h3 className="order-status">
                 <i className="fa-solid fa-ban"></i> canceled orders
               </h3>
               <h2>{canceledOrders}</h2>
-            </article>
-            <article className="blue-overview">
-              <h3 className="order-status">
-                <i className="fa-solid fa-truck-fast"></i> picked orders
-              </h3>
-              <h2>{pickedOrders}</h2>
-            </article>
-            <article className="blue-overview">
-              <h3 className="order-status">
-                <i className="fa-solid fa-check-to-slot"></i> assigned orders
-              </h3>
-              <h2>{assignOrders}</h2>
-            </article>
-            <article className="blue-overview">
-              <h3 className="order-status">
-                <i className="fa-solid fa-list-check"></i> reassigned orders
-              </h3>
-              <h2>{reassignOrders}</h2>
-            </article>
+            </article> */}
+            <Link href="/orders?selectedStatus=picked" passHref>
+              <article className="blue-overview">
+                <h3 className="order-status">
+                  <i className="fa-solid fa-truck-fast"></i> picked orders
+                </h3>
+                <h2>{pickedOrders}</h2>
+              </article>
+            </Link>
+            <Link href="/orders?selectedStatus=assign" passHref>
+              <article className="blue-overview">
+                <h3 className="order-status">
+                  <i className="fa-solid fa-check-to-slot"></i> assigned orders
+                </h3>
+                <h2>{assignOrders}</h2>
+              </article>
+            </Link>
+            <Link href="/orders?selectedStatus=reassign" passHref>
+              <article className="blue-overview">
+                <h3 className="order-status">
+                  <i className="fa-solid fa-list-check"></i> reassigned orders
+                </h3>
+                <h2>{reassignOrders}</h2>
+              </article>
+            </Link>
           </section>
 
           <section className="charts">

@@ -1,3 +1,5 @@
+@import "../../styles/abstracts/mixins.scss";
+@import "../../styles/abstracts/variables.scss";
 .order {
   h1 {
     font-size: 24px;
@@ -17,4 +19,9 @@
     padding: 10px;
     text-align: center;
   }
+}
+
+.no-data {
+  font-size: $HeadFont;
+  @include centerX;
 }

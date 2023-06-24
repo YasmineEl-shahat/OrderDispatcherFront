@@ -11,8 +11,12 @@ import { useState, useEffect } from "react";
 
 import { channel } from "../api/pusher";
 import { getAllCities, getAllGovernates } from "../api/locations";
+import { useRouter } from "next/router";
 
 const Orders = () => {
+  const router = useRouter();
+  const { selectedStatus } = router.query;
+
   const [loading, setLoading] = useState(true);
   const [orders, setOrders] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
@@ -24,7 +28,7 @@ const Orders = () => {
   const [searchKey, setSearchKey] = useState("");
   const [governate, setGovernate] = useState("");
   const [city, setCity] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(selectedStatus ?? "");
 
   const getData = () => {
     getAllOrders(orderNum, searchKey, governate, city, status)
@@ -114,7 +118,7 @@ const Orders = () => {
     >
       {loading ? (
         <Spinner />
-      ) : (
+      ) : orders.length ? (
         <Table
           columnNames={columnNames}
           tableContent={orders}
@@ -136,12 +140,18 @@ const Orders = () => {
           setSearchKey={setSearchKey}
           setNum={setOrderNum}
         />
+      ) : (
+        <p className="formContainer no-data invalid">No {status} orders now</p>
       )}
     </main>
   );
 };
 Orders.getLayout = function getLayout(page) {
-  return <Layout title="Order">{page}</Layout>;
+  return (
+    <Layout title="orders" navTitle="orders">
+      {page}
+    </Layout>
+  );
 };
 
 export default Orders;

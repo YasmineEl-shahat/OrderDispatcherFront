@@ -41,7 +41,8 @@
     "required": "is required!",
     "female-required": "is required",
     "code": "Code",
-    "confirmPassword": "Confirm Password"
+    "confirmPassword": "Confirm Password",
+    "profile": "Profile"
   },
   "ar": {
     "order-dispatcher": "مرسل الطلب",
@@ -85,6 +86,7 @@
     "required": "مطلوب!",
     "female-required": "مطلوبة!",
     "code": "الكود",
-    "confirmPassword": "تأكيد كلمة السر"
+    "confirmPassword": "تأكيد كلمة السر",
+    "profile": "الحساب"
   }
 }

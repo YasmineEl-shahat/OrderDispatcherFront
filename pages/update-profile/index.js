@@ -113,7 +113,7 @@ const UpdateUser = () => {
 
 UpdateUser.getLayout = function getLayout(page) {
   return (
-    <Layout title="user-details" navTitle="user-details">
+    <Layout title="profile" navTitle="profile">
       {page}
     </Layout>
   );
