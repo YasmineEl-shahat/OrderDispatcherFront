@@ -24,19 +24,22 @@ const City = () => {
 
   const { t } = useTranslation();
 
+  const noData = Object.keys(router.query).length === 0;
+
   useEffect(() => {
-    viewCity(id)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    if (!noData)
+      viewCity(id)
+        .then((res) => {
+          setData(res.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
 
     // eslint-disable-next-line
-  }, []);
+  }, [noData]);
 
   const submit = (e) => {
     e.preventDefault();

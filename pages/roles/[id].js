@@ -41,19 +41,22 @@ const Role = () => {
 
   const [loading, setLoading] = useState(true);
 
+  const noData = Object.keys(router.query).length === 0;
+
   useEffect(() => {
-    viewRole(id)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    if (!noData)
+      viewRole(id)
+        .then((res) => {
+          setData(res.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
 
     // eslint-disable-next-line
-  }, []);
+  }, [noData]);
 
   const submit = (e, permissions, setPermissions) => {
     e.preventDefault();

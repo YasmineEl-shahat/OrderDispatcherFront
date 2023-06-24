@@ -9,46 +9,47 @@ const Order = () => {
   const [loading, setLoading] = useState(true);
   const [orderDetails, setOrderDetails] = useState(null);
   const [statusColor, setStatusColor] = useState(null);
-  const ISSERVER = typeof window === "undefined";
   const { t } = useTranslation();
   const router = useRouter();
   const { id } = router.query;
 
+  const noData = Object.keys(router.query).length === 0;
+
   useEffect(() => {
-    viewOrder(id)
-      .then((res) => {
-        setOrderDetails(res.data);
-        console.log(res.data.Status);
-        switch (res.data.Status) {
-          case "assign":
-            setStatusColor("#ebe234");
-            break;
-          case "reassigned":
-            setStatusColor("#94918a");
-            break;
-          case "confirm":
-            setStatusColor("#349feb");
-            break;
-          case "picked":
-            setStatusColor("#eb8334");
-            break;
-          case "delivered":
-            setStatusColor("#34eb34");
-            break;
-          case "cancelled":
-            setStatusColor("#eb4034");
-            break;
-          default:
-            setStatusColor("#ebe234");
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    if (!noData)
+      viewOrder(id)
+        .then((res) => {
+          setOrderDetails(res.data);
+          switch (res.data.Status) {
+            case "assign":
+              setStatusColor("#ebe234");
+              break;
+            case "reassigned":
+              setStatusColor("#94918a");
+              break;
+            case "confirm":
+              setStatusColor("#349feb");
+              break;
+            case "picked":
+              setStatusColor("#eb8334");
+              break;
+            case "delivered":
+              setStatusColor("#34eb34");
+              break;
+            case "cancelled":
+              setStatusColor("#eb4034");
+              break;
+            default:
+              setStatusColor("#ebe234");
+          }
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
     // eslint-disable-next-line
-  }, []);
+  }, [noData]);
 
   const renderProductTableRows = () => {
     return orderDetails?.Product.map(
@@ -75,7 +76,7 @@ const Order = () => {
       {loading ? (
         <Spinner />
       ) : (
-        !ISSERVER && (
+        !noData && (
           <div className="order">
             <h1>
               {t("order-details")}: #{id}
