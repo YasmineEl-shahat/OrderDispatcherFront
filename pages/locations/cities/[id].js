@@ -95,21 +95,23 @@ const City = () => {
             </form>
           )}
           {operation === "view" && (
-            <article>
+            <article className="location-article">
               <span className="label--global title">City: </span>
-              <span className="description">{data.city}</span>
+              <span className="description governate">{data.city}</span>
             </article>
           )}
-          <article>
+          <article className="location-article">
             <span className="label--global title">Governate: </span>
-            <span className="description">{data.governate}</span>
+            <span className="description city">{data.governate}</span>
           </article>
-          <article>
+          <article className="location-article">
             <span className="label--global title">Areas: </span>
-            <span className="description permissionsWrapper">
+            <span className="description areaWrapper">
               <ul>
                 {data?.areas?.map((area) => (
-                  <li key={area}>{area}</li>
+                  <li className="area" key={area}>
+                    {area}
+                  </li>
                 ))}
               </ul>
             </span>

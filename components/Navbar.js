@@ -46,11 +46,28 @@ const Navbar = ({ locale, translate, navTitle }) => {
     });
   }, []);
 
+  const isEquivalent = (a, b) => {
+    // Check if both objects have the same keys
+    const aKeys = Object.keys(a);
+    const bKeys = Object.keys(b);
+    if (aKeys.length !== bKeys.length) {
+      return false;
+    }
+    // Check if the values of each key are equal
+    for (const key of aKeys) {
+      if (a[key] !== b[key]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   useEffect(() => {
     channel.bind("newOrder", function (orderData) {
       try {
         saveOrder(orderData);
         assignOrder(orderData._id);
+        // if (!newOrders.some((order) => isEquivalent(order, orderData)))
         setNewOrders((prevOrders) => [...prevOrders, orderData]);
       } catch (error) {
         console.error("Error:", error);
@@ -141,7 +158,7 @@ const Navbar = ({ locale, translate, navTitle }) => {
                       </span>
                       <span className="dropdownItem w-100">
                         <div className="d-flex flex-column">
-                          <span className="issue">{`New order: ${order._id}`}</span>
+                          <span className="issue">{`New order: from ${order.CustomerName}`}</span>
                         </div>
                       </span>
                     </li>

@@ -95,18 +95,18 @@ const Area = () => {
             </form>
           )}
           {operation === "view" && (
-            <article>
+            <article className="location-article">
               <span className="label--global title">Area: </span>
-              <span className="description">{data.area}</span>
+              <span className="description area">{data.area}</span>
             </article>
           )}
-          <article>
+          <article className="location-article">
             <span className="label--global title">Governate: </span>
-            <span className="description">{data.governate}</span>
+            <span className="description governate">{data.governate}</span>
           </article>
-          <article>
+          <article className="location-article">
             <span className="label--global title">City: </span>
-            <span className="description">{data.city}</span>
+            <span className="description city">{data.city}</span>
           </article>
         </>
       )}

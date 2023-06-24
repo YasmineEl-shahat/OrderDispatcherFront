@@ -112,7 +112,7 @@ const Governate = () => {
                     {city.areas.length ? (
                       <article>
                         <span className="label--global title">Areas: </span>
-                        <span className="description permissionsWrapper">
+                        <span className="description areaWrapper">
                           <ul>
                             {city.areas?.map((area) => (
                               <li key={area} className="area">
