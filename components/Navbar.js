@@ -3,18 +3,25 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
 import Link from "next/link";
+import { channel } from "../pages/api/pusher";
+import { assignOrder, saveOrder } from "../pages/api/orders";
 
 const Navbar = ({ locale, translate, navTitle }) => {
-  const {
-    logoutUser,
-    name,
-    image,
-    newOrders,
-    notificationsNum,
-    setNotificationsNum,
-  } = useContext(AuthContext);
+  const { logoutUser, name, image } = useContext(AuthContext);
   const ISSERVER = typeof window === "undefined";
   const router = useRouter();
+
+  const [newOrders, setNewOrders] = useState(
+    !ISSERVER && localStorage.getItem("newOrders") != null
+      ? JSON.parse(localStorage.getItem("newOrders"))
+      : []
+  );
+
+  const [notificationsNum, setNotificationsNum] = useState(
+    !ISSERVER && localStorage.getItem("notificationsNum") != "undefined"
+      ? JSON.parse(localStorage.getItem("notificationsNum"))
+      : 0
+  );
 
   const toggleSideBar = () => {
     let margin = 0;
@@ -47,6 +54,38 @@ const Navbar = ({ locale, translate, navTitle }) => {
         photo.classList.remove("active");
       }
     });
+  }, []);
+
+  useEffect(() => {
+    channel.bind("newOrder", function (orderData) {
+      try {
+        saveOrder(orderData);
+        assignOrder(orderData._id);
+        let pushNotification = true;
+
+        newOrders.forEach((order) => {
+          if (order._id == orderData._id) {
+            pushNotification = false;
+          }
+        });
+
+        if (pushNotification) {
+          setNewOrders((prevOrders) => [orderData, ...prevOrders]); // add new order to beginning of array
+          localStorage.setItem(
+            "newOrders",
+            JSON.stringify([orderData, ...newOrders]) // also store in LIFO order
+          );
+          setNotificationsNum(++notificationsNum);
+          localStorage.setItem(
+            "notificationsNum",
+            JSON.stringify(++notificationsNum)
+          );
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+    // eslint-disable-next-line
   }, []);
 
   const changeLocale = (locale) => {
