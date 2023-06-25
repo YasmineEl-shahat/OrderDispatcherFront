@@ -21,7 +21,6 @@ const Home = () => {
   const [totalOrders, setTotalOrders] = useState(0);
   const [newOrders, setNewOrders] = useState(0);
   const [deliveredOrders, setDeliveredOrders] = useState(0);
-  const [canceledOrders, setCanceledOrders] = useState(0);
   const [pickedOrders, setPickedOrders] = useState(0);
   const [assignOrders, setAssignOrders] = useState(0);
   const [reassignOrders, setReassignOrders] = useState(0);
@@ -53,16 +52,6 @@ const Home = () => {
       .then((res) => {
         setLoading(true);
         setDeliveredOrders(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    getCancelledOrders()
-      .then((res) => {
-        setLoading(true);
-        setCanceledOrders(res.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -174,10 +163,8 @@ const Home = () => {
             <Bar_
               data={{
                 labels: [
-                  "Total Orders",
                   "New Orders",
                   "Delivered Orders",
-                  "Canceled Orders",
                   "Picked Orders",
                   "Assign Orders",
                   "Reassign Orders",
@@ -186,10 +173,8 @@ const Home = () => {
                   {
                     label: "Order Data",
                     data: [
-                      totalOrders,
                       newOrders,
                       deliveredOrders,
-                      canceledOrders,
                       pickedOrders,
                       assignOrders,
                       reassignOrders,
@@ -204,10 +189,8 @@ const Home = () => {
             <Doughnut_
               data={{
                 labels: [
-                  "Total Orders",
                   "New Orders",
                   "Delivered Orders",
-                  "Canceled Orders",
                   "Picked Orders",
                   "Assigned Orders",
                   "Reassigned Orders",
@@ -215,10 +198,8 @@ const Home = () => {
                 datasets: [
                   {
                     data: [
-                      totalOrders,
                       newOrders,
                       deliveredOrders,
-                      canceledOrders,
                       pickedOrders,
                       assignOrders,
                       reassignOrders,

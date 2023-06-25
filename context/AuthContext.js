@@ -53,10 +53,14 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => {
     setAuth(null);
     setUser(null);
+
     document.cookie = "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     localStorage.removeItem("name");
     localStorage.removeItem("image");
     localStorage.removeItem("permissions");
+    // localStorage.removeItem("newOrders");
+    // localStorage.removeItem("notificationsNum");
+
     if (locale == "ar") router.replace("/ar/login");
     else router.replace("/login");
   };
