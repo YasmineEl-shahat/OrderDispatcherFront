@@ -27,7 +27,8 @@ const Users = () => {
 
   // handlers
   const handleSetActive = (e) => {
-    setActive(e.target.value === "active");
+    if (e.target.value === "all") setActive(null);
+    else setActive(e.target.value === "active");
   };
 
   const handleDelete = () => {
@@ -108,7 +109,7 @@ const Users = () => {
           <>
             <article className="addWrapper">
               <div className="radio-buttons">
-                <label>
+                {/* <label>
                   <input
                     type="radio"
                     name="active"
@@ -137,7 +138,7 @@ const Users = () => {
                     onChange={handleSetActive}
                   />
                   inactive
-                </label>
+                </label> */}
               </div>
               {permissions?.users?.add && (
                 <Link href="/users/add" passHref>
@@ -157,6 +158,9 @@ const Users = () => {
               filter1={role}
               setFilter1={setRole}
               filter1_placeholder={"Role"}
+              filter2_list={["all", "active", "inactive"]}
+              handleSetFilter2={handleSetActive}
+              filter2_placeholder={"Status"}
               canEdit={permissions?.users?.edit}
               handleDelete={permissions?.users?.delete ? handleDelete : false}
               setSelectedItem={setSelectedUser}

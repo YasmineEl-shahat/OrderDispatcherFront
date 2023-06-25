@@ -27,6 +27,7 @@ const Table = ({
   setSelectedItem,
   location,
   notView,
+  handleSetFilter2,
 }) => {
   const router = useRouter();
 
@@ -99,7 +100,11 @@ const Table = ({
                       placeholder={`${filter2_placeholder}...`}
                       className="form-select"
                       value={filter2}
-                      onChange={(e) => setFilter2(e.target.value)}
+                      onChange={
+                        handleSetFilter2
+                          ? handleSetFilter2
+                          : (e) => setFilter2(e.target.value)
+                      }
                     />
                   </div>
                   <datalist id="filter2">
