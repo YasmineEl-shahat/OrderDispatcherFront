@@ -6,6 +6,8 @@ import { userLogin } from "../pages/api/auth";
 import { useTranslation } from "../util/useTranslation";
 import { viewRole } from "../pages/api/roles";
 import { getNavData } from "../pages/api/users";
+import { channel } from "../pages/api/pusher";
+import { assignOrder, saveOrder } from "../pages/api/orders";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -48,6 +50,18 @@ export const AuthProvider = ({ children }) => {
     !ISSERVER && localStorage.getItem("permissions") != "undefined"
       ? JSON.parse(localStorage.getItem("permissions"))
       : ""
+  );
+
+  const [newOrders, setNewOrders] = useState(
+    !ISSERVER && localStorage.getItem("newOrders") != null
+      ? JSON.parse(localStorage.getItem("newOrders"))
+      : []
+  );
+
+  const [notificationsNum, setNotificationsNum] = useState(
+    !ISSERVER && localStorage.getItem("notificationsNum") != "undefined"
+      ? JSON.parse(localStorage.getItem("notificationsNum"))
+      : 0
   );
 
   const logoutUser = () => {
@@ -93,6 +107,45 @@ export const AuthProvider = ({ children }) => {
     };
     //eslint-disable-next-line
   }, [auth]);
+
+  const isEquivalent = (a, b) => {
+    // Check if both objects have the same keys
+    const aKeys = Object.keys(a);
+    const bKeys = Object.keys(b);
+    if (aKeys.length !== bKeys.length) {
+      return false;
+    }
+    // Check if the values of each key are equal
+    for (const key of aKeys) {
+      if (a[key] !== b[key]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    channel.bind("newOrder", function (orderData) {
+      try {
+        saveOrder(orderData);
+        assignOrder(orderData._id);
+
+        setNewOrders((prevOrders) => [orderData, ...prevOrders]); // add new order to beginning of array
+        localStorage.setItem(
+          "newOrders",
+          JSON.stringify([orderData, ...newOrders]) // also store in LIFO order
+        );
+        localStorage.setItem(
+          "notificationsNum",
+          JSON.stringify(++notificationsNum)
+        );
+        setNotificationsNum(++notificationsNum);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
 
   const onChangeHandler = (e) => {
     let err = { ...errors };
@@ -220,6 +273,9 @@ export const AuthProvider = ({ children }) => {
     logoutUser,
     onChangeHandler,
     permissions,
+    newOrders,
+    notificationsNum,
+    setNotificationsNum,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

@@ -3,15 +3,18 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
 import Link from "next/link";
-import { channel } from "../pages/api/pusher";
-import { assignOrder, saveOrder } from "../pages/api/orders";
 
 const Navbar = ({ locale, translate, navTitle }) => {
-  const { logoutUser, name, image } = useContext(AuthContext);
+  const {
+    logoutUser,
+    name,
+    image,
+    newOrders,
+    notificationsNum,
+    setNotificationsNum,
+  } = useContext(AuthContext);
   const ISSERVER = typeof window === "undefined";
   const router = useRouter();
-
-  const [newOrders, setNewOrders] = useState([]);
 
   const toggleSideBar = () => {
     let margin = 0;
@@ -44,36 +47,6 @@ const Navbar = ({ locale, translate, navTitle }) => {
         photo.classList.remove("active");
       }
     });
-  }, []);
-
-  const isEquivalent = (a, b) => {
-    // Check if both objects have the same keys
-    const aKeys = Object.keys(a);
-    const bKeys = Object.keys(b);
-    if (aKeys.length !== bKeys.length) {
-      return false;
-    }
-    // Check if the values of each key are equal
-    for (const key of aKeys) {
-      if (a[key] !== b[key]) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  useEffect(() => {
-    channel.bind("newOrder", function (orderData) {
-      try {
-        saveOrder(orderData);
-        assignOrder(orderData._id);
-        // if (!newOrders.some((order) => isEquivalent(order, orderData)))
-        setNewOrders((prevOrders) => [...prevOrders, orderData]);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    });
-    // eslint-disable-next-line
   }, []);
 
   const changeLocale = (locale) => {
@@ -129,10 +102,16 @@ const Navbar = ({ locale, translate, navTitle }) => {
             </div>
             <section className="dropdown">
               <div className="notifications" data-bs-toggle="dropdown">
-                <i className="fa-solid fa-bell"></i>
-                {newOrders.length > 0 && (
+                <i
+                  onClick={() => {
+                    setNotificationsNum(0);
+                    localStorage.setItem("notificationsNum", JSON.stringify(0));
+                  }}
+                  className="fa-solid fa-bell"
+                ></i>
+                {notificationsNum > 0 && (
                   <span className="badge bg-danger notificationDot">
-                    {newOrders.length}
+                    {notificationsNum}
                   </span>
                 )}
               </div>
@@ -143,11 +122,10 @@ const Navbar = ({ locale, translate, navTitle }) => {
                 <li className="notificationHeader">
                   {translate("notifications")}
                 </li>
-                <div>
+                <div className="notifications-wrapper">
                   {newOrders.map((order) => (
                     <li
                       onClick={() => {
-                        setNewOrders([]);
                         router.push("/orders");
                       }}
                       className="align-items-start d-flex"
