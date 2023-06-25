@@ -10,7 +10,6 @@
   height: 100vh;
   transition: 0.3s;
   box-shadow: $globalShadow;
-  text-transform: capitalize;
   color: $primaryGray;
   padding: 2rem 1rem;
 
@@ -42,6 +41,7 @@
     margin-top: 2rem;
     .sideItem {
       cursor: pointer;
+      text-transform: capitalize;
       padding: 1rem 0px;
       i {
         margin-right: 1rem;

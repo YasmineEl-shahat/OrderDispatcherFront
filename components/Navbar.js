@@ -19,7 +19,7 @@ const Navbar = ({ locale, translate, navTitle }) => {
 
   const [notificationsNum, setNotificationsNum] = useState(
     !ISSERVER && localStorage.getItem("notificationsNum") != "undefined"
-      ? JSON.parse(localStorage.getItem("notificationsNum"))
+      ? Number(localStorage.getItem("notificationsNum"))
       : 0
   );
 
@@ -75,10 +75,10 @@ const Navbar = ({ locale, translate, navTitle }) => {
             "newOrders",
             JSON.stringify([orderData, ...newOrders]) // also store in LIFO order
           );
-          setNotificationsNum(++notificationsNum);
+          setNotificationsNum(notificationsNum + 1);
           localStorage.setItem(
             "notificationsNum",
-            JSON.stringify(++notificationsNum)
+            JSON.stringify(notificationsNum + 1)
           );
         }
       } catch (error) {

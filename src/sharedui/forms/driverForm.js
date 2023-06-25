@@ -70,7 +70,7 @@ const DriverForm = ({
           </span>
         </div>
 
-        <div className="field--wrapper">
+        {/* <div className="field--wrapper">
           <label className="label--global" htmlFor="orderCount">
             Order Count
           </label>
@@ -82,43 +82,48 @@ const DriverForm = ({
             value={data.orderCount}
             onChange={(e) => onChangeHandler(e)}
             disabled={viewOnly}
-            min={1}
+            min={0}
+            max={2}
           />
           <span className="invalid">
             {errors.orderCount ? errors.orderCount : ""}
           </span>
-        </div>
+        </div> */}
 
-        <div className="field--wrapper" style={{ width: "45%" }}>
-          <label className="label--global" htmlFor="status">
-            Status
-          </label>
-          <div className="radio-buttons">
-            <label>
-              <input
-                type="radio"
-                name="status"
-                value="active"
-                disabled={viewOnly}
-                checked={data.status === "active"}
-                onChange={(e) => onChangeHandler(e)}
-              />
-              active
+        {emailView && (
+          <div className="field--wrapper" style={{ width: "45%" }}>
+            <label className="label--global" htmlFor="status">
+              Status
             </label>
-            <label>
-              <input
-                type="radio"
-                name="status"
-                value="not active"
-                disabled={viewOnly}
-                checked={data.status === "not active"}
-                onChange={(e) => onChangeHandler(e)}
-              />
-              not active
-            </label>
+            <div className="radio-buttons">
+              <label>
+                <input
+                  type="radio"
+                  name="status"
+                  value="active"
+                  disabled={viewOnly}
+                  checked={data.status === "active"}
+                  onChange={(e) => onChangeHandler(e)}
+                />
+                active
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="status"
+                  value="not active"
+                  disabled={viewOnly}
+                  checked={data.status === "not active"}
+                  onChange={(e) => onChangeHandler(e)}
+                />
+                not active
+              </label>
+            </div>
+            <span className="invalid">
+              {errors.status ? errors.status : ""}
+            </span>
           </div>
-          <span className="invalid">{errors.status ? errors.status : ""}</span>
-        </div>
+        )}
 
         <div className="field--wrapper" style={{ width: "45%" }}>
           <label className="label--global" htmlFor="availability">
