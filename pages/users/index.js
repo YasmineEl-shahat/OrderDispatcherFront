@@ -73,7 +73,7 @@ const Users = () => {
                             let newUsers = users.map((u) => {
                               if (u.id == user.id) u.active = !u.active;
                             });
-                            setUserNum(newUsers);
+                            setUsers(newUsers);
                           }}
                         >
                           {user.active ? (
