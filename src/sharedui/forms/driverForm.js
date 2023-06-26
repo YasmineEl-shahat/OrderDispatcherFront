@@ -89,90 +89,6 @@ const DriverForm = ({
             {errors.orderCount ? errors.orderCount : ""}
           </span>
         </div> */}
-
-        {emailView && (
-          <div className="field--wrapper" style={{ width: "45%" }}>
-            <label className="label--global" htmlFor="status">
-              Status
-            </label>
-            <div className="radio-buttons">
-              <label>
-                <input
-                  type="radio"
-                  name="status"
-                  value="active"
-                  disabled={viewOnly}
-                  checked={data.status === "active"}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-                active
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="status"
-                  value="not active"
-                  disabled={viewOnly}
-                  checked={data.status === "not active"}
-                  onChange={(e) => onChangeHandler(e)}
-                />
-                not active
-              </label>
-            </div>
-            <span className="invalid">
-              {errors.status ? errors.status : ""}
-            </span>
-          </div>
-        )}
-
-        <div className="field--wrapper" style={{ width: "45%" }}>
-          <label className="label--global" htmlFor="availability">
-            availability
-          </label>
-          <div className="radio-buttons">
-            <label>
-              <input
-                type="radio"
-                name="availability"
-                value="free"
-                disabled={viewOnly}
-                checked={data.availability === "free"}
-                onChange={(e) => onChangeHandler(e)}
-              />
-              free
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="availability"
-                value="busy"
-                disabled={viewOnly}
-                checked={data.availability === "busy"}
-                onChange={(e) => onChangeHandler(e)}
-              />
-              busy
-            </label>
-          </div>
-          <span className="invalid">
-            {errors.availability ? errors.availability : ""}
-          </span>
-        </div>
-
-        <div className="field--wrapper">
-          <label className="label--global" htmlFor="areas">
-            areas
-          </label>
-          <AsyncPaginate
-            value={selectedAreas}
-            placeholder="Select Areas..."
-            loadOptions={loadAreas}
-            isMulti
-            onChange={setSelectedAreas}
-            closeMenuOnSelect={false}
-            isDisabled={viewOnly}
-          />
-        </div>
-
         {!viewOnly && (
           <div className="field--wrapper">
             <label className="label--global" htmlFor="password">
@@ -191,6 +107,89 @@ const DriverForm = ({
             </span>
           </div>
         )}
+        {emailView && (
+          <>
+            <div className="field--wrapper" style={{ width: "45%" }}>
+              <label className="label--global" htmlFor="status">
+                Status
+              </label>
+              <div className="radio-buttons">
+                <label>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="active"
+                    disabled={viewOnly}
+                    checked={data.status === "active"}
+                    onChange={(e) => onChangeHandler(e)}
+                  />
+                  active
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="not active"
+                    disabled={viewOnly}
+                    checked={data.status === "not active"}
+                    onChange={(e) => onChangeHandler(e)}
+                  />
+                  not active
+                </label>
+              </div>
+              <span className="invalid">
+                {errors.status ? errors.status : ""}
+              </span>
+            </div>
+            <div className="field--wrapper" style={{ width: "45%" }}>
+              <label className="label--global" htmlFor="availability">
+                availability
+              </label>
+              <div className="radio-buttons">
+                <label>
+                  <input
+                    type="radio"
+                    name="availability"
+                    value="free"
+                    disabled={viewOnly}
+                    checked={data.availability === "free"}
+                    onChange={(e) => onChangeHandler(e)}
+                  />
+                  free
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="availability"
+                    value="busy"
+                    disabled={viewOnly}
+                    checked={data.availability === "busy"}
+                    onChange={(e) => onChangeHandler(e)}
+                  />
+                  busy
+                </label>
+              </div>
+              <span className="invalid">
+                {errors.availability ? errors.availability : ""}
+              </span>
+            </div>
+          </>
+        )}
+
+        <div className="field--wrapper">
+          <label className="label--global" htmlFor="areas">
+            areas
+          </label>
+          <AsyncPaginate
+            value={selectedAreas}
+            placeholder="Select Areas..."
+            loadOptions={loadAreas}
+            isMulti
+            onChange={setSelectedAreas}
+            closeMenuOnSelect={false}
+            isDisabled={viewOnly}
+          />
+        </div>
       </section>
 
       <span className="invalid">{backError}</span>
