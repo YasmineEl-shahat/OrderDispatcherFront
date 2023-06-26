@@ -1,6 +1,8 @@
 import { api_url } from "../../config/config";
 import { authorizedHttpJson } from "../../config/http";
 
-export async function getAllReports() {
+export async function getAllReports(searchKey = "", sortValue) {
+  authorizedHttpJson.defaults.headers["searchKey"] = searchKey;
+  authorizedHttpJson.defaults.headers["sortValue"] = sortValue;
   return await authorizedHttpJson.get(`${api_url}/report`);
 }

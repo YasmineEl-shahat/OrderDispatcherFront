@@ -35,11 +35,11 @@ const Table = ({
     <div className="table-responsive">
       <div className="table-wrapper">
         <div className="table-title">
-          {!notView && (
-            <div className="row filter">
-              <div className="col-sm-4">
-                <h2>Filters</h2>
-              </div>
+          <div className="row filter">
+            <div className="col-sm-4">
+              <h2>Filters</h2>
+            </div>
+            {!notView && (
               <div className="col-sm-4">
                 <label> numbers of rows</label>
                 <input
@@ -50,22 +50,22 @@ const Table = ({
                   max={total}
                 />
               </div>
-              {searchKey !== undefined && (
-                <div className="col-sm-4">
-                  <div className="search-box">
-                    <i className="material-icons">&#xE8B6;</i>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search&hellip;"
-                      onChange={(e) => setSearchKey(e.target.value)}
-                      value={searchKey}
-                    />
-                  </div>
+            )}
+            {searchKey !== undefined && (
+              <div className="col-sm-4">
+                <div className="search-box">
+                  <i className="material-icons">&#xE8B6;</i>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search&hellip;"
+                    onChange={(e) => setSearchKey(e.target.value)}
+                    value={searchKey}
+                  />
                 </div>
-              )}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
 
           <br />
           <div className="row">

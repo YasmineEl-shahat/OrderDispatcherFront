@@ -8,9 +8,11 @@ const Roles = () => {
   const [loading, setLoading] = useState(true);
   const [Roles, setReports] = useState([]);
   const [columnNames, setColumnNames] = useState([]);
+  const [searchKey, setSearchKey] = useState("");
+  const [sortValue, setSortValue] = useState("");
 
   useEffect(() => {
-    getAllReports()
+    getAllReports(searchKey, sortValue)
       .then((res) => {
         setColumnNames(Object.keys(res.data[0]));
         setReports(res.data);
@@ -20,7 +22,7 @@ const Roles = () => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+  }, [searchKey, sortValue]);
 
   return (
     <main
@@ -38,6 +40,12 @@ const Roles = () => {
             columnNames={columnNames}
             tableContent={Roles}
             notView={true}
+            searchKey={searchKey}
+            setSearchKey={setSearchKey}
+            filter1_list={["asc", "desc"]}
+            filter1={sortValue}
+            setFilter1={setSortValue}
+            filter1_placeholder={"Sort"}
           />
         </>
       )}
