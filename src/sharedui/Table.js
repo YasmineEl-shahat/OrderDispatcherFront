@@ -39,18 +39,20 @@ const Table = ({
             <div className="col-sm-4">
               <h2>Filters</h2>
             </div>
-            {!notView && (
-              <div className="col-sm-4">
-                <label> numbers of rows</label>
-                <input
-                  type="number"
-                  value={num}
-                  min={1}
-                  onChange={(e) => setNum(e.target.value)}
-                  max={total}
-                />
-              </div>
-            )}
+            <div className="col-sm-4">
+              {!notView && (
+                <>
+                  <label> numbers of rows</label>
+                  <input
+                    type="number"
+                    value={num}
+                    min={1}
+                    onChange={(e) => setNum(e.target.value)}
+                    max={total}
+                  />
+                </>
+              )}
+            </div>
             {searchKey !== undefined && (
               <div className="col-sm-4">
                 <div className="search-box">

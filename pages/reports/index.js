@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { useState, useEffect } from "react";
-import { getAllReports } from "../api/reports";
+import { downloadPdf, getAllReports } from "../api/reports";
 
 const Roles = () => {
   const [loading, setLoading] = useState(true);
@@ -36,6 +36,12 @@ const Roles = () => {
         <Spinner />
       ) : (
         <>
+          <article className="addWrapper">
+            <div></div>
+            <button onClick={downloadPdf} className="btn--global btn--download">
+              Download <i className="fa fa-download"></i>
+            </button>
+          </article>
           <Table
             columnNames={columnNames}
             tableContent={Roles}
