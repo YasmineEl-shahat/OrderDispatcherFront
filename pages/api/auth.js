@@ -6,7 +6,10 @@ export async function userLogin(data) {
 }
 
 export async function forgetPassword(data) {
-  return await httpJson.post(`${api_url}/forgetpassword`, data);
+  return await httpJson.post(
+    `https://jimmy.nader-mo.tech/forgetpassword`,
+    data
+  );
 }
 
 export async function resetPassword(data) {
