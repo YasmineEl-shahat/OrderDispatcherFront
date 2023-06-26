@@ -46,56 +46,45 @@ const Users = () => {
     setIsModalOpen(false);
   };
 
+  let canActivate = permissions?.users?.activateDeactivate;
+
+  const handleCanActivate = async (e, id) => {
+    const response = await banUser(id);
+    let newUsers = users.map((u) => {
+      if (u.id === id) {
+        return {
+          ...u,
+          status: response.data,
+        };
+      } else {
+        return u;
+      }
+    });
+
+    if (e.target.tagName == "I") e.target = e.target.parentElement;
+
+    if (response.data === "active")
+      e.target.firstChild.classList.value = "fa-solid fa-toggle-on";
+    else e.target.firstChild.classList.value = "fa-solid fa-toggle-off";
+    setUsers(newUsers);
+  };
+
   useEffect(() => {
     getAllUsers(userNum, searchKey, role, active)
       .then((res) => {
-        setLoading(true);
         let usersArray = [];
         if (userNum > res.data.count) setUserNum(res.data.count);
         setTotalUsers(res.data.count);
 
         res.data.data.forEach((user) => {
-          usersArray.push(
-            permissions?.users?.activateDeactivate
-              ? {
-                  id: user._id,
-                  name: user.firstName + " " + user.lastName,
-                  email: user.email,
-                  "phone number": user.phoneNumber,
-                  status: user.active ? "active" : "inactive",
-                  role: user.roleName,
-                  toggleActive: (
-                    <div>
-                      <label className="switch">
-                        <button
-                          onClick={() => {
-                            banUser(user.id);
-                            let newUsers = users.map((u) => {
-                              if (u.id == user.id) u.active = !u.active;
-                            });
-                            setUsers(newUsers);
-                          }}
-                        >
-                          {user.active ? (
-                            <i className="fa-solid fa-toggle-on"></i>
-                          ) : (
-                            <i className="fa-solid fa-toggle-off"></i>
-                          )}
-                        </button>
-                        <span className="slider round"></span>
-                      </label>
-                    </div>
-                  ),
-                }
-              : {
-                  id: user._id,
-                  name: user.firstName + " " + user.lastName,
-                  email: user.email,
-                  "phone number": user.phoneNumber,
-                  status: user.active ? "active" : "inactive",
-                  role: user.roleName,
-                }
-          );
+          usersArray.push({
+            id: user._id,
+            name: user.firstName + " " + user.lastName,
+            email: user.email,
+            "phone number": user.phoneNumber,
+            role: user.roleName,
+            status: user.active ? "active" : "not active",
+          });
         });
 
         setColumnNames(Object.keys(usersArray[0]));
@@ -195,6 +184,8 @@ const Users = () => {
               canEdit={permissions?.users?.edit}
               handleDelete={permissions?.users?.delete ? handleDelete : false}
               setSelectedItem={setSelectedUser}
+              canActivate={canActivate}
+              handleCanActivate={handleCanActivate}
             />
           </>
         )}

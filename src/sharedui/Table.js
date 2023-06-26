@@ -28,6 +28,8 @@ const Table = ({
   location,
   notView,
   handleSetFilter2,
+  canActivate,
+  handleCanActivate,
 }) => {
   const router = useRouter();
 
@@ -152,6 +154,7 @@ const Table = ({
                     {column}
                   </th>
                 ))}
+                {canActivate && <th> toggle state</th>}
                 {!notView && <th>Actions</th>}
               </tr>
             </thead>
@@ -164,6 +167,20 @@ const Table = ({
                       const value = item[key];
                       return <td key={`${item.id} ${key}`}>{value}</td>;
                     })}
+                    {canActivate && (
+                      <td>
+                        <button
+                          onClick={(e) => handleCanActivate(e, item.id)}
+                          className="btn--toggle"
+                        >
+                          {item.status === "active" ? (
+                            <i className="fa-solid fa-toggle-on"></i>
+                          ) : (
+                            <i className="fa-solid fa-toggle-off"></i>
+                          )}
+                        </button>
+                      </td>
+                    )}
                     {!notView && (
                       <td>
                         <Link

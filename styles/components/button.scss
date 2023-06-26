@@ -35,4 +35,7 @@ body {
   .btn--confirm {
     background-color: $primary;
   }
+  .btn--toggle i {
+    color: $primary;
+  }
 }
