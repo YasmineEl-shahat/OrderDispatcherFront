@@ -43,7 +43,15 @@
     "code": "Code",
     "confirmPassword": "Confirm Password",
     "profile": "Profile",
-    "notifications": "notifications"
+    "notifications": "notifications",
+    "total-orders": "total orders",
+    "new-orders": "new orders",
+    "picked-orders": "picked orders",
+    "delivered-orders": "delivered orders",
+    "assigned-orders": "assigned orders",
+    "reassigned-orders": "reassigned orders",
+    "overview": "overview",
+    "dashboard": "dashboard"
   },
   "ar": {
     "order-dispatcher": "أيدسباتش",
@@ -89,6 +97,14 @@
     "code": "الكود",
     "confirmPassword": "تأكيد كلمة السر",
     "profile": "الحساب",
-    "notifications": "الإشعارات"
+    "notifications": "الإشعارات",
+    "total-orders": "إجمالي الطلبات",
+    "new-orders": "طلبات جديدة",
+    "picked-orders": "الطلبات المختارة",
+    "delivered-orders": "الطلبات المسلمة",
+    "assigned-orders": "الطلبات المسندة",
+    "reassigned-orders": "الطلبات المعاد إسنادها",
+    "overview": "ملخص",
+    "dashboard": "لوحة القيادة"
   }
 }

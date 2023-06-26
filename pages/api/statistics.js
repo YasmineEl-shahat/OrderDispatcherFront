@@ -13,10 +13,6 @@ export async function getDeliveredOrders() {
   return await authorizedHttpJson.get(api_url + "/total/deliveredorders");
 }
 
-export async function getCancelledOrders() {
-  return await authorizedHttpJson.get(api_url + "/total/cancelledorders");
-}
-
 export async function getPickedOrders() {
   return await authorizedHttpJson.get(api_url + "/total/pickedorders");
 }

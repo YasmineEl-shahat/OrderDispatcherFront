@@ -4,7 +4,6 @@ import Spinner from "../components/Spinner";
 import { useTranslation } from "../util/useTranslation";
 import {
   getAssignOrders,
-  getCancelledOrders,
   getDeliveredOrders,
   getNewOrders,
   getPickedOrders,
@@ -106,7 +105,8 @@ const Home = () => {
             <Link href="/orders" passHref>
               <article className="blue-overview">
                 <h3 className="order-status">
-                  <i className="fa-solid fa-check-double"></i> total orders
+                  <i className="fa-solid fa-check-double"></i>{" "}
+                  {t("total-orders")}
                 </h3>
                 <h2>{totalOrders}</h2>
               </article>
@@ -114,7 +114,7 @@ const Home = () => {
             <Link href="/orders?selectedStatus=confirm" passHref>
               <article className="purple-overview">
                 <h3 className="order-status">
-                  <i className="fa-solid fa-rss"></i> new orders
+                  <i className="fa-solid fa-rss"></i> {t("new-orders")}
                 </h3>
                 <h2>{newOrders}</h2>
               </article>
@@ -122,7 +122,7 @@ const Home = () => {
             <Link href="/orders?selectedStatus=delivered" passHref>
               <article className="purple-overview">
                 <h3 className="order-status">
-                  <i className="fa-solid fa-truck"></i> delivered orders
+                  <i className="fa-solid fa-truck"></i> {t("delivered-orders")}
                 </h3>
                 <h2>{deliveredOrders}</h2>
               </article>
@@ -136,7 +136,8 @@ const Home = () => {
             <Link href="/orders?selectedStatus=picked" passHref>
               <article className="blue-overview">
                 <h3 className="order-status">
-                  <i className="fa-solid fa-truck-fast"></i> picked orders
+                  <i className="fa-solid fa-truck-fast"></i>{" "}
+                  {t("picked-orders")}
                 </h3>
                 <h2>{pickedOrders}</h2>
               </article>
@@ -144,7 +145,8 @@ const Home = () => {
             <Link href="/orders?selectedStatus=assign" passHref>
               <article className="blue-overview">
                 <h3 className="order-status">
-                  <i className="fa-solid fa-check-to-slot"></i> assigned orders
+                  <i className="fa-solid fa-check-to-slot"></i>{" "}
+                  {t("assigned-orders")}
                 </h3>
                 <h2>{assignOrders}</h2>
               </article>
@@ -152,7 +154,8 @@ const Home = () => {
             <Link href="/orders?selectedStatus=reassign" passHref>
               <article className="blue-overview">
                 <h3 className="order-status">
-                  <i className="fa-solid fa-list-check"></i> reassigned orders
+                  <i className="fa-solid fa-list-check"></i>{" "}
+                  {t("reassigned-orders")}
                 </h3>
                 <h2>{reassignOrders}</h2>
               </article>
@@ -163,15 +166,15 @@ const Home = () => {
             <Bar_
               data={{
                 labels: [
-                  "New Orders",
-                  "Delivered Orders",
-                  "Picked Orders",
-                  "Assign Orders",
-                  "Reassign Orders",
+                  t("new-orders"),
+                  t("delivered-orders"),
+                  t("picked-orders"),
+                  t("assigned-orders"),
+                  t("reassigned-orders"),
                 ],
                 datasets: [
                   {
-                    label: "Order Data",
+                    label: t("order-data"),
                     data: [
                       newOrders,
                       deliveredOrders,
@@ -189,11 +192,11 @@ const Home = () => {
             <Doughnut_
               data={{
                 labels: [
-                  "New Orders",
-                  "Delivered Orders",
-                  "Picked Orders",
-                  "Assigned Orders",
-                  "Reassigned Orders",
+                  t("new-orders"),
+                  t("delivered-orders"),
+                  t("picked-orders"),
+                  t("assigned-orders"),
+                  t("reassigned-orders"),
                 ],
                 datasets: [
                   {

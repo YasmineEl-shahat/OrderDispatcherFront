@@ -40,7 +40,7 @@ const SideBar = ({ translate }) => {
               onClick={() => setActiveLink("/")}
             >
               <i className="fa-solid fa-house "></i>
-              {translate("dasboard")}
+              {translate("dashboard")}
             </div>
           </Link>
         )}
