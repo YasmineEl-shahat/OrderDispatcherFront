@@ -21,7 +21,6 @@ const Locations = () => {
   const [searchKey, setSearchKey] = useState("");
   const [selectedLocation, setSelectedLocation] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [changeHappened, setChangeHappened] = useState(false);
 
   const { permissions } = useContext(AuthContext);
 
@@ -40,7 +39,11 @@ const Locations = () => {
   const handleConfirmDelete = () => {
     deleteLocation(location, selectedLocation.id);
     setIsModalOpen(false);
-    setChangeHappened(true);
+    let newLocations = locations.filter(
+      (location) => location.id != selectedLocation.id
+    );
+    setLocations(newLocations);
+    setShownNumber(shownNumber - 1);
   };
 
   const handleCancelDelete = () => {
@@ -59,7 +62,7 @@ const Locations = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [location, shownNumber, searchKey, changeHappened]);
+  }, [location, shownNumber, searchKey]);
 
   return (
     <>

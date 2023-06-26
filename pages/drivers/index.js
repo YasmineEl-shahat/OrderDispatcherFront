@@ -16,7 +16,6 @@ const Drivers = () => {
   const [searchKey, setSearchKey] = useState("");
   const [selectedDriver, setSelectedDriver] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [changeHappened, setChangeHappened] = useState(false);
 
   const { permissions } = useContext(AuthContext);
 
@@ -28,7 +27,9 @@ const Drivers = () => {
   const handleConfirmDelete = () => {
     deleteDriver(selectedDriver.id);
     setIsModalOpen(false);
-    setChangeHappened(true);
+    let newDrivers = drivers.filter((driver) => driver.id != selectedDriver.id);
+    setDrivers(newDrivers);
+    setDriverNum(driverNum - 1);
   };
 
   const handleCancelDelete = () => {
@@ -59,7 +60,7 @@ const Drivers = () => {
         console.log(error.response);
         setLoading(false);
       });
-  }, [driverNum, searchKey, changeHappened]);
+  }, [driverNum, searchKey]);
 
   return (
     <>

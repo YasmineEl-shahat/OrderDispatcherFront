@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import Spinner from "../../components/Spinner";
 import Table from "../../src/sharedui/Table";
 import { getAllRoles } from "../api/roles";
-import { deleteUser, getAllUsers } from "../api/users";
+import { deleteUser, getAllUsers, banUser } from "../api/users";
 import { useState, useEffect, useContext } from "react";
 import CustomModal from "../../src/sharedui/modal";
 import AuthContext from "../../context/AuthContext";
@@ -21,7 +21,6 @@ const Users = () => {
   const [active, setActive] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
-  const [changeHappened, setChangeHappened] = useState(false);
 
   const { permissions } = useContext(AuthContext);
 
@@ -38,7 +37,9 @@ const Users = () => {
   const handleConfirmDelete = () => {
     deleteUser(selectedUser.id);
     setIsModalOpen(false);
-    setChangeHappened(true);
+    let newUsers = users.filter((user) => user.id != selectedUser.id);
+    setUsers(newUsers);
+    setUserNum(userNum - 1);
   };
 
   const handleCancelDelete = () => {
@@ -51,21 +52,51 @@ const Users = () => {
         setLoading(true);
         let usersArray = [];
         if (userNum > res.data.count) setUserNum(res.data.count);
-        res.data.data.forEach((user) => {
-          usersArray.push({
-            id: user._id,
-            name: user.firstName + " " + user.lastName,
-            email: user.email,
-            "phone number": user.phoneNumber,
-            active: user.active ? (
-              <i className="fa-solid fa-check" style={{ color: "green" }}></i>
-            ) : (
-              <i className="fa-solid fa-x" style={{ color: "#e34724" }}></i>
-            ),
-            role: user.roleName,
-          });
-        });
         setTotalUsers(res.data.count);
+
+        res.data.data.forEach((user) => {
+          usersArray.push(
+            permissions?.users?.activateDeactivate
+              ? {
+                  id: user._id,
+                  name: user.firstName + " " + user.lastName,
+                  email: user.email,
+                  "phone number": user.phoneNumber,
+                  status: user.active ? "active" : "inactive",
+                  role: user.roleName,
+                  toggleActive: (
+                    <div>
+                      <label className="switch">
+                        <button
+                          onClick={() => {
+                            banUser(user.id);
+                            let newUsers = users.map((u) => {
+                              if (u.id == user.id) u.active = !u.active;
+                            });
+                            setUserNum(newUsers);
+                          }}
+                        >
+                          {user.active ? (
+                            <i className="fa-solid fa-toggle-on"></i>
+                          ) : (
+                            <i className="fa-solid fa-toggle-off"></i>
+                          )}
+                        </button>
+                        <span className="slider round"></span>
+                      </label>
+                    </div>
+                  ),
+                }
+              : {
+                  id: user._id,
+                  name: user.firstName + " " + user.lastName,
+                  email: user.email,
+                  "phone number": user.phoneNumber,
+                  status: user.active ? "active" : "inactive",
+                  role: user.roleName,
+                }
+          );
+        });
 
         setColumnNames(Object.keys(usersArray[0]));
         setUsers(usersArray);
@@ -92,7 +123,7 @@ const Users = () => {
 
         setLoading(false);
       });
-  }, [userNum, searchKey, role, active, roleNum, changeHappened]);
+  }, [userNum, searchKey, role, active, roleNum]);
 
   return (
     <>

@@ -34,6 +34,10 @@ export async function deleteUser(id) {
   return await authorizedHttpJson.delete(`${api_url}/users/${id}`);
 }
 
+export async function banUser(id) {
+  return await authorizedHttpJson.patch(`${api_url}/users/ban/${id}`);
+}
+
 export async function getNavData(id) {
   return await httpJson.get(`${api_url}/nav/users/${id}`);
 }
