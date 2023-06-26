@@ -47,4 +47,17 @@
       left: calc(100vw - 140px);
     }
   }
+  .permissionsWrapper {
+    text-align: right;
+  }
+  .table-wrapper {
+    label {
+      margin-left: 1rem;
+    }
+  }
+  .search-box {
+    input {
+      text-align: left;
+    }
+  }
 }

@@ -3,7 +3,6 @@
     "order-dispatcher": "iDispatch",
     "home": "Home page",
     "orders": "Orders",
-    "dashboard": "dashboard",
     "users": "users",
     "roles": "roles & permissions",
     "drivers": "drivers",
@@ -51,13 +50,15 @@
     "assigned-orders": "assigned orders",
     "reassigned-orders": "reassigned orders",
     "overview": "overview",
-    "dashboard": "dashboard"
+    "dashboard": "dashboard",
+    "numbers-of-rows": "number of rows",
+    "filters": "filters",
+    "search": "Search..."
   },
   "ar": {
     "order-dispatcher": "أيدسباتش",
     "home": "الرئيسية",
     "orders": "الطلبات",
-    "dashboard": "لوحة التحكم",
     "users": "المستخدمون",
     "roles": "الأدوار والأذونات",
     "drivers": "السائقون",
@@ -105,6 +106,9 @@
     "assigned-orders": "الطلبات المسندة",
     "reassigned-orders": "الطلبات المعاد إسنادها",
     "overview": "ملخص",
-    "dashboard": "لوحة القيادة"
+    "dashboard": "لوحة القيادة",
+    "numbers-of-rows": "عدد الصفوف",
+    "filters": "المرشحات",
+    "search": "بحث..."
   }
 }

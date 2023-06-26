@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useTranslation } from "../../util/useTranslation";
 
 const Table = ({
   columnNames,
@@ -32,6 +33,7 @@ const Table = ({
   handleCanActivate,
 }) => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <div className="table-responsive">
@@ -39,12 +41,12 @@ const Table = ({
         <div className="table-title">
           <div className="row filter">
             <div className="col-sm-4">
-              <h2>Filters</h2>
+              <h2>{t("filters")}</h2>
             </div>
             <div className="col-sm-4">
               {!notView && (
                 <>
-                  <label> numbers of rows</label>
+                  <label> {t("numbers-of-rows")}</label>
                   <input
                     type="number"
                     value={num}
@@ -62,7 +64,7 @@ const Table = ({
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Search&hellip;"
+                    placeholder={t("search")}
                     onChange={(e) => setSearchKey(e.target.value)}
                     value={searchKey}
                   />
