@@ -27,7 +27,7 @@ module.exports = {
       config.plugins = [
         ...config.plugins,
         new webpack.DefinePlugin({
-          "process.env.API_URL": JSON.stringify("http://localhost:8080"),
+          "process.env.API_URL": JSON.stringify("https://jimmy.nader-mo.tech"),
         }),
         //Webpack will pick the name for us and add a hash to it.
         //the file name will only change when our CSS changes.
